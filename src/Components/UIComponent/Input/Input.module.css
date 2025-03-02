@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap");
+
+
+.fullWidthCss {
+    color: #33415c;
+    font-family: "Markazi Text", serif;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.fullWidthCss input{
+    color: #33415c;
+    font-family: "Markazi Text", serif;
+    font-weight: 800;
+    font-size: 20px;
+    width: 97%;
+}
+.fullWidthCss p {
+    margin: 0;
+    color: red;
+    font-size: 10px;
+}

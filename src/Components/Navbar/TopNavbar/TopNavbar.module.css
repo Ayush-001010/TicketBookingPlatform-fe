@@ -1,0 +1,58 @@
+.css1 {
+  display: flex;
+  background-color: #212529;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.css2 {
+  margin-right: 10px;
+  align-items: center;
+  display: flex;
+}
+.css2 a {
+  color: #adb5bd;
+  text-decoration: none;
+  width: 80px;
+  text-align: center;
+  height: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.css2 a:hover {
+  background-color: #adb5bd;
+  color: #212529;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.css3 {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: 10px;
+}
+.css3 a {
+  padding: 5px;
+  color: #adb5bd;
+  text-decoration: none;
+  text-align: center;
+  height: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.css3 a:hover {
+  background-color: #adb5bd;
+  color: #212529;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.css4 {
+  display: flex;
+}

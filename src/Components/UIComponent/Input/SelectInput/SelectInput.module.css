@@ -1,0 +1,32 @@
+.halfWidthCss {
+    width: 43.8% !important;
+    display: inline-block;
+    margin-right: 10px !important;
+    font-family: "Markazi Text", serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: #33415c;
+    margin-bottom: 20px !important;
+    margin-left: 15px !important;
+}
+
+
+.halfWidthCss input{
+    color: #33415c;
+    font-family: "Markazi Text", serif;
+    font-weight: 800;
+    font-size: 20px;
+    width: 97%;
+}
+.halfWidthCss p {
+    margin: 0;
+    color: red;
+    font-size: 10px;
+}
+
+.halfWidthCss label {
+    display: block;
+}
+.halfWidthCss div{
+    width: 100% !important;
+}

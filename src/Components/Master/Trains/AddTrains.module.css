@@ -1,0 +1,23 @@
+.css1 {
+    display: flex;
+}
+.css1 div:nth-child(1) {
+    width: 20%;
+}
+
+.css1 div:nth-child(2) {
+    width: 50%;
+    margin: 0;
+}
+
+.css1 div:nth-child(2) div:nth-child(1){
+    width: 100% ;
+    /* margin-top: 21px; */
+}
+.css1 div:nth-child(2) div:nth-child(1) div:nth-child(1){
+    width: 100% ;
+}
+
+.css1 div:nth-child(3) {
+    width: 15%;
+}

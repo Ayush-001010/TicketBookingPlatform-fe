@@ -1,0 +1,23 @@
+.css1 {
+    color: #33415c;
+    font-family: "Markazi Text", serif;
+    font-weight: 900;
+    font-size: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.css2 {
+    color: #33415c;
+    font-family: "Markazi Text", serif;
+    font-weight: 900;
+    font-size: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+.css2:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
