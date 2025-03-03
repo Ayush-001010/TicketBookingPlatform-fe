@@ -1,0 +1,20 @@
+.css1 {
+  display: flex;
+  justify-content: flex-end;
+}
+.css2 {
+  width: 200px !important;
+  margin-right: 10px;
+}
+.css3 {
+  display: flex;
+  justify-content: flex-end;
+  width: 50px !important;
+}
+.css3 button{
+    border: 1px solid #adb5bd;
+    border-radius: 5px;
+}
+.css3 button i {
+    color: #495057;
+}

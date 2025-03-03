@@ -11,7 +11,7 @@ const FormButtons: React.FunctionComponent<IFormButton> = ({
 }) => {
   return (
     <div className={styles[`${className || "css1"}`]}>
-      <ButtonUI type="button">
+      <ButtonUI type={ !btn2 ? "submit": "button" }>
         <Text>{btn1}</Text>
       </ButtonUI>
       { btn2 && <ButtonUI type="submit">

@@ -92,20 +92,20 @@ const formConfig: IFormTypes = {
       validation: Yup.string(),
       className:"halfWidthCss"
     },
-    {
-      displayName: "Departure Time",
-      backendName: "DepartureTime",
-      fieldType: "DateTime",
-      validation: Yup.string().required(requiredErrorMessage),
-      className:"halfWidthCss"
-    },
-    {
-      displayName: "Arrival Time",
-      backendName: "ArrivalTime",
-      fieldType: "DateTime",
-      validation: Yup.string().required(requiredErrorMessage),
-      className:"halfWidthCss"
-    },
+      // {
+      //   displayName: "Departure Time",
+      //   backendName: "DepartureTime",
+      //   fieldType: "DateTime",
+      //   validation: Yup.string().required(requiredErrorMessage),
+      //   className:"halfWidthCss"
+      // },
+      // {
+      //   displayName: "Arrival Time",
+      //   backendName: "ArrivalTime",
+      //   fieldType: "DateTime",
+      //   validation: Yup.string().required(requiredErrorMessage),
+      //   className:"halfWidthCss"
+      // },
     {
       displayName: "Train Code",
       backendName: "Train Code",
