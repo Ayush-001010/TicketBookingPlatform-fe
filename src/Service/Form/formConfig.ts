@@ -8,6 +8,7 @@ export interface IFormFields {
   fieldType: string;
   className?: string;
   isMultiple?: boolean;
+  dependableField?: string;
 }
 
 // Interface Represent the types of form.
@@ -67,51 +68,54 @@ const formConfig: IFormTypes = {
       displayName: "Type of Train",
       backendName: "TypeOfTrain",
       fieldType: "dropdown",
-      validation: Yup.string(),
-      className:"halfWidthCss"
+      validation: Yup.string().required(requiredErrorMessage),
+      className: "halfWidthCss",
     },
     {
       displayName: "Type of Coach",
       backendName: "TypeOfCoach",
       fieldType: "dropdown",
-      validation: Yup.array(),
-      className:"halfWidthCss",
-      isMultiple:true
+      validation: Yup.array().required(requiredErrorMessage),
+      className: "halfWidthCss",
+      isMultiple: true,
     },
     {
       displayName: "Departure Station",
       backendName: "DepartureStation",
       fieldType: "dropdown",
-      validation: Yup.string(),
-      className:"halfWidthCss"
+      validation: Yup.string().required(requiredErrorMessage),
+      className: "halfWidthCss",
     },
     {
       displayName: "Destination Station",
       backendName: "DestinationStation",
       fieldType: "dropdown",
-      validation: Yup.string(),
-      className:"halfWidthCss"
+      validation: Yup.string().required(requiredErrorMessage),
+      className: "halfWidthCss",
     },
-      // {
-      //   displayName: "Departure Time",
-      //   backendName: "DepartureTime",
-      //   fieldType: "DateTime",
-      //   validation: Yup.string().required(requiredErrorMessage),
-      //   className:"halfWidthCss"
-      // },
-      // {
-      //   displayName: "Arrival Time",
-      //   backendName: "ArrivalTime",
-      //   fieldType: "DateTime",
-      //   validation: Yup.string().required(requiredErrorMessage),
-      //   className:"halfWidthCss"
-      // },
+    {
+      displayName: "Running Schedule",
+      backendName: "RunningSchedule",
+      fieldType: "dropdown",
+      validation: Yup.string().required(requiredErrorMessage),
+      className: "halfWidthCss",
+    },
+    {
+      displayName: "Running Day",
+      backendName: "RunningDay",
+      fieldType: "dropdown",
+      validation: Yup.array().required(requiredErrorMessage),
+      className: "halfWidthCss",
+      dependableField : "RunningSchedule",
+      isMultiple:true
+
+    },
     {
       displayName: "Train Code",
-      backendName: "Train Code",
+      backendName: "TrainCode",
       fieldType: "text",
       validation: Yup.string().required(requiredErrorMessage),
-      className:"fullWidthCss"
+      className: "fullWidthCss",
     },
   ],
 };

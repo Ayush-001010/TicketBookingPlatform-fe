@@ -17,8 +17,9 @@ const InputUI: React.FunctionComponent<IInput> = ({
   const isTouched = () => {
     formik.setFieldTouched(backendName,true);
   };
-  const errorMessage = formik.errors[backendName];
-  const isError = formik.touched[backendName] && typeof errorMessage === 'string';
+  const errorMessage  : string = formik.errors[backendName] ? formik.errors[backendName] as string : "";
+  const isError = (formik.touched[backendName] && typeof errorMessage === 'string' ) || errorMessage?.includes("required");
+  console.log("Formik ",formik.errors);
   return (
     <div className={styles[`${className || "css1"}`]}>
       <label>{displayName}</label>

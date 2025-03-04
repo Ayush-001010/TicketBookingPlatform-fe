@@ -6,11 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAddTrainFunc from "../../../../hooks/useAddTrainFunc";
 import { message } from "antd";
 import TrainFormStops from "./TrainFormStops/TrainFormStops";
+import TrainFormPrices from "./TrainFormPrices/TrainFormPrices";
 
 const TrainForm: React.FunctionComponent<ITrainForm> = () => {
   const [messageAPI, contextHandler] = message.useMessage();
   const { getTrainDetailsOptions } = useAddTrainFunc(messageAPI);
-  const [formType, setFormType] = useState<number>(2);
+  const [formType, setFormType] = useState<number>(1);
   const [formValues , setFormValues]  = useState<any>({})
 
   const { data } = useQuery({
@@ -20,8 +21,8 @@ const TrainForm: React.FunctionComponent<ITrainForm> = () => {
   });
   const gettingValue = (value: any) => {
     console.log(value);
-    setFormType(2);
     setFormValues(value);
+    setFormType(2);
   };
   return (
     <div style={{ marginTop: "21px" }}>
@@ -41,6 +42,9 @@ const TrainForm: React.FunctionComponent<ITrainForm> = () => {
         )}
         { formType === 2 && (
           <TrainFormStops placesOptions={data?.DepartureStation}/>
+        )}
+        { formType === 3 && (
+          <TrainFormPrices coachTypes={["Slepper" , "3 AC" , "2 AC" , "1 AC"]} stops={[{distance  : "200" , time : "" , placeName : "Jamshedpur"} , {distance  : "200" , time : "" , placeName : "Kolkata"} ]} />
         )}
       </DashboardCard>
     </div>

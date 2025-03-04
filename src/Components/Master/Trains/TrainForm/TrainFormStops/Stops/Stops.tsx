@@ -12,6 +12,7 @@ const Stops: React.FunctionComponent<IStops> = ({
   index,
   passingValueToParent,
   deleteStop,
+  type,
 }) => {
   const [data, setData] = useState<ITrainStops | null>(null);
   const changeHandler = (value: string, backendName: string) => {
@@ -27,13 +28,15 @@ const Stops: React.FunctionComponent<IStops> = ({
     <>
       {data && (
         <div className={styles.css1}>
-          <div className={styles.css2}>
-            <Tooltip title="Delete">
-              <button disabled={disabled} onClick={() => deleteStop(index)}>
-                <i className="bi bi-trash3-fill" />
-              </button>
-            </Tooltip>
-          </div>
+          {type !== "Price" && (
+            <div className={styles.css2}>
+              <Tooltip title="Delete">
+                <button disabled={disabled} onClick={() => deleteStop(index)}>
+                  <i className="bi bi-trash3-fill" />
+                </button>
+              </Tooltip>
+            </div>
+          )}
           <div className={styles.css3}>
             <div className={styles.css5}>
               <label className={styles.css4}>Place Name</label>
@@ -61,19 +64,25 @@ const Stops: React.FunctionComponent<IStops> = ({
                 className={styles.css6}
               />
             </div>
-            <div className={styles.css5}>
-              <label className={styles.css4}>Distance</label>
-              <Input
-                type="text"
-                value={data.distance}
-                disabled={disabled}
-                onChange={(event) =>
-                  changeHandler(event.target.value, "distance")
-                }
-                className={styles.css6}
-              />
-            </div>
           </div>
+          {type === "Price" && (
+            <>
+              {data.price &&
+                Object.keys(data.price).map((currKey: string) => (
+                  <div className={styles.css5}>
+                    <label className={styles.css4}>Price of {currKey}</label>
+                    <Input
+                      type="number"
+                      value={data.price ? data.price[currKey] : ""}
+                      onChange={(event) =>
+                        changeHandler(event.target.value, "distance")
+                      }
+                      className={styles.css6}
+                    />
+                  </div>
+                ))}
+            </>
+          )}
         </div>
       )}
     </>

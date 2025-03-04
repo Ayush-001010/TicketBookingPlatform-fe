@@ -11,14 +11,14 @@ const FormItems: React.FunctionComponent<IFormItems> = ({ fields , formik }) => 
     const contextValue = useGetFormContext();
   return <div className={style.css1}>
     { fields.map((currItem : IFormFields) => {
-        const { displayName , backendName  , fieldType , className , isMultiple} = currItem;
+        const { displayName , backendName  , fieldType , className , isMultiple , dependableField} = currItem;
         if(fieldType.includes("text")) {
             return (
                 <InputUI className={className} displayName={displayName} backendName={backendName}  type={fieldType.split('-')[1]}  formik={formik} />
             )
         } else if(fieldType.includes("dropdown")){
             return (
-                <SelectUI isMultiple={isMultiple} className={className} displayName={displayName} backendName={backendName} formik={formik} placeHolder="Select" option={contextValue?.options ? contextValue.options[backendName] || [] : []} />
+                <SelectUI dependableField={dependableField} isMultiple={isMultiple} className={className} displayName={displayName} backendName={backendName} formik={formik} placeHolder="Select" option={contextValue?.options ? contextValue.options[backendName] || [] : []} />
             )
         } else if(fieldType.includes("DateTime")){
             return (

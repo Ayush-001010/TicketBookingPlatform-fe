@@ -25,7 +25,7 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
     messageAPI.loading(CommonConfig.loadingMessageAPI);
     const response = await APIService.getData("/train/getOptions");
     if (response.success) {
-      const { typeOfTrainData, typeOfCoachData, placesData } = response.data;
+      const { typeOfTrainData, typeOfCoachData, placesData , runningData } = response.data;
       console.log("Data  ", typeOfTrainData, typeOfCoachData, placesData);
       const TypeOfTrain = typeOfTrainData.map((item: any) => {
         return {
@@ -45,12 +45,20 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
           label: item.PlaceName,
         };
       });
+      const RunningSchedule = runningData.map((item : any) => {
+        return {
+          label : item.Schedule,
+          value : item.Schedule
+        }
+      });
       messageAPI.destroy();
       return {
         TypeOfTrain,
         TypeOfCoach,
+        RunningSchedule,
         DestinationStation: Places,
         DepartureStation: Places,
+        RunningDay : AddTrainConfig.runningDayOpt
       };
     } else {
     }
@@ -154,11 +162,18 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
     }
     return data;
   };
+  const setPrice = (data : Array<ITrainStops> , price : number , coachType : string) => {
+    for(const curr of data){
+      curr.price =  { ...curr.price ,   [coachType]: (Number(curr.distance) * price).toString() };
+    }
+    return data;
+  }
   return {
     genratingPreview,
     getTrainDetailsOptions,
     genratedStopsConfig,
     modifyConfig,
+    setPrice
   };
 };
 

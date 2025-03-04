@@ -9,12 +9,13 @@ const FormButtons: React.FunctionComponent<IFormButton> = ({
   btn2,
   className,
 }) => {
+  console.log("BTN2 ",btn2);
   return (
     <div className={styles[`${className || "css1"}`]}>
-      <ButtonUI type={ !btn2 ? "submit": "button" }>
+      <ButtonUI type={ !btn2 || btn2.length === 0 ? "submit": "button" }>
         <Text>{btn1}</Text>
       </ButtonUI>
-      { btn2 && <ButtonUI type="submit">
+      { btn2 && btn2.length > 0 && <ButtonUI type="submit">
         <Text>{btn2}</Text>
       </ButtonUI>
       }

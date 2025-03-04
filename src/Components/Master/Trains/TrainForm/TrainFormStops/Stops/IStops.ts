@@ -8,4 +8,5 @@ export default interface IStops {
     passingValueToParent: any;
     index:number;
     deleteStop:any;
+    type ? : string;
 }

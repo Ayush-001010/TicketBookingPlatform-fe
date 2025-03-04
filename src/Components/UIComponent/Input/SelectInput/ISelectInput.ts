@@ -8,4 +8,5 @@ export default interface ISelect {
   className?: string;
   option?: any;
   isMultiple?:boolean;
+  dependableField? : string;
 }
