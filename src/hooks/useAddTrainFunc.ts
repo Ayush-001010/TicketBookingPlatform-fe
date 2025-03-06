@@ -3,9 +3,17 @@ import AddTrainConfig from "../Service/Config/AddTrainConfig";
 import APIService from "../Service/APIServices/APIService";
 import { MessageInstance } from "antd/es/message/interface";
 import CommonConfig from "../Service/Config/CommonConfig";
-import { ITrainStops } from "../Service/Interface/AddTrainInterface";
+import {
+  ITrainDetails,
+  ITrainStops,
+} from "../Service/Interface/AddTrainInterface";
+import { useEffect, useState } from "react";
 
-const useAddTrainFunc = (messageAPI?: MessageInstance) => {
+const useAddTrainFunc = (
+  messageAPI?: MessageInstance,
+  data?: ITrainDetails
+) => {
+  const [totalJourneyTimeValue, setTotalJourneyTimeValue] = useState<string>("");
   const genratingPreview = () => {
     const arr = AddTrainConfig.previewItems;
     const data: Array<StepProps> = [];
@@ -25,7 +33,8 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
     messageAPI.loading(CommonConfig.loadingMessageAPI);
     const response = await APIService.getData("/train/getOptions");
     if (response.success) {
-      const { typeOfTrainData, typeOfCoachData, placesData , runningData } = response.data;
+      const { typeOfTrainData, typeOfCoachData, placesData, runningData } =
+        response.data;
       console.log("Data  ", typeOfTrainData, typeOfCoachData, placesData);
       const TypeOfTrain = typeOfTrainData.map((item: any) => {
         return {
@@ -45,11 +54,11 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
           label: item.PlaceName,
         };
       });
-      const RunningSchedule = runningData.map((item : any) => {
+      const RunningSchedule = runningData.map((item: any) => {
         return {
-          label : item.Schedule,
-          value : item.Schedule
-        }
+          label: item.Schedule,
+          value: item.Schedule,
+        };
       });
       messageAPI.destroy();
       return {
@@ -58,7 +67,7 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
         RunningSchedule,
         DestinationStation: Places,
         DepartureStation: Places,
-        RunningDay : AddTrainConfig.runningDayOpt
+        RunningDay: AddTrainConfig.runningDayOpt,
       };
     } else {
     }
@@ -131,27 +140,39 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
     });
     messageAPI?.destroy();
     if (response.success) {
-      const { data : placesData } = response;
-      let prevLatitude : number = 0;
-      let prevLongitude : number = 0;
-      let prevStartTime : string = "";
+      const { data: placesData } = response;
+      let prevLatitude: number = 0;
+      let prevLongitude: number = 0;
+      let prevStartTime: string = "";
       for (let i = 0; i < data.length; i++) {
         const curr = data[i];
-        const place = placesData.find((p: any) => p.PlaceName === curr.placeName);
+        const place = placesData.find(
+          (p: any) => p.PlaceName === curr.placeName
+        );
         if (place) {
           const { Longitude, Latitude } = place;
-          let newTime : string = "";
+          let newTime: string = "";
           if (i > 0) {
-            const distance = calculateDistance(prevLatitude, prevLongitude, Latitude, Longitude);
-            console.log("Distance   ",distance);
+            const distance = calculateDistance(
+              prevLatitude,
+              prevLongitude,
+              Latitude,
+              Longitude
+            );
+            console.log("Distance   ", distance);
             data[i].distance = distance.toString();
-            newTime = calculateArrivalTime(distance , prevStartTime , value.avgSpeed);
-            console.log("Time  ",newTime);
+            newTime = calculateArrivalTime(
+              distance,
+              prevStartTime,
+              value.avgSpeed
+            );
+            console.log("Time  ", newTime);
             data[i].time = newTime;
           } else {
             data[i].distance = "0";
-            data[i].time = value.time
+            data[i].time = value.time;
           }
+          data[i].TrainStoppageTime = "10";
           prevLatitude = Latitude;
           prevLongitude = Longitude;
           prevStartTime = i === 0 ? value.time : newTime;
@@ -162,18 +183,52 @@ const useAddTrainFunc = (messageAPI?: MessageInstance) => {
     }
     return data;
   };
-  const setPrice = (data : Array<ITrainStops> , price : number , coachType : string) => {
-    for(const curr of data){
-      curr.price =  { ...curr.price ,   [coachType]: (Number(curr.distance) * price).toString() };
+  const setPrice = (
+    data: Array<ITrainStops>,
+    price: number,
+    coachType: string
+  ) => {
+    for (const curr of data) {
+      curr.price = {
+        ...curr.price,
+        [coachType]: (Number(curr.distance) * price).toString(),
+      };
     }
     return data;
-  }
+  };
+  const totalJourneyTimeFunc = () => {
+    if (!data) return;
+    let totalMinutes = 0;
+    const steps =  data.stops.map(ele => ele.time);
+    for (let i = 0; i < steps.length - 1; i++) {
+      const start = new Date(`1970-01-01T${steps[i]}:00Z`).getTime();
+      const end = new Date(`1970-01-01T${steps[i + 1]}:00Z`).getTime();
+
+      let diff = end - start;
+
+      if (diff < 0) {
+        diff += 24 * 60 * 60 * 1000; // Add 24 hours in milliseconds
+      }
+
+      totalMinutes += diff / (1000 * 60); // Convert milliseconds to minutes
+    }
+
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = Math.floor(totalMinutes % 60);
+    setTotalJourneyTimeValue(`${hours}hr:${minutes}mins`);
+  };
+  useEffect(() => {
+    if (data) {
+      totalJourneyTimeFunc();
+    }
+  }, [data]);
   return {
     genratingPreview,
     getTrainDetailsOptions,
     genratedStopsConfig,
     modifyConfig,
-    setPrice
+    setPrice,
+    totalJourneyTimeValue
   };
 };
 

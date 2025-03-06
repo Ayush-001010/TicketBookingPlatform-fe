@@ -1,39 +1,53 @@
 .css1 {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 95% !important;
-    margin: 10px !important;
-    border-radius: 10px;
-    padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 95% !important;
+  margin: 10px !important;
+  border-radius: 10px;
+  padding: 10px;
 }
 .css2 {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
-.css2 button{
-    border-radius: 5px;
-    border: 1px solid #ced4da;
+.css2 button {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
 }
 .css2 button i {
-    color: #e5383b;
+  color: #e5383b;
 }
 
 .css2 button:hover i {
-    color: #ba181b;
-    cursor: pointer;
+  color: #ba181b;
+  cursor: pointer;
 }
-.css3{
-    display: flex;
-    width:  100% !important;
+.css3 {
+  display: flex;
+  width: 100% !important;
 }
-.css4{
-    color: #495057;
-    font-weight: 600;
-    display: block;
+.css4 {
+  color: #495057;
+  font-weight: 600;
+  display: block;
 }
 .css5 {
-    width: 500px !important;
-    margin-left: 10px !important;
+  width: 500px !important;
+  margin-left: 10px !important;
 }
-.css6{
-    width: 100% !important;
+.css6 {
+  width: 100% !important;
+}
+
+.css10 {
+  margin-top: 10px !important;
+}
+.css10 div {
+  margin-top: 10px !important;
+}
+.css11 {
+  width: 60% !important;
+}
+.css10 {
+  display: flex;
+  width: 100% !important;
 }

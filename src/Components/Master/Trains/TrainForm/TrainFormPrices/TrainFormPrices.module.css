@@ -1,0 +1,32 @@
+.css1 {
+  width: 100% !important;
+}
+
+.css2 {
+  width: 100% !important;
+}
+.css3 {
+  display: flex;
+  justify-content: center;
+  width: 100% !important;
+}
+.css3 p {
+  width: 2px !important;
+  background-color: #adb5bd;
+  height: 40px;
+  margin: 0;
+}
+.css4 {
+  width: 100% !important;
+  display: flex;
+  justify-content: flex-end;
+}
+.css4 button {
+  background-color: #469d89;
+  color: #eff1ed;
+  font-weight: 600;
+}
+.css4 button:hover {
+  background-color: #415d43 !important;
+  color: #eff1ed !important;
+}

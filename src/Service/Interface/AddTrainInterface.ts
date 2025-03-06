@@ -3,6 +3,7 @@ export interface ITrainStops {
     time : string;
     distance : string;
     price?:Record<string , string>;
+    TrainStoppageTime : string;
 }
 
 export interface ITrainDetails  {
@@ -14,4 +15,5 @@ export interface ITrainDetails  {
     TrainCode : string;
     RunningSchedule : string;
     RunningDay : Array<string>;
+    stops : Array<ITrainStops>
 }

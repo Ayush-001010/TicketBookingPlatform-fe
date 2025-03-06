@@ -1,0 +1,65 @@
+.css1 {
+  color: #495057;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+}
+.css1 span {
+  font-size: 17px;
+  align-items: flex-end;
+  display: flex;
+  margin-bottom: 5px;
+  margin-left: 7px;
+  font-weight: 600;
+}
+.css2 {
+  display: flex;
+  width: 100% !important;
+  margin-left: 10px;
+}
+
+.css3 {
+    width: 50% !important;
+}
+.css3 p{
+    color: #343a40;
+    font-weight: 700;
+}
+.css3 p span {
+    color: #adb5bd;
+    font-weight: 600;
+    border: 1px solid #adb5bd;
+    margin-left: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 3px;
+}
+.css5 {
+  width: 100% !important;
+}
+.css6 {
+  display: flex;
+  justify-content: center;
+  width: 100% !important;
+}
+.css6 p {
+  width: 2px;
+  background-color: #adb5bd;
+  height: 40px;
+  margin: 0;
+}
+.css4 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.css4 button {
+  background-color: #588157;
+  color: white;
+  transition: all 1s;
+}
+.css4 button:hover {
+  background-color: #344e41 !important;
+  color: white !important;
+  border: none !important;
+}

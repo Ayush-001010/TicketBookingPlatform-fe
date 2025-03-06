@@ -1,0 +1,38 @@
+.css1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.css2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.css3 {
+  width: 300px !important;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 !important;
+}
+.css3 label {
+  color: #6c757d;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+
+.css4 {
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px !important;
+}
+.css4 input {
+  width: 200px;
+  margin-right: 10px;
+}
+
+.css4 button i {
+    color: #495057;
+}

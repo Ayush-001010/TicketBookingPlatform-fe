@@ -1,29 +1,42 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import IAddTrains from "./IAddTrains";
 import SideNotes from "../../UIComponent/Cards/SideNotes/SideNotes";
 import AddTrainConfig from "../../../Service/Config/AddTrainConfig";
-import FirstDescription from "./Notes/FirstDescription";
+import Description from "./Notes/Description";
 import styles from "./AddTrains.module.css";
 import TrainForm from "./TrainForm/TrainForm";
 import RightSidePreview from "../../UIComponent/Cards/RightSidePreview/RightSidePreview";
 import Preview from "./Preview/Preview";
 
+interface IAddTrainContext {
+  formType: number;
+}
+
+export const AddTrainContext = createContext<IAddTrainContext >({formType : 1});
+
+
 const AddTrains: React.FunctionComponent<IAddTrains> = () => {
+  const [formType , setFormType] = useState<number>(1);
+  const changeFormType = (newValue : number) => {
+    setFormType(newValue);
+  }
   return (
-    <div className={styles.css2}>
-      <div>
-        <h1>{AddTrainConfig.title}</h1>
+    <AddTrainContext.Provider value={{ formType }}>
+      <div className={styles.css2}>
+        <div>
+          <h1>{AddTrainConfig.title}</h1>
+        </div>
+        <div className={styles.css1}>
+          <SideNotes>
+            <Description />
+          </SideNotes>
+          <TrainForm changeFormType={changeFormType} />
+          <RightSidePreview>
+            <Preview />
+          </RightSidePreview>
+        </div>
       </div>
-      <div className={styles.css1}>
-        <SideNotes>
-          <FirstDescription />
-        </SideNotes>
-        <TrainForm />
-        <RightSidePreview>
-          <Preview />
-        </RightSidePreview>
-      </div>
-    </div>
+    </AddTrainContext.Provider>
   );
 };
 

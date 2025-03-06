@@ -23,12 +23,12 @@ const Stops: React.FunctionComponent<IStops> = ({
     console.log("Value  ", value);
     const val = { ...value };
     setData(val);
-  }, [value.time, value.distance, value, value.placeName]);
+  }, [value.time, value.distance, value, value.placeName , type , value.price]);
   return (
     <>
       {data && (
         <div className={styles.css1}>
-          {type !== "Price" && (
+          {type !== "Price" && type !== "Preview" && (
             <div className={styles.css2}>
               <Tooltip title="Delete">
                 <button disabled={disabled} onClick={() => deleteStop(index)}>
@@ -64,9 +64,31 @@ const Stops: React.FunctionComponent<IStops> = ({
                 className={styles.css6}
               />
             </div>
+            <div className={styles.css5}>
+              <label className={styles.css4}>Distance</label>
+              <Input
+                value={data.distance}
+                onChange={({ target }: any) =>
+                  changeHandler(target.value, "distance")
+                }
+                disabled={disabled}
+                className={styles.css6}
+              />
+            </div>
+            <div className={styles.css5}>
+              <label className={styles.css4}>Stoppage Time</label>
+              <Input
+                value={data.TrainStoppageTime}
+                onChange={({ target }: any) =>
+                  changeHandler(target.value, "TrainStoppageTime")
+                }
+                disabled={disabled}
+                className={styles.css6}
+              />
+            </div>
           </div>
-          {type === "Price" && (
-            <>
+          {type === "Price" || type === "Preview" && (
+            <div className={styles.css10}>
               {data.price &&
                 Object.keys(data.price).map((currKey: string) => (
                   <div className={styles.css5}>
@@ -75,13 +97,14 @@ const Stops: React.FunctionComponent<IStops> = ({
                       type="number"
                       value={data.price ? data.price[currKey] : ""}
                       onChange={(event) =>
-                        changeHandler(event.target.value, "distance")
+                        changeHandler(event.target.value, currKey )
                       }
-                      className={styles.css6}
+                      className={styles.css11}
+                      disabled={type === "Preview"}
                     />
                   </div>
                 ))}
-            </>
+            </div>
           )}
         </div>
       )}

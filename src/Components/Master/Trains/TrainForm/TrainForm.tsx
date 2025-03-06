@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ITrainForm from "./ITrainForm";
 import Form from "../../../Form/Form";
 import DashboardCard from "../../../UIComponent/Cards/Dashboard/DashboardCard";
@@ -7,22 +7,48 @@ import useAddTrainFunc from "../../../../hooks/useAddTrainFunc";
 import { message } from "antd";
 import TrainFormStops from "./TrainFormStops/TrainFormStops";
 import TrainFormPrices from "./TrainFormPrices/TrainFormPrices";
+import {
+  ITrainDetails,
+  ITrainStops,
+} from "../../../../Service/Interface/AddTrainInterface";
+import { AddTrainContext } from "../AddTrains";
+import TrainDetails from "./TrainDetails/TrainDetails";
 
-const TrainForm: React.FunctionComponent<ITrainForm> = () => {
+const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
   const [messageAPI, contextHandler] = message.useMessage();
   const { getTrainDetailsOptions } = useAddTrainFunc(messageAPI);
-  const [formType, setFormType] = useState<number>(1);
-  const [formValues , setFormValues]  = useState<any>({})
+  const [formValues, setFormValues] = useState<ITrainDetails>();
+  const { formType } = useContext(AddTrainContext);
 
   const { data } = useQuery({
     queryFn: () => getTrainDetailsOptions(),
     queryKey: ["TrainOptions"],
     retry: 3,
   });
+  const gettingPrice = (value: Array<ITrainStops>) => {
+    setFormValues((prevState : any) => {
+      return {...prevState , stops : value}
+    });
+    changeFormType(4);
+  };
+  const gettingStops = (value: Array<ITrainStops>) => {
+    console.log("Value  ", value);
+    setFormValues((prevState: any) => {
+      let price: Record<string, string> = {};
+      for (const curr1 of value) {
+        for (const curr of prevState.TypeOfCoach) {
+          price = { ...price, [curr]: "" };
+        }
+        curr1.price = price;
+      }
+      return { ...prevState, stops: value };
+    });
+    changeFormType(3);
+  };
   const gettingValue = (value: any) => {
     console.log(value);
     setFormValues(value);
-    setFormType(2);
+    changeFormType(2);
   };
   return (
     <div style={{ marginTop: "21px" }}>
@@ -40,11 +66,23 @@ const TrainForm: React.FunctionComponent<ITrainForm> = () => {
             <Form.Information />
           </Form>
         )}
-        { formType === 2 && (
-          <TrainFormStops placesOptions={data?.DepartureStation}/>
+        {formType === 2 && (
+          <TrainFormStops
+            placesOptions={data?.DepartureStation}
+            DepartureStation={formValues?.DepartureStation || ""}
+            DestinationStation={formValues?.DestinationStation || ""}
+            passingValueToParentFunc={gettingStops}
+          />
         )}
-        { formType === 3 && (
-          <TrainFormPrices coachTypes={["Slepper" , "3 AC" , "2 AC" , "1 AC"]} stops={[{distance  : "200" , time : "" , placeName : "Jamshedpur"} , {distance  : "200" , time : "" , placeName : "Kolkata"} ]} />
+        {formType === 3 && (
+          <TrainFormPrices
+            passingDataToParentFunc={gettingPrice}
+            coachTypes={formValues?.TypeOfCoach || []}
+            stops={formValues?.stops ? [...formValues?.stops] : []}
+          />
+        )}
+        {formType === 4 && formValues && (
+          <TrainDetails details={formValues}  />
         )}
       </DashboardCard>
     </div>

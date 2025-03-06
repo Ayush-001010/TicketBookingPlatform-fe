@@ -9,11 +9,16 @@ import styles from "./TrainFormStops.module.css";
 
 const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
   placesOptions,
+  DepartureStation,DestinationStation,
+  passingValueToParentFunc
 }) => {
   const [messageAPI, contextHandler] = message.useMessage();
   const { genratedStopsConfig, modifyConfig } = useAddTrainFunc(messageAPI);
   const [data, setData] = useState<Array<ITrainStops>>([]);
 
+  const passingValueToParent = () => {
+    passingValueToParentFunc(data);
+  }
   const genrateStops = (
     oldValue: Array<ITrainStops>,
     value: ITrainStops,
@@ -32,7 +37,7 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
   const addStops = (index: number) => {
     const val = genrateStops(
       data,
-      { placeName: "", time: "", distance: "" },
+      { placeName: "", time: "", distance: "" , TrainStoppageTime : "" },
       index + 1,
       index + 1
     );
@@ -53,21 +58,22 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
     });
   };
   useEffect(() => {
+    if(!DepartureStation || !DestinationStation) return;
     const val = genrateStops(
       [],
-      { placeName: "Jamshedpur", time: "", distance: "" },
+      { placeName: DepartureStation, time: "", distance: "" , TrainStoppageTime : "" },
       0,
       0
     );
     const newValue = genrateStops(
       val,
-      { placeName: "kolkata", time: "", distance: "" },
+      { placeName: DestinationStation, time: "", distance: "" , TrainStoppageTime : "" },
       1,
       1
     );
     setData(newValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [DepartureStation , DestinationStation]);
   console.log("Data ", data);
   return (
     <div>
@@ -103,7 +109,7 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
         );
       })}
       <div className={styles.css4}>
-        <Button>Next</Button>
+        <Button onClick={passingValueToParent}>Next</Button>
       </div>
     </div>
   );
