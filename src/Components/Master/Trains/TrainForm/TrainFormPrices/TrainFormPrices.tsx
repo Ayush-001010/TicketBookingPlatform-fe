@@ -11,17 +11,22 @@ import { Button } from "antd";
 const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
   coachTypes,
   stops,
-  passingDataToParentFunc
+  passingDataToParentFunc,
+  backHandlerFunc
 }) => {
   const { setPrice } = useAddTrainFunc();
   const [data, setData] = useState<Array<ITrainStops>>([]);
 
+  const backHandler = () => {
+    backHandlerFunc();
+  }
   const passingDataToParent = () => {
     passingDataToParentFunc(data)
   }
-  const changeHandlerPrice = (price: number, coachType: string) => {
-    const modifyData = setPrice(stops, price, coachType);
+  const changeHandlerPrice = (price: number, coachType: string , perCabinSeat : number , totalCabin : number) => {
+    const modifyData = setPrice(stops, price, coachType , perCabinSeat , totalCabin);
     console.log("Modify Data    ", modifyData);
+    passingDataToParentFunc({coachType , perCabinSeat , totalCabin} , "Coach")
     setData([...modifyData]);
   };
   const changeHandlerPriceValue = (value : string , backendName : string , index: number) => {
@@ -68,6 +73,7 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
         ))}
       </div>
       <div className={styles.css4}>
+        <Button onClick={backHandler}>Back</Button>
         <Button onClick={passingDataToParent}>Next</Button>
       </div>
     </div>

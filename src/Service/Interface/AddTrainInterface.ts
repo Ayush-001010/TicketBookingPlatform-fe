@@ -16,4 +16,5 @@ export interface ITrainDetails  {
     RunningSchedule : string;
     RunningDay : Array<string>;
     stops : Array<ITrainStops>
+    coaches?:Array<Record<string , string>>;
 }

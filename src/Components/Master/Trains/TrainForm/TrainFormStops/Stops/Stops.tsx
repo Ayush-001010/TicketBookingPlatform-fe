@@ -23,7 +23,15 @@ const Stops: React.FunctionComponent<IStops> = ({
     console.log("Value  ", value);
     const val = { ...value };
     setData(val);
-  }, [value.time, value.distance, value, value.placeName , type , value.price]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    value.time,
+    value.distance,
+    value.placeName,
+    type,
+    value.price,
+    value.TrainStoppageTime,
+  ]);
   return (
     <>
       {data && (
@@ -60,7 +68,7 @@ const Stops: React.FunctionComponent<IStops> = ({
                 onChange={(date, dateString) =>
                   changeHandler(dateString.toString(), "time")
                 }
-                disabled={disabled}
+                disabled={(disabled && type !== "AddStops") || index === 0}
                 className={styles.css6}
               />
             </div>
@@ -71,7 +79,7 @@ const Stops: React.FunctionComponent<IStops> = ({
                 onChange={({ target }: any) =>
                   changeHandler(target.value, "distance")
                 }
-                disabled={disabled}
+                disabled={(disabled && type !== "AddStops") || index === 0}
                 className={styles.css6}
               />
             </div>
@@ -82,29 +90,33 @@ const Stops: React.FunctionComponent<IStops> = ({
                 onChange={({ target }: any) =>
                   changeHandler(target.value, "TrainStoppageTime")
                 }
-                disabled={disabled}
+                disabled={disabled && type !== "AddStops"}
                 className={styles.css6}
               />
             </div>
           </div>
-          {type === "Price" || type === "Preview" && (
-            <div className={styles.css10}>
-              {data.price &&
-                Object.keys(data.price).map((currKey: string) => (
-                  <div className={styles.css5}>
-                    <label className={styles.css4}>Price of {currKey}</label>
-                    <Input
-                      type="number"
-                      value={data.price ? data.price[currKey] : ""}
-                      onChange={(event) =>
-                        changeHandler(event.target.value, currKey )
-                      }
-                      className={styles.css11}
-                      disabled={type === "Preview"}
-                    />
-                  </div>
-                ))}
-            </div>
+          {(type === "Price" || type === "Preview") && (
+            <>
+            {/* <hr></hr> */}
+              {/* <h1 className={styles.css8}>Price of Seats : </h1> */}
+              <div className={styles.css10}>
+                {data.price &&
+                  Object.keys(data.price).map((currKey: string) => (
+                    <div className={styles.css5}>
+                      <label className={styles.css7}>Price of {currKey}</label>
+                      <Input
+                        type="number"
+                        value={data.price ? data.price[currKey] : ""}
+                        onChange={(event) =>
+                          changeHandler(event.target.value, currKey)
+                        }
+                        className={styles.css11}
+                        disabled={type === "Preview"}
+                      />
+                    </div>
+                  ))}
+              </div>
+            </>
           )}
         </div>
       )}

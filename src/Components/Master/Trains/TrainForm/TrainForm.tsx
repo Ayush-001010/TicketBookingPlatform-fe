@@ -25,11 +25,25 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
     queryKey: ["TrainOptions"],
     retry: 3,
   });
-  const gettingPrice = (value: Array<ITrainStops>) => {
-    setFormValues((prevState : any) => {
-      return {...prevState , stops : value}
-    });
-    changeFormType(4);
+  const backHandlerFunc = () => {
+    changeFormType(formType - 1);
+  };
+  const gettingPrice = (value: any, type?: string) => {
+    if (type === "Coach") {
+      setFormValues((prevState: ITrainDetails | undefined) => {
+        if (!prevState) return;
+        if (!prevState.coaches) {
+          prevState.coaches = [];
+        }
+        prevState.coaches = [...prevState.coaches, value];
+        return { ...prevState };
+      });
+    } else {
+      setFormValues((prevState: any) => {
+        return { ...prevState, stops: value };
+      });
+      changeFormType(4);
+    }
   };
   const gettingStops = (value: Array<ITrainStops>) => {
     console.log("Value  ", value);
@@ -62,6 +76,7 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
             option={data}
             passingeValueToParent={gettingValue}
             information={"Basic Details"}
+            intialValue={formValues}
           >
             <Form.Information />
           </Form>
@@ -72,6 +87,8 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
             DepartureStation={formValues?.DepartureStation || ""}
             DestinationStation={formValues?.DestinationStation || ""}
             passingValueToParentFunc={gettingStops}
+            backHandler={backHandlerFunc}
+            data={formValues}
           />
         )}
         {formType === 3 && (
@@ -79,11 +96,10 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
             passingDataToParentFunc={gettingPrice}
             coachTypes={formValues?.TypeOfCoach || []}
             stops={formValues?.stops ? [...formValues?.stops] : []}
+            backHandlerFunc={backHandlerFunc}
           />
         )}
-        {formType === 4 && formValues && (
-          <TrainDetails details={formValues}  />
-        )}
+        {formType === 4 && formValues && <TrainDetails details={formValues} />}
       </DashboardCard>
     </div>
   );

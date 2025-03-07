@@ -9,4 +9,5 @@ export default interface IForm {
   option?:any;
   passingeValueToParent?: (value : any) => void;
   information?:any;
+  intialValue?:any; 
 }

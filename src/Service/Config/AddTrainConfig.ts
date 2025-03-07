@@ -1,7 +1,7 @@
 import { IOptions } from "../Interface/CommonInterface";
 
 export default class AddTrainConfig {
-  static title: string = "Add Train";
+  static title: string = "Launch a New Train Route";
   static previewItems: Array<string> = [
     "Basic Details",
     "Add Stops",

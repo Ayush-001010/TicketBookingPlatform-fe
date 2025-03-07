@@ -10,7 +10,9 @@ import styles from "./TrainFormStops.module.css";
 const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
   placesOptions,
   DepartureStation,DestinationStation,
-  passingValueToParentFunc
+  passingValueToParentFunc,
+  backHandler,
+  data : formData
 }) => {
   const [messageAPI, contextHandler] = message.useMessage();
   const { genratedStopsConfig, modifyConfig } = useAddTrainFunc(messageAPI);
@@ -19,6 +21,9 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
   const passingValueToParent = () => {
     passingValueToParentFunc(data);
   }
+  const backHandlerFunc = () => {
+    backHandler();
+  }  
   const genrateStops = (
     oldValue: Array<ITrainStops>,
     value: ITrainStops,
@@ -74,7 +79,11 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
     setData(newValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [DepartureStation , DestinationStation]);
-  console.log("Data ", data);
+  useEffect(()=>{
+    if(formData?.stops){
+      setData(formData.stops)
+    }
+  },[formData])
   return (
     <div>
       {contextHandler}
@@ -89,6 +98,7 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
               passingValueToParent={changeConfigValue}
               index={index}
               deleteStop={deleteStop}
+              type="AddStops"
             />
             {index !== data.length - 1 && (
               <div className={styles.css1}>
@@ -109,6 +119,7 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
         );
       })}
       <div className={styles.css4}>
+        <Button onClick={backHandlerFunc}>Back</Button>
         <Button onClick={passingValueToParent}>Next</Button>
       </div>
     </div>

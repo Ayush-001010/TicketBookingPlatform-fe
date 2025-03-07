@@ -10,6 +10,8 @@ const PriceHeaders: React.FunctionComponent<IPriceHeaders> = ({
 }) => {
   const [radioValue, setRadioValue] = useState<Record<string, boolean>>({});
   const [pricePerKilometer, setPricePerKilometer] = useState<number>();
+  const [perCabinSeat, setPerCabinSeat] = useState<number>();
+  const [totalCabin, setTotalCabin] = useState<number>();
 
   const changeHandlerRadio = (target: any, backendName: string) => {
     console.log("Target ", target.checked);
@@ -20,17 +22,25 @@ const PriceHeaders: React.FunctionComponent<IPriceHeaders> = ({
       }
       return obj;
     });
-    setPricePerKilometer(0);
+    setPricePerKilometer(undefined);
+    setPerCabinSeat(undefined);
+    setTotalCabin(undefined);
   };
-  const changeHandlerInput = ({ target }: any) => {
-    setPricePerKilometer(Number(target.value));
+  const changeHandlerInput = (target: any, backendName: string) => {
+    if (backendName === "perCabinSeat") {
+      setPerCabinSeat(Number(target.value));
+    } else if (backendName === "totalCabin") {
+      setTotalCabin(Number(target.value));
+    } else {
+      setPricePerKilometer(Number(target.value));
+    }
   };
   const clickHandler = () => {
     let coachType: string = "";
     for (const currKey in radioValue) {
       if (radioValue[currKey]) {
         coachType = currKey;
-        passingPriceToParent(pricePerKilometer, coachType);
+        passingPriceToParent(pricePerKilometer, coachType , perCabinSeat , totalCabin);
         break;
       }
     }
@@ -61,11 +71,25 @@ const PriceHeaders: React.FunctionComponent<IPriceHeaders> = ({
       <div className={styles.css4}>
         <Input
           type="number"
+          value={perCabinSeat}
+          onChange={({ target }) => changeHandlerInput(target, "perCabinSeat")}
+          placeholder="Total Seat in one cabin"
+        />
+        <Input
+          type="number"
+          value={totalCabin}
+          onChange={({ target }) => changeHandlerInput(target, "totalCabin")}
+          placeholder="Total Cabins"
+        />
+        <Input
+          type="number"
           value={pricePerKilometer}
-          onChange={changeHandlerInput}
+          onChange={({ target }) => changeHandlerInput(target, "distane")}
           placeholder="Distance per kilometer price"
         />
-        <Button onClick={clickHandler}><i className="bi bi-gear"/></Button>
+        <Button onClick={clickHandler}>
+          <i className="bi bi-gear" />
+        </Button>
       </div>
     </div>
   );

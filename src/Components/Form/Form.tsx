@@ -1,4 +1,10 @@
-import React, { createContext, PropsWithChildren, useContext } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import IForm from "./IForm";
 import { Formik } from "formik";
 import styles from "./Form.module.css";
@@ -34,37 +40,45 @@ const Form = ({
   option,
   passingeValueToParent,
   information,
+  intialValue: val,
 }: IForm & PropsWithChildren) => {
-  const { initialValue, validation, formFields } = useFormikHook(formType);
+  const { initialValue, validation, formFields } = useFormikHook(formType, val);
+  const [iniValue, setIniValue] = useState<Record<string, any> | null>(null);
 
+  console.log("Values  ", val);
   const handleSubmit = (values: Record<string, any>) => {
-    console.log("Values  ", values);
     if (passingeValueToParent) passingeValueToParent(values);
   };
+  useEffect(()=>{
+    console.log("INI Values  ", initialValue);
+    setIniValue({...initialValue})
+  },[initialValue])
   return (
     <FormContext.Provider
       value={{ title: formtitle, options: option, information: information }}
     >
       <div className={styles.css1}>
-        <Formik
-          initialValues={initialValue}
-          validationSchema={validation}
-          onSubmit={handleSubmit}
-        >
-          {(formik) => (
-            <div>
-              {children}
-              <form onSubmit={formik.handleSubmit}>
-                <FormItems fields={formFields} formik={formik} />
-                <FormButtons
-                  btn1={button1Text || ""}
-                  btn2={button2Text || ""}
-                  className={classNameButton}
-                />
-              </form>
-            </div>
-          )}
-        </Formik>
+        {iniValue && (
+          <Formik
+            initialValues={iniValue}
+            validationSchema={validation}
+            onSubmit={handleSubmit}
+          >
+            {(formik) => (
+              <div>
+                {children}
+                <form onSubmit={formik.handleSubmit}>
+                  <FormItems fields={formFields} formik={formik} />
+                  <FormButtons
+                    btn1={button1Text || ""}
+                    btn2={button2Text || ""}
+                    className={classNameButton}
+                  />
+                </form>
+              </div>
+            )}
+          </Formik>
+        )}
       </div>
     </FormContext.Provider>
   );

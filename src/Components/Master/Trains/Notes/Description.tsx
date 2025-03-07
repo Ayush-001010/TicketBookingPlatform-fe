@@ -34,11 +34,11 @@ const Description: React.FunctionComponent<{}> = () => {
           operates (e.g., Mon-Fri, 10:00 AM - 6:00 PM).
         </li>
         <li>
-          From Place: Enter the name of the departure station. No special
+        Departure Station: Enter the name of the departure station. No special
           characters, please.
         </li>
         <li>
-          To Place: Enter the name of the destination station. Again, no special
+        Destination Station: Enter the name of the destination station. Again, no special
           characters.
         </li>
       </ul>
@@ -118,11 +118,22 @@ const Description: React.FunctionComponent<{}> = () => {
       </ul>
     </div>
   );
+  const fourthNotes = (
+    <div>
+      <p>
+        Hello, You're just a step away from adding a new train that will serve
+        millions of travelers! Before you submit, please ensure that all the
+        details are accurate. Once everything is verified, click the 'Add New
+        Train' button. Thank you for your attention to detail!
+      </p>
+    </div>
+  );
   return (
     <>
       {formType === 1 && firstFormNotes}
       {formType === 2 && secondFormNotes}
       {formType === 3 && thirdFormNotes}
+      {formType === 4 && fourthNotes}
     </>
   );
 };

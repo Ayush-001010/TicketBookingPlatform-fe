@@ -5,17 +5,17 @@
     font-family: "Markazi Text", serif;
     font-weight: 900;
     font-size: 20px;
-    color: #33415c;
+    /* color: #33415c; */
     margin-bottom: 20px !important;
     margin-left: 15px !important;
 }
 
 
 .halfWidthCss input{
-    color: #33415c;
+    color: #33415c !important;
     font-family: "Markazi Text", serif;
-    font-weight: 800;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 15px;
     width: 97%;
 }
 .halfWidthCss p {

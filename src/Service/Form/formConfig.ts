@@ -23,7 +23,7 @@ const invalidCharacterErrorMessage: string =
   "Invalid characters, only letters and spaces are allowed.";
 
 //regex
-const regaxForAtoZCharacterOnlyWhichIncludeSpace = /^[A-Z a-z\s]+$/;
+const regaxForAtoZCharacterOnlyWhichIncludeSpace = /^[A-Z a-z ( ) , \s]+$/;
 
 //Configuration for form fields
 const formConfig: IFormTypes = {

@@ -1,3 +1,4 @@
+import { ITrainDetails } from "../../../../../Service/Interface/AddTrainInterface";
 import { IOptions } from "../../../../../Service/Interface/CommonInterface";
 
 export default interface ITrainFormStops {
@@ -5,4 +6,6 @@ export default interface ITrainFormStops {
     DepartureStation : string;
     DestinationStation : string;
     passingValueToParentFunc : any;
+    backHandler : () => void; 
+    data?: ITrainDetails
 }

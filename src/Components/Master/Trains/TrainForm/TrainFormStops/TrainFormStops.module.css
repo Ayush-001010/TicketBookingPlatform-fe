@@ -29,14 +29,22 @@
 .css4 {
     width: 100% !important;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
-.css4 button {
+.css4 button:nth-child(2) {
     background-color: #469d89;
     color:#eff1ed;
     font-weight: 600;
 }
-.css4 button:hover {
+.css4 button:nth-child(2):hover {
     background-color: #415d43 !important; 
+    color: #eff1ed !important;
+}
+.css4 button:nth-child(1):hover {
+    background-color: #9d0208 !important; 
+    color: #eff1ed !important;
+}
+.css4 button:nth-child(1) {
+    background-color: #d00000;
     color: #eff1ed !important;
 }

@@ -23,7 +23,7 @@ const AddTrains: React.FunctionComponent<IAddTrains> = () => {
   return (
     <AddTrainContext.Provider value={{ formType }}>
       <div className={styles.css2}>
-        <div>
+        <div className={styles.css3}>
           <h1>{AddTrainConfig.title}</h1>
         </div>
         <div className={styles.css1}>

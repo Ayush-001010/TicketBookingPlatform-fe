@@ -50,8 +50,7 @@ const SelectUI: React.FunctionComponent<ISelect> = ({
     ? (formik.errors[backendName] as string)
     : "";
   const isError =
-    (formik.touched[backendName] && typeof errorMessage === "string") ||
-    errorMessage?.includes("required");
+    (formik.touched[backendName] && typeof errorMessage === "string") 
   return (
     <div className={styles[`${className || "css1"}`]}>
       <label>{displayName}</label>

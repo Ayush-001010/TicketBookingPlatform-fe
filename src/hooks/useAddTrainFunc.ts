@@ -13,7 +13,8 @@ const useAddTrainFunc = (
   messageAPI?: MessageInstance,
   data?: ITrainDetails
 ) => {
-  const [totalJourneyTimeValue, setTotalJourneyTimeValue] = useState<string>("");
+  const [totalJourneyTimeValue, setTotalJourneyTimeValue] =
+    useState<string>("");
   const genratingPreview = () => {
     const arr = AddTrainConfig.previewItems;
     const data: Array<StepProps> = [];
@@ -160,7 +161,7 @@ const useAddTrainFunc = (
               Longitude
             );
             console.log("Distance   ", distance);
-            data[i].distance = distance.toString();
+            data[i].distance = distance.toFixed(2).toString();
             newTime = calculateArrivalTime(
               distance,
               prevStartTime,
@@ -186,7 +187,9 @@ const useAddTrainFunc = (
   const setPrice = (
     data: Array<ITrainStops>,
     price: number,
-    coachType: string
+    coachType: string,
+    perCabinSeat: number,
+    totalCabin: number
   ) => {
     for (const curr of data) {
       curr.price = {
@@ -199,7 +202,7 @@ const useAddTrainFunc = (
   const totalJourneyTimeFunc = () => {
     if (!data) return;
     let totalMinutes = 0;
-    const steps =  data.stops.map(ele => ele.time);
+    const steps = data.stops.map((ele) => ele.time);
     for (let i = 0; i < steps.length - 1; i++) {
       const start = new Date(`1970-01-01T${steps[i]}:00Z`).getTime();
       const end = new Date(`1970-01-01T${steps[i + 1]}:00Z`).getTime();
@@ -228,7 +231,7 @@ const useAddTrainFunc = (
     genratedStopsConfig,
     modifyConfig,
     setPrice,
-    totalJourneyTimeValue
+    totalJourneyTimeValue,
   };
 };
 

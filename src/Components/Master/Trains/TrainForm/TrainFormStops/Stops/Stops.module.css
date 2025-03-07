@@ -30,6 +30,12 @@
   font-weight: 600;
   display: block;
 }
+.css7 {
+  color: #495057;
+  font-weight: 600;
+  display: block;
+  font-size: 12px;
+}
 .css5 {
   width: 500px !important;
   margin-left: 10px !important;
@@ -50,4 +56,10 @@
 .css10 {
   display: flex;
   width: 100% !important;
+}
+.css8 {
+  font-size: 20px;
+    margin-top: 10px;
+    color: #495057;
+    font-weight: 700;
 }

@@ -1,12 +1,14 @@
-import React, { useEffect , useState } from "react";
+import React, { useContext, useEffect , useState } from "react";
 import IPreview from "./IPreview";
 import { StepProps, Steps } from "antd";
 import useAddTrainFunc from "../../../../hooks/useAddTrainFunc";
 import styles from "./Preview.module.css";
+import { AddTrainContext } from "../AddTrains";
 
 const Preview: React.FunctionComponent<IPreview> = () => {
   const { genratingPreview } = useAddTrainFunc();
   const [previewItems, setPreviewItems] = useState<Array<StepProps>>([]);
+  const { formType } = useContext(AddTrainContext)
   useEffect(() => {
     const res= genratingPreview();
     res.map((ele:StepProps) => {
@@ -19,7 +21,7 @@ const Preview: React.FunctionComponent<IPreview> = () => {
   }, []);
   return (
     <>
-      <Steps className={styles.css1} direction="vertical" current={0} items={previewItems} />
+      <Steps className={styles.css1} direction="vertical" current={formType - 1} items={previewItems} />
     </>
   );
 };
