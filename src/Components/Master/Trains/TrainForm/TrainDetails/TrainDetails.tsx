@@ -6,8 +6,11 @@ import { ITrainStops } from "../../../../../Service/Interface/AddTrainInterface"
 import Stops from "../TrainFormStops/Stops/Stops";
 import { Button } from "antd";
 
-const TrainDetails: React.FunctionComponent<ITrainPreview> = ({ details }) => {
+const TrainDetails: React.FunctionComponent<ITrainPreview> = ({ details , submitHanlderFunc }) => {
   const { totalJourneyTimeValue } = useAddTrainFunc(undefined, details);
+  const submitHanlder = () => {
+    submitHanlderFunc();
+  }
   return (
     <div>
       <div>
@@ -16,6 +19,7 @@ const TrainDetails: React.FunctionComponent<ITrainPreview> = ({ details }) => {
         </h1>
       </div>
       <hr />
+        <h2 className={styles.css7}>Basic Deatils : </h2>
       <div className={styles.css2}>
         <div className={styles.css3}>
           <p>
@@ -32,8 +36,8 @@ const TrainDetails: React.FunctionComponent<ITrainPreview> = ({ details }) => {
         <div className={styles.css3}>
           <p>
             Type Of Coach :{" "}
-            {details.TypeOfCoach.map((curr: string) => (
-              <span>{curr}</span>
+            {details.TypeOfCoach.map((curr: string,index:number) => (
+              <span>{curr} {index !== details.TypeOfCoach.length - 1 ? "," : ""} </span>
             ))}
           </p>
         </div>
@@ -87,7 +91,7 @@ const TrainDetails: React.FunctionComponent<ITrainPreview> = ({ details }) => {
         })}
       </div>
       <div className={styles.css4}>
-        <Button>Submit</Button>
+        <Button onClick={submitHanlder}>Submit</Button>
       </div>
     </div>
   );

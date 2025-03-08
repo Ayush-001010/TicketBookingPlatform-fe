@@ -128,13 +128,13 @@ const useAddTrainFunc = (
     );
     const arrivalHours = arrivalDate.getHours().toString().padStart(2, "0");
     const arrivalMinutes = arrivalDate.getMinutes().toString().padStart(2, "0");
-
     return `${arrivalHours}:${arrivalMinutes}`;
   };
   const modifyConfig = async (
     data: Array<ITrainStops>,
     value: { time: string; avgSpeed: number }
   ) => {
+    messageAPI?.destroy();
     messageAPI?.loading(CommonConfig.loadingMessageAPI);
     const response = await APIService.getData("/train/getMasterDetails", {
       tableName: "Places",
@@ -144,7 +144,6 @@ const useAddTrainFunc = (
       const { data: placesData } = response;
       let prevLatitude: number = 0;
       let prevLongitude: number = 0;
-      let prevStartTime: string = "";
       for (let i = 0; i < data.length; i++) {
         const curr = data[i];
         const place = placesData.find(
@@ -164,7 +163,7 @@ const useAddTrainFunc = (
             data[i].distance = distance.toFixed(2).toString();
             newTime = calculateArrivalTime(
               distance,
-              prevStartTime,
+              value.time,
               value.avgSpeed
             );
             console.log("Time  ", newTime);
@@ -174,9 +173,10 @@ const useAddTrainFunc = (
             data[i].time = value.time;
           }
           data[i].TrainStoppageTime = "10";
-          prevLatitude = Latitude;
-          prevLongitude = Longitude;
-          prevStartTime = i === 0 ? value.time : newTime;
+          if (i === 0) {
+            prevLatitude = Latitude;
+            prevLongitude = Longitude;
+          }
         }
       }
     } else {
@@ -194,7 +194,7 @@ const useAddTrainFunc = (
     for (const curr of data) {
       curr.price = {
         ...curr.price,
-        [coachType]: (Number(curr.distance) * price).toString(),
+        [coachType]: (Number(curr.distance) * price).toFixed(2).toString(),
       };
     }
     return data;
@@ -220,10 +220,17 @@ const useAddTrainFunc = (
     const minutes = Math.floor(totalMinutes % 60);
     setTotalJourneyTimeValue(`${hours}hr:${minutes}mins`);
   };
+  const addNewTrain = async (value : ITrainDetails) => {
+    messageAPI?.destroy();
+    messageAPI?.loading(CommonConfig.loadingMessageAPI);
+    const response = await APIService.getData("/train/addNewTrain",value);
+    console.log("Response ",response);
+  }
   useEffect(() => {
     if (data) {
       totalJourneyTimeFunc();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
   return {
     genratingPreview,
@@ -232,6 +239,7 @@ const useAddTrainFunc = (
     modifyConfig,
     setPrice,
     totalJourneyTimeValue,
+    addNewTrain
   };
 };
 

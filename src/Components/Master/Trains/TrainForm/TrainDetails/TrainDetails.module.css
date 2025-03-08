@@ -1,5 +1,5 @@
 .css1 {
-  color: #495057;
+  color: #343a40;
   display: flex;
   justify-content: center;
   font-weight: 700;
@@ -19,20 +19,21 @@
 }
 
 .css3 {
-    width: 50% !important;
+  width: 50% !important;
 }
-.css3 p{
-    color: #343a40;
-    font-weight: 700;
+.css3 p {
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 15px;
 }
 .css3 p span {
-    color: #adb5bd;
-    font-weight: 600;
-    border: 1px solid #adb5bd;
-    margin-left: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    padding: 3px;
+  color: #adb5bd;
+  font-weight: 600;
+  /* border: 1px solid #adb5bd; */
+  margin-left: 10px;
+  /* border-radius: 4px; */
+  font-size: 14px;
+  margin: 0;
 }
 .css5 {
   width: 100% !important;
@@ -62,4 +63,11 @@
   background-color: #344e41 !important;
   color: white !important;
   border: none !important;
+}
+.css7 {
+  color: #495057;
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 7px;
+  text-decoration: underline;
 }

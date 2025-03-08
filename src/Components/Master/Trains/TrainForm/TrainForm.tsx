@@ -14,7 +14,7 @@ import {
 import { AddTrainContext } from "../AddTrains";
 import TrainDetails from "./TrainDetails/TrainDetails";
 
-const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
+const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType , submitHanlder }) => {
   const [messageAPI, contextHandler] = message.useMessage();
   const { getTrainDetailsOptions } = useAddTrainFunc(messageAPI);
   const [formValues, setFormValues] = useState<ITrainDetails>();
@@ -64,6 +64,10 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
     setFormValues(value);
     changeFormType(2);
   };
+  const submitHanlderFunc = () => {
+    if(!formValues)return;
+    submitHanlder(formValues);
+  }
   return (
     <div style={{ marginTop: "21px" }}>
       {contextHandler}
@@ -99,7 +103,7 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType }) => {
             backHandlerFunc={backHandlerFunc}
           />
         )}
-        {formType === 4 && formValues && <TrainDetails details={formValues} />}
+        {formType === 4 && formValues && <TrainDetails submitHanlderFunc={submitHanlderFunc} details={formValues} />}
       </DashboardCard>
     </div>
   );
