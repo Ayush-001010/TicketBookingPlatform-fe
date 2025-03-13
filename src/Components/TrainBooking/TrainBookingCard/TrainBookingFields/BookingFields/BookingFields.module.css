@@ -1,0 +1,22 @@
+.css2 {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+.css1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin:10px
+}
+.css1 label{
+    color:#343a40;
+    font-weight: 600;
+}
+.css1 span{
+    color:#343a40;
+    font-weight: 600;
+}
+.css3 {
+    width: 40%;
+}

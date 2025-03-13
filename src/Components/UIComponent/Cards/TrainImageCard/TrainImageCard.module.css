@@ -1,0 +1,17 @@
+.css1 {
+  width: 60%; /* Set the width of your div */
+  height: 600px; /* Set the height of your div */
+  overflow: hidden; /* Hide any overflow content */
+  position: relative; /* Required for absolute positioning */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 30px;  
+}
+
+.css1 img {
+  width: 100%; /* Make the image fill the width of the div */
+  height: auto; /* Maintain the aspect ratio */
+  position: absolute; /* Position the image */
+  top: 50%; /* Center the image vertically */
+  left: 50%; /* Center the image horizontally */
+  transform: translate(-50%, -50%); /* Adjust the position to the center */
+}

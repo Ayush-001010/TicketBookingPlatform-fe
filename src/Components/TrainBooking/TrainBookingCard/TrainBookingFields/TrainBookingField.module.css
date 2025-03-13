@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Ponomar&display=swap");
+.css1 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5%;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  left: 200px;
+  width: 40%;
+  height: 530px;
+  margin-top: 50px;
+  padding: 1%;
+  font-family: "Ponomar", system-ui;
+}
+.css2 h1 {
+  font-size: 25px;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.css3 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.css4 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.css4 label{
+    color: #4a4e69;
+    font-weight: 700;
+}
+.css5 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px;
+}
+.css5 p {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #38b000;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 14%;
+  font-size: 20px;
+}
+.css5 p i {
+    color: white;
+    font-weight: 800;
+}
+.css6 {
+  background-color: #ced4da;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  padding: 5%;
+}
+.css7 {
+  color: #343a40;
+  font-weight: 700;
+}
+
+.css8 .ant-tabs-nav .ant-tabs-tab {
+  background-color: #adb5bd !important  ; /* Light gray background */
+  color: #333; /* Default text color */
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Active tab */
+.css8  .ant-tabs-tab  .ant-tabs-tab-active {
+  background-color: #6c757d !important; /* Darker gray when active */
+  color: white !important; /* White text for better contrast */
+  font-weight: bold;
+}
+
+/* Hover effect */
+.css8 .ant-tabs-tab:hover {
+  background-color: #868e96; /* Medium gray on hover */
+  color: white;
+}
+
+/* Tab bar styling */
+.css8 .ant-tabs-nav {
+  background-color: #adb5bd;
+  border-radius: 10px 10px 0 0;
+  padding: 1%;
+}
+
+.css9 {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+.css9 button{
+  width: 100%;
+  background-color: #212529;
+  color: white;
+}
