@@ -6,7 +6,7 @@ import {
 import TrainBookingConfig from "../Service/Config/TrainBookingConfig";
 import { IOptions } from "../Service/Interface/CommonInterface";
 import APIService from "../Service/APIServices/APIService";
-import { useAppDispatch } from "../Redux/Hooks";
+import { useAppDispatch, useAppSelector } from "../Redux/Hooks";
 import { setTrainDetailsData } from "../Redux/Slices/TrainDetails";
 
 const useTrainBooking = () => {
@@ -118,13 +118,29 @@ const useTrainBooking = () => {
     console.log("Filter Array ", filterArr);
     return filterArr;
   };
+  const bookingData = useAppSelector((state) => state.TrainBookingDetailsSlice);
+  const getPrice = async (coachType: string, trainCode: string) => {
+    const response = await APIService.getData("/train/getPrice", {
+      DepartureStation: bookingData.departureStation,
+      DestinationStation: bookingData.destinationStation,
+      Adults: bookingData.Adults,
+      Kids: bookingData.Kids,
+      seniorCitizen: bookingData.seniorCitizen,
+      trainCode,
+      coachType 
+    });
+    if(response.success){
+      return response.data;
+    }
+    return 0;
+  };
   useEffect(() => {
     genrateBookingOption().then((opt) => {
       setBookingOption(opt);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return { bookingOption, gettingTrainDetails , genrateSideFilters};
+  return { bookingOption, gettingTrainDetails, genrateSideFilters, getPrice };
 };
 
 export default useTrainBooking;

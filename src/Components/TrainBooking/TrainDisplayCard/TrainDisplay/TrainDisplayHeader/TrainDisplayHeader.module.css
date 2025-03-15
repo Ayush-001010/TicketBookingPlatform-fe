@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Ponomar&display=swap");
+.css1 {
+    margin-top: 10px;
+}
+.css2 {
+    font-family: "Ponomar", system-ui;
+    color: #212529;
+}
+.css3 {
+    color: #212529;
+    font-family: "Ponomar", system-ui;
+    font-weight: 700;
+}

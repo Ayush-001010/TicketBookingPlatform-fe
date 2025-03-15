@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Ponomar&display=swap");
+.css1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+.css2 {
+    background-color: #343a40;
+    border-radius: 10px;
+    width: 200px;
+    height: 45px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 10px;
+}
+.css5 {
+    background-color: #495057;
+    border-radius: 10px;
+    width: 200px;
+    height: 45px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 10px;
+}
+.css3{
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-family: "Ponomar", system-ui;
+    color: #adb5bd;
+    margin: 0;
+}
+.css4 {
+    display: flex;
+    color: #adb5bd;
+    justify-content: center;
+    font-family: "Ponomar", system-ui;
+    font-size: 15px;
+    font-weight: 700;
+}
+.css6 {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.css6 button{
+    font-family: "Ponomar", system-ui;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    background-color: #a4161a;
+    color: #e9ecef;
+    border-radius: 10px;
+    height: 30px;
+    width: 120px;
+    font-weight: 500;
+}
+.css7 {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+.css8 {
+    font-family: "Ponomar", system-ui;
+    font-size: 18px;
+    font-weight: 700;
+    color: #343a40;
+}
+.css9 {
+    font-weight: 500;
+}
+.css10 {
+    font-weight: 500;
+    font-size: 12px;
+}
+.css11 button {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    background-color: #333d29;
+    font-weight: 600;
+    width: 100px;
+    color: #e9ecef;
+}
