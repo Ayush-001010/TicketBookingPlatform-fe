@@ -1,5 +1,5 @@
 import { IFormFields } from "../Form/formConfig";
-import { IBookingOptions } from "../Interface/TrainBookingInterface";
+import { IBookingOptions  } from "../Interface/TrainBookingInterface";
 
 export default class TrainBookingConfig {
   static trainImageText: string =
@@ -22,7 +22,7 @@ export default class TrainBookingConfig {
       },
       {
         displayName: "Reach Time",
-        backendName: "ReactTime",
+        backendName: "ReachTime",
         validation: null,
         fieldType: "time",
       },
@@ -70,12 +70,12 @@ export default class TrainBookingConfig {
       logic: "timeOnMinutes",
     },
     {
-      name: "ReactTimeHr",
+      name: "ReachTimeHr",
       where: "logic",
       logic: "timeOnhour",
     },
     {
-      name: "ReactTimeMinutes",
+      name: "ReachTimeMinutes",
       where: "logic",
       logic: "timeOnMinutes",
     },

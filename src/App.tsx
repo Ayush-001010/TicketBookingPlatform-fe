@@ -10,9 +10,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AddTrains from "./Components/Master/Trains/AddTrains";
 import Home from "./Components/TrainBooking/Home";
+import { socket } from "./socket";
 
 const App: React.FC<{}> = () => {
   const queryClient = new QueryClient();
+
+  socket.on("connect" , ()=>console.log("Hey I am connect to backend!!"));
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>

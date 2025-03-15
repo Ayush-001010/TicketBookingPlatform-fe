@@ -1,10 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import { IBookingOptions } from "../Service/Interface/TrainBookingInterface";
+import {
+  IBookingOptions,
+  ISideFilter,
+} from "../Service/Interface/TrainBookingInterface";
 import TrainBookingConfig from "../Service/Config/TrainBookingConfig";
 import { IOptions } from "../Service/Interface/CommonInterface";
 import APIService from "../Service/APIServices/APIService";
+import { useAppDispatch } from "../Redux/Hooks";
+import { setTrainDetailsData } from "../Redux/Slices/TrainDetails";
 
 const useTrainBooking = () => {
+  const updateValue = useAppDispatch();
+
   const [bookingOption, setBookingOption] = useState<
     Record<string, Array<IOptions>>
   >({});
@@ -28,7 +35,7 @@ const useTrainBooking = () => {
           const res = await APIService.getData(backendUrl || "");
           if (name === "departureStation" || name === "destinationStation") {
             for (const item of res.data.placesData) {
-              arr.push({ value: item.PlaceName , label: item.PlaceName });
+              arr.push({ value: item.PlaceName, label: item.PlaceName });
             }
           }
           opt = { ...opt, [name]: arr };
@@ -58,24 +65,66 @@ const useTrainBooking = () => {
     }
     return opt;
   }, []);
-  const gettingTrainDetails = async (value : any) => {
-    const obj : Record<string , string> = {
-      DepartureStation : value["departureStation"],
-      DestinationStation : value["destinationStation"],
-      JourneyDate : value["travelDate"],
-      DepartureTime : `${value["leavingTimeHr"]}:${value["leavingTimeMinutes"]}`,
-      DestinationTime : `${value["ReactTimeHr"]}:${value["ReactTimeMinutes"]}`,
+  const gettingTrainDetails = async (value: any) => {
+    const obj: Record<string, string> = {
+      DepartureStation: value["departureStation"],
+      DestinationStation: value["destinationStation"],
+      JourneyDate: value["travelDate"],
+      DepartureTime: `${value["leavingTimeHr"]}:${value["leavingTimeMinutes"]}`,
+      DestinationTime: `${value["ReachTimeHr"]}:${value["ReachTimeMinutes"]}`,
+    };
+    const response = await APIService.getData("/train/getTrains", obj);
+    console.log("Response ", response);
+    if (response.success) {
+      updateValue(setTrainDetailsData(response.data));
     }
-    const response = await APIService.getData("/train/getTrains",obj);
-    console.log("Response ",response);
-  }
+  };
+  const genrateSideFilters = async () => {
+    const type: Array<string> = ["Train Type", "Ticket Price", "Facilites"];
+    const response = await APIService.getData("/train/filterOption");
+    console.log("Response ", response);
+    const filterArr: Array<ISideFilter> = [];
+    if (response.success) {
+      const { TypeOfTrainData, TrainFacilites } = response.data;
+      for (const item of type) {
+        let obj: ISideFilter = { header: "", fields: [] };
+        if (item === "Train Type") {
+          obj = {
+            header: item,
+            fields: TypeOfTrainData.map((ele: any) => {
+              return { labelName: ele.TrainType, fieldType: "checkbox" };
+            }),
+          };
+        } else if (item === "Facilites") {
+          obj = {
+            header: item,
+            fields: TrainFacilites.map((ele: any) => {
+              return { labelName: ele.FacilitesName, fieldType: "checkbox" };
+            }),
+          };
+        } else {
+          obj = {
+            header: item,
+            fields: [
+              { labelName: "up to 500", fieldType: "radio", radioID: "price" },
+              { labelName: "up to 1000", fieldType: "radio", radioID: "price" },
+              { labelName: "up to 1500", fieldType: "radio", radioID: "price" },
+            ],
+          };
+        }
+        filterArr.push(obj);
+      }
+    }
+    console.log("Filter Array ", filterArr);
+    return filterArr;
+  };
   useEffect(() => {
     genrateBookingOption().then((opt) => {
       setBookingOption(opt);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return { bookingOption  , gettingTrainDetails};
+  return { bookingOption, gettingTrainDetails , genrateSideFilters};
 };
 
 export default useTrainBooking;

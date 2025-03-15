@@ -5,18 +5,25 @@ import TrainBookingConfig from "../../../../Service/Config/TrainBookingConfig";
 import { Button, Select, Tabs } from "antd";
 import BookingFields from "./BookingFields/BookingFields";
 import useTrainBooking from "../../../../hooks/useTrainBooking";
+import { useAppDispatch } from "../../../../Redux/Hooks";
+import { setTrainBookingDetailsValues } from "../../../../Redux/Slices/TrainBookingDetails";
 
 const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
   const { bookingOption } = useTrainBooking();
   const [value, setValue] = useState<Record<string, string>>({});
   const { gettingTrainDetails } = useTrainBooking();
-  
+  const dispatch = useAppDispatch();
+
+  const submitHandler = () => {
+    gettingTrainDetails(value);
+    dispatch(setTrainBookingDetailsValues(value));
+  };
   const changeHandler = (newValue: string, backendName: string) => {
     setValue((prevState: Record<string, string>) => {
       return { ...prevState, [backendName]: newValue };
     });
   };
-  console.log("Value  ",value);
+  console.log("Value  ", value);
   return (
     <div className={styles.css1}>
       <div className={styles.css2}>
@@ -25,7 +32,10 @@ const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
       <div className={styles.css3}>
         <div className={styles.css4}>
           <label>Departure Station</label>
-          <Select options={bookingOption["departureStation"]} onChange={(newValue) => changeHandler(newValue , "departureStation")}/>
+          <Select
+            options={bookingOption["departureStation"]}
+            onChange={(newValue) => changeHandler(newValue, "departureStation")}
+          />
         </div>
         <div className={styles.css5}>
           <p>
@@ -34,7 +44,12 @@ const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
         </div>
         <div className={styles.css4}>
           <label>Distination Station</label>
-          <Select options={bookingOption["destinationStation"]} onChange={(newValue) => changeHandler(newValue , "destinationStation")}/>
+          <Select
+            options={bookingOption["destinationStation"]}
+            onChange={(newValue) =>
+              changeHandler(newValue, "destinationStation")
+            }
+          />
         </div>
       </div>
       <div className={styles.css6}>
@@ -67,7 +82,7 @@ const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
         />
       </div>
       <div className={styles.css9}>
-        <Button onClick={()=>gettingTrainDetails(value)}>Get times & tickets</Button>
+        <Button onClick={submitHandler}>Get times & tickets</Button>
       </div>
     </div>
   );

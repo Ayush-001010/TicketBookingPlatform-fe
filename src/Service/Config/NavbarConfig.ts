@@ -6,6 +6,7 @@ export interface INavItems {
 
 export default class NavbarConfig {
   static navbarItems: Array<INavItems> = [
+    { displayName: "Home", role: "Admin" , navLink : "/" },
     { displayName: "Railway Stations", role: "Admin" , navLink : "/RailwayStations" },
     { displayName: "Add Train", role: "Admin" , navLink : "/AddTrain" },
   ];

@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthenticationSlice from "../Slices/Authentication";
+import  TrainDetailsSlice  from "../Slices/TrainDetails";
+import  TrainBookingDetailsSlice  from "../Slices/TrainBookingDetails";
 
 
 export const store = configureStore({
   reducer: {
-    AuthenticationSlice : AuthenticationSlice
+    AuthenticationSlice : AuthenticationSlice,
+    TrainDetailsSlice : TrainDetailsSlice,
+    TrainBookingDetailsSlice : TrainBookingDetailsSlice
   },
 });
 
