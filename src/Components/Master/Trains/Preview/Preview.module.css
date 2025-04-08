@@ -22,3 +22,46 @@
     color: #6c757d !important;
     font-weight: 500;
 }
+
+
+.css2 {
+  font-size: 12px;
+  margin: 2px 0;
+  color: #f0f0f0;
+}
+
+.css3 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.css4 {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.css4 h1 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+.css4 p {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 2px 0 6px 0;
+  color: #dcdcdc;
+}
+
+.css5 {
+  max-width: 500px;
+  padding: 10px;
+  background-color: #1f1f1f; /* Optional: if you use styled tooltip */
+  border-radius: 8px;
+}

@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import APIService from "../APIServices/APIService";
 
 //Interface representing the structure of the form fields
 export interface IFormFields {
@@ -24,6 +25,7 @@ const invalidCharacterErrorMessage: string =
 
 //regex
 const regaxForAtoZCharacterOnlyWhichIncludeSpace = /^[A-Z a-z ( ) , \s]+$/;
+const regaxForNumberOnly = /^[0-9]+$/;
 
 //Configuration for form fields
 const formConfig: IFormTypes = {
@@ -83,14 +85,35 @@ const formConfig: IFormTypes = {
       displayName: "Departure Station",
       backendName: "DepartureStation",
       fieldType: "dropdown",
-      validation: Yup.string().required(requiredErrorMessage),
+      validation: Yup.string()
+        .required(requiredErrorMessage)
+        .test(
+          "MustNotBeSame1",
+          "Departure and Destination station must be different",
+          function (this: Yup.TestContext, value) {
+            const parent = this?.parent as Record<string, any>;
+            if (!value || !parent?.DestinationStation) return true;
+            return parent.DestinationStation !== value;
+          }
+        ),
       className: "halfWidthCss",
     },
     {
       displayName: "Destination Station",
       backendName: "DestinationStation",
       fieldType: "dropdown",
-      validation: Yup.string().required(requiredErrorMessage),
+      validation: Yup.string()
+        .required(requiredErrorMessage)
+        .test(
+          "MustNotBeSame",
+          "Departure and Destination station must be different",
+          function (this: Yup.TestContext, value) {
+            const parent = this?.parent as Record<string, any>;
+            if (!value || !parent?.DepartureStation)
+              return true;
+            return parent.DepartureStation !== value;
+          }
+        ),
       className: "halfWidthCss",
     },
     {
@@ -106,15 +129,34 @@ const formConfig: IFormTypes = {
       fieldType: "dropdown",
       validation: Yup.array().required(requiredErrorMessage),
       className: "halfWidthCss",
-      dependableField : "RunningSchedule",
-      isMultiple:true
-
+      dependableField: "RunningSchedule",
+      isMultiple: true,
     },
     {
       displayName: "Train Code",
       backendName: "TrainCode",
       fieldType: "text",
-      validation: Yup.string().required(requiredErrorMessage),
+      validation: Yup.string()
+        .required(requiredErrorMessage)
+        .matches(
+          regaxForNumberOnly,
+          "Invalid characters, only numbers are allowed."
+        )
+        .test(
+          "DuplicateTrainCode",
+          "Train code already exists",
+          async (value) => {
+            const response = await APIService.getData(
+              "/train/checkTrainCodeExistOrNot",
+              { trainCode: value }
+            );
+            if (response.success) {
+              return response.data;
+            } else {
+              return false;
+            }
+          }
+        ),
       className: "fullWidthCss",
     },
   ],

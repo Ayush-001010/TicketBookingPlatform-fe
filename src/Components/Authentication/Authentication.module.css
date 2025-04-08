@@ -1,0 +1,9 @@
+.css1 {
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    width: 50%;
+}
+.css2 {
+    width: 50%;
+}

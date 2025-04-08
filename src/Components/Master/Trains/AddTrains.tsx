@@ -7,7 +7,6 @@ import styles from "./AddTrains.module.css";
 import TrainForm from "./TrainForm/TrainForm";
 import RightSidePreview from "../../UIComponent/Cards/RightSidePreview/RightSidePreview";
 import Preview from "./Preview/Preview";
-import { ITrainDetails } from "../../../Service/Interface/AddTrainInterface";
 import useAddTrainFunc from "../../../hooks/useAddTrainFunc";
 
 interface IAddTrainContext {
@@ -21,6 +20,7 @@ const AddTrains: React.FunctionComponent<IAddTrains> = () => {
   const {addNewTrain} = useAddTrainFunc();
   const [formType , setFormType] = useState<number>(1);
   const changeFormType = (newValue : number) => {
+    console.log("New Value", newValue);
     setFormType(newValue);
   }
   return (

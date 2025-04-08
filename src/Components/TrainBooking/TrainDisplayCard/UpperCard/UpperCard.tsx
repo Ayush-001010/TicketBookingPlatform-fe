@@ -3,11 +3,11 @@ import IUpperCard from "./IUpperCard";
 import { Steps } from "antd";
 import styles from "./UpperCard.module.css"
 
-const UpperCard: React.FunctionComponent<IUpperCard> = () => {
+const UpperCard: React.FunctionComponent<IUpperCard> = ({currentItem}) => {
   return (
     <div className={styles.css1}>
       <Steps
-        current={0}
+        current={currentItem || 0}
         items={[
           {
             description: "Select Train",

@@ -8,4 +8,8 @@ export default class CommonConfig {
     content: "loading",
     duration: 0,
   };
+  static errorMessageAPI: IMessage = {
+    content: "Something Went Wrong",
+    duration: 0,
+  };
 }

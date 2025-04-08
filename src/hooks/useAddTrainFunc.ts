@@ -36,7 +36,6 @@ const useAddTrainFunc = (
     if (response.success) {
       const { typeOfTrainData, typeOfCoachData, placesData, runningData } =
         response.data;
-      console.log("Data  ", typeOfTrainData, typeOfCoachData, placesData);
       const TypeOfTrain = typeOfTrainData.map((item: any) => {
         return {
           value: item.TrainType,
@@ -159,14 +158,12 @@ const useAddTrainFunc = (
               Latitude,
               Longitude
             );
-            console.log("Distance   ", distance);
             data[i].distance = distance.toFixed(2).toString();
             newTime = calculateArrivalTime(
               distance,
               value.time,
               value.avgSpeed
             );
-            console.log("Time  ", newTime);
             data[i].time = newTime;
           } else {
             data[i].distance = "0";
@@ -204,6 +201,7 @@ const useAddTrainFunc = (
     let totalMinutes = 0;
     const steps = data.stops.map((ele) => ele.time);
     for (let i = 0; i < steps.length - 1; i++) {
+
       const start = new Date(`1970-01-01T${steps[i]}:00Z`).getTime();
       const end = new Date(`1970-01-01T${steps[i + 1]}:00Z`).getTime();
 
@@ -224,7 +222,7 @@ const useAddTrainFunc = (
     messageAPI?.destroy();
     messageAPI?.loading(CommonConfig.loadingMessageAPI);
     const response = await APIService.getData("/train/addNewTrain",value);
-    console.log("Response ",response);
+    // console.log("Response ",response);
   }
   useEffect(() => {
     if (data) {

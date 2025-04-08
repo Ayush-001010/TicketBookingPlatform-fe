@@ -1,14 +1,27 @@
 import React from "react";
+import { useMemo } from "react";
 import ITopNavbar from "./ITopNavbar";
 import styles from "./TopNavbar.module.css";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../../Redux/Hooks";
 import NavbarConfig, { INavItems } from "../../../Service/Config/NavbarConfig";
+import { Dropdown } from "antd";
 
 const TopNavbar: React.FunctionComponent<ITopNavbar> = () => {
   const isAdmin: boolean = useAppSelector(
-    (state) => state.AuthenticationSlice.isAdmin
+    (state) => state.AuthenticationSlice.IsAdmin
   );
+  const userProfileItems  = useMemo(()=>{
+    const items = NavbarConfig.userProfileItems.map((item , index) => {
+      return {
+        key : index,
+        label : <Link to={`/${item.replace(/\s+/g, "")}`} className={styles.css6}>{item}</Link>,
+      }
+    })
+    return items;
+  },[]);
+
+
   return (
     <div className={styles.css1}>
       <div className={styles.css4}>
@@ -29,7 +42,9 @@ const TopNavbar: React.FunctionComponent<ITopNavbar> = () => {
         })}
       </div>
       <div className={styles.css2}>
-        <Link to="/signIn">Sign In</Link>
+        <Dropdown menu={{ items: userProfileItems }} placement="bottom">
+          <i className={`${"bi bi-person-circle"} ${styles.css5}`} />
+        </Dropdown>
       </div>
     </div>
   );

@@ -20,7 +20,6 @@ const Stops: React.FunctionComponent<IStops> = ({
   };
   useEffect(() => {
     setData(null);
-    console.log("Value  ", value);
     const val = { ...value };
     setData(val);
     // eslint-disable-next-line react-hooks/exhaustive-deps

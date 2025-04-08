@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Ponomar&display=swap");
+.css2 {
+    width: 70%;
+    height: 300px;
+    border-radius: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.css3{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* border-right: 3px dashed #495057; */
+    border-radius: 0px 20px 20px 0px;
+    width: 30%;
+}
+.css4{
+    border-radius: 0px 10px 0px 0px;
+    background-color: #495057;
+    height: 80px;
+    font-family: "Ponomar", system-ui;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+}
+.css5{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 70%;
+    border-radius: 20px 0px 0px 20px;
+}
+.css6{
+    border-radius: 10px 0px 0px 0px;
+    background-color: #495057;
+    height: 80px;
+    font-family: "Ponomar", system-ui;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.css7 label{
+    color: #6c757d;
+    font-weight: 700;
+}
+.css7 input {
+    border:none;
+    border-bottom: 1px solid #6c757d;
+    margin: 5px;
+}
+
+.css12 {
+    display: flex;
+    justify-content: space-between;
+}
+.css8 {
+    margin: 10px;
+}
+.css8 label{
+    color: #495057;
+    font-weight: 600;
+}
+.css8 p{
+    color: #495057;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+}

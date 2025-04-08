@@ -9,7 +9,6 @@ const FormButtons: React.FunctionComponent<IFormButton> = ({
   btn2,
   className,
 }) => {
-  console.log("BTN2 ",btn2);
   return (
     <div className={styles[`${className || "css1"}`]}>
       <ButtonUI type={ !btn2 || btn2.length === 0 ? "submit": "button" }>

@@ -45,12 +45,10 @@ const Form = ({
   const { initialValue, validation, formFields } = useFormikHook(formType, val);
   const [iniValue, setIniValue] = useState<Record<string, any> | null>(null);
 
-  console.log("Values  ", val);
   const handleSubmit = (values: Record<string, any>) => {
     if (passingeValueToParent) passingeValueToParent(values);
   };
   useEffect(()=>{
-    console.log("INI Values  ", initialValue);
     setIniValue({...initialValue})
   },[initialValue])
   return (

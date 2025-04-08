@@ -10,7 +10,6 @@ const useFormikHook = (formType: keyof IFormTypes, data?: any) => {
   const [validation, setValidation] = useState<Record<string, any>>({});
   const [formFields, setFormFields] = useState<IFormFields[]>([]);
   const fetchFormDetails = (type: keyof IFormTypes, data: any) => {
-    console.log(data);
     const config = formConfig[type];
     let initialValueSchema: Record<string, any> = {};
     let validationValueSchema: Record<string, any> = {};

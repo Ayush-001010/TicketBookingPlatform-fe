@@ -13,3 +13,9 @@ export interface IFilter {
   backendName: string;
   options: Array<IOptions>;
 }
+
+export interface IForm {
+  displayName: string;
+  backendName: string;
+  type: string;
+}

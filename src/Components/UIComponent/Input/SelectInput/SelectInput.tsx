@@ -58,7 +58,7 @@ const SelectUI: React.FunctionComponent<ISelect> = ({
         value={formik.values[backendName]}
         onChange={(newValue: any) => changeHandler(newValue)}
         mode={isMultiple ? "multiple" : undefined}
-        placeholder={placeHolder}
+        // placeholder={placeHolder}
         onBlur={isTouched}
         options={option}
         showSearch={true}

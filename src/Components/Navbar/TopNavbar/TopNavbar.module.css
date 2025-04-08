@@ -9,25 +9,24 @@
 .css2 {
   margin-right: 10px;
   align-items: center;
-  display: flex;
-}
-.css2 a {
-  color: #adb5bd;
-  text-decoration: none;
-  width: 80px;
-  text-align: center;
-  height: 30px;
-  align-items: center;
+  display: flex;  
+  width: 40px;
   display: flex;
   justify-content: center;
+  color: #adb5bd;
+  height: 88%;
+  margin-top: 4px;
 }
 
-.css2 a:hover {
+.css2:hover {
   background-color: #adb5bd;
   color: #212529;
-  border-radius: 20px;
+  border-radius: 10px;
   font-weight: 600;
+  cursor: pointer;
 }
+
+
 
 .css3 {
   display: flex;
@@ -55,4 +54,14 @@
 
 .css4 {
   display: flex;
+}
+
+.css5{
+  /* color: ; */
+  font-size: 20px;
+}
+
+
+.css6 {
+  text-decoration: none;
 }

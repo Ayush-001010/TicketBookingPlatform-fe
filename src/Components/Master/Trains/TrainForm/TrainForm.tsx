@@ -13,12 +13,18 @@ import {
 } from "../../../../Service/Interface/AddTrainInterface";
 import { AddTrainContext } from "../AddTrains";
 import TrainDetails from "./TrainDetails/TrainDetails";
+import { useAppDispatch } from "../../../../Redux/Hooks";
+import { setAddTrainDataFunc } from "../../../../Redux/Slices/AddTrainData";
 
-const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType , submitHanlder }) => {
+const TrainForm: React.FunctionComponent<ITrainForm> = ({
+  changeFormType,
+  submitHanlder,
+}) => {
   const [messageAPI, contextHandler] = message.useMessage();
   const { getTrainDetailsOptions } = useAddTrainFunc(messageAPI);
   const [formValues, setFormValues] = useState<ITrainDetails>();
   const { formType } = useContext(AddTrainContext);
+  const dispatch = useAppDispatch();
 
   const { data } = useQuery({
     queryFn: () => getTrainDetailsOptions(),
@@ -46,7 +52,6 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType , submi
     }
   };
   const gettingStops = (value: Array<ITrainStops>) => {
-    console.log("Value  ", value);
     setFormValues((prevState: any) => {
       let price: Record<string, string> = {};
       for (const curr1 of value) {
@@ -60,14 +65,14 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType , submi
     changeFormType(3);
   };
   const gettingValue = (value: any) => {
-    console.log(value);
     setFormValues(value);
     changeFormType(2);
+    dispatch(setAddTrainDataFunc(value));
   };
   const submitHanlderFunc = () => {
-    if(!formValues)return;
+    if (!formValues) return;
     submitHanlder(formValues);
-  }
+  };
   return (
     <div style={{ marginTop: "21px" }}>
       {contextHandler}
@@ -103,7 +108,12 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({ changeFormType , submi
             backHandlerFunc={backHandlerFunc}
           />
         )}
-        {formType === 4 && formValues && <TrainDetails submitHanlderFunc={submitHanlderFunc} details={formValues} />}
+        {formType === 4 && formValues && (
+          <TrainDetails
+            submitHanlderFunc={submitHanlderFunc}
+            details={formValues}
+          />
+        )}
       </DashboardCard>
     </div>
   );

@@ -23,7 +23,6 @@ const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
       return { ...prevState, [backendName]: newValue };
     });
   };
-  console.log("Value  ", value);
   return (
     <div className={styles.css1}>
       <div className={styles.css2}>

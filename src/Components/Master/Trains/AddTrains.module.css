@@ -25,13 +25,16 @@
 }
 
 .css3 {
-  font-family: "Markazi Text", serif;
+  font-family: "Ponomar", system-ui;
   display: flex;
   justify-content: center;
   padding-top: 10px;
 }
 .css3 h1 {
-  font-size: 50px !important;
-  color: #212529;
+  background-color: #343a40;
+  font-size: 40px !important;
+  color: #adb5bd;
   font-weight: 900;
+  border-radius: 25px;
+  padding: 10px;
 }

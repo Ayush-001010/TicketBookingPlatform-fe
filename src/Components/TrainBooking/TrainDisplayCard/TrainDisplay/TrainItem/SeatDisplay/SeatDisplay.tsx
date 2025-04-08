@@ -1,21 +1,41 @@
 import React, { useEffect, useState } from "react";
 import ISeatDisplay from "./ISeatDisplay";
 import { socket } from "../../../../../../socket";
-import { useAppSelector } from "../../../../../../Redux/Hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../../Redux/Hooks";
 import styles from "./SeatDisplay.module.css";
 import useTrainBooking from "../../../../../../hooks/useTrainBooking";
+import { setBookTrainTicket } from "../../../../../../Redux/Slices/BookTrainTicket";
 
 const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
   const [active, setActive] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const { getPrice } = useTrainBooking();
   const bookingDetails = useAppSelector(
     (state) => state.TrainBookingDetailsSlice
   );
+  console.log("Data ",data);
   const [value, setValue] = useState([]);
 
+  const startBooking = () => {
+    const obj = { Name : "" , From  : bookingDetails.departureStation , To : bookingDetails.destinationStation , TrainName : data.TrainName, TrainCode : data.TrainCode ,CoachType : active ,CoachNumber : "-" , Age : "" , Type : "" , PhoneNumber : "" , DestinationTime : data.destinationTime , DepartureTime : data.leavingTime , SeatNo:"-"};
+    const arr = [];
+    for(let i=0;i<Number(bookingDetails.Adults);i++){
+      obj.Type = "Adults";
+      arr.push(obj);
+    }
+    for(let i=0;i<Number(bookingDetails.Kids);i++){
+      obj.Type = "Kids";
+      arr.push(obj);
+    }
+    for(let i=0;i<Number(bookingDetails.seniorCitizen);i++){
+      obj.Type = "Senior Citizen";
+      arr.push(obj);
+    }
+    dispatch(setBookTrainTicket({isStart : true , data : arr}))
+  }
   const selectHandler = (val: string) => {
     setActive(val);
     setIsSubmit(false);
@@ -77,7 +97,7 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
             </p>
           </div>
           <div className={styles.css11}>
-            <button>Book</button>
+            <button onClick={startBooking}>Book</button>
           </div>
         </div>
       )}

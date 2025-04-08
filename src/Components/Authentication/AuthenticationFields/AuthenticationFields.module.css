@@ -1,0 +1,42 @@
+.css1 {
+    font-family: "Ponomar", system-ui;
+    display: flex;
+    justify-content: center;
+    color: #023047;
+    font-weight: 900;
+}
+
+.css2 label{
+    font-family: "Ponomar", system-ui;
+    display: block;
+    color:#023047;
+    font-weight: 700;
+}
+
+.css2 input{
+    width: 90%;
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.css3{
+    margin-top: 20%;
+    margin-left: 10%;
+}
+
+.css4 {
+    margin: 20% 10%;
+}
+
+.css4 button{
+    background-color: #023047;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    font-family: "Ponomar", system-ui;
+}
