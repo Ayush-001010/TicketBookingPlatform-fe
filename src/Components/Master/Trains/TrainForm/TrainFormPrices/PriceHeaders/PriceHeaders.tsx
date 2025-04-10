@@ -40,7 +40,12 @@ const PriceHeaders: React.FunctionComponent<IPriceHeaders> = ({
     for (const currKey in radioValue) {
       if (radioValue[currKey]) {
         coachType = currKey;
-        passingPriceToParent(pricePerKilometer, coachType , perCabinSeat , totalCabin);
+        passingPriceToParent(
+          pricePerKilometer,
+          coachType,
+          perCabinSeat,
+          totalCabin
+        );
         break;
       }
     }
@@ -69,27 +74,40 @@ const PriceHeaders: React.FunctionComponent<IPriceHeaders> = ({
         ))}
       </div>
       <div className={styles.css4}>
-        <Input
-          type="number"
-          value={perCabinSeat}
-          onChange={({ target }) => changeHandlerInput(target, "perCabinSeat")}
-          placeholder="Total Seat in one cabin"
-        />
-        <Input
-          type="number"
-          value={totalCabin}
-          onChange={({ target }) => changeHandlerInput(target, "totalCabin")}
-          placeholder="Total Cabins"
-        />
-        <Input
-          type="number"
-          value={pricePerKilometer}
-          onChange={({ target }) => changeHandlerInput(target, "distane")}
-          placeholder="Distance per kilometer price"
-        />
-        <Button onClick={clickHandler}>
-          <i className="bi bi-gear" />
-        </Button>
+        <div className={styles.css14}>
+          <label className={styles.css15}>Total Seat in one cabin</label>
+          <Input
+            type="number"
+            value={perCabinSeat}
+            onChange={({ target }) =>
+              changeHandlerInput(target, "perCabinSeat")
+            }
+            placeholder="Total Seat in one cabin"
+          />
+        </div>
+        <div className={styles.css14}>
+          <label className={styles.css15}>Total Cabin</label>
+          <Input
+            type="number"
+            value={totalCabin}
+            onChange={({ target }) => changeHandlerInput(target, "totalCabin")}
+            placeholder="Total Cabins"
+          />
+        </div>
+        <div className={styles.css14}>
+          <label className={styles.css15}>Distance per kilometer price</label>
+          <Input
+            type="number"
+            value={pricePerKilometer}
+            onChange={({ target }) => changeHandlerInput(target, "distane")}
+            placeholder="Distance per kilometer price"
+          />
+        </div>
+        <div className={styles.css16}>
+          <Button onClick={clickHandler}>
+            <i className="bi bi-gear" />
+          </Button>
+        </div>
       </div>
     </div>
   );

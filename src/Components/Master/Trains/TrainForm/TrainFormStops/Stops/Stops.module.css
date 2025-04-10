@@ -7,7 +7,7 @@
 }
 .css2 {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .css2 button {
   border-radius: 5px;
@@ -29,6 +29,13 @@
   color: #495057;
   font-weight: 600;
   display: block;
+  font-family: "Ponomar", system-ui;
+}
+.css12 {
+  color: #495057;
+  font-weight: 600;
+  display: block;
+  font-family: "Ponomar", system-ui;
 }
 .css7 {
   color: #495057;
@@ -62,4 +69,8 @@
     margin-top: 10px;
     color: #495057;
     font-weight: 700;
+}
+
+.css15{
+  color: #495057;
 }

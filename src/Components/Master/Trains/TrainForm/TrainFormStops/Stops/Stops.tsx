@@ -13,6 +13,7 @@ const Stops: React.FunctionComponent<IStops> = ({
   passingValueToParent,
   deleteStop,
   type,
+  noOfDays
 }) => {
   const [data, setData] = useState<ITrainStops | null>(null);
   const changeHandler = (value: string, backendName: string) => {
@@ -37,6 +38,9 @@ const Stops: React.FunctionComponent<IStops> = ({
         <div className={styles.css1}>
           {type !== "Price" && type !== "Preview" && (
             <div className={styles.css2}>
+              <div>
+                <p className={styles.css12}>Day-{noOfDays}</p>
+              </div>
               <Tooltip title="Delete">
                 <button disabled={disabled} onClick={() => deleteStop(index)}>
                   <i className="bi bi-trash3-fill" />
@@ -96,7 +100,7 @@ const Stops: React.FunctionComponent<IStops> = ({
           </div>
           {(type === "Price" || type === "Preview") && (
             <>
-            {/* <hr></hr> */}
+              {/* <hr></hr> */}
               {/* <h1 className={styles.css8}>Price of Seats : </h1> */}
               <div className={styles.css10}>
                 {data.price &&

@@ -65,3 +65,45 @@
   background-color: #1f1f1f; /* Optional: if you use styled tooltip */
   border-radius: 8px;
 }
+
+.tooltipContent {
+  padding: 14px;
+  background-color: #1c1c2e;
+  color: #e4e4e4;
+  border-radius: 12px;
+  min-width: 240px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  line-height: 1.5;
+}
+
+.tooltipBlock {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tooltipBlock:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.tooltipRow {
+  margin-bottom: 2px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.tooltipLabel {
+  font-weight: 600;
+  color: #fcd34d;
+  margin: 0;
+}
+
+.tooltipValue {
+  color: #d1d5db;
+  margin: 0;
+}

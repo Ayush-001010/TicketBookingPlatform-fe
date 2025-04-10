@@ -2,7 +2,7 @@ export interface ITrainStops {
     placeName : string;
     time : string;
     distance : string;
-    price?:Record<string , string>;
+    price?:any;
     TrainStoppageTime : string;
 }
 

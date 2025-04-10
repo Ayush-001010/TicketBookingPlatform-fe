@@ -1,21 +1,22 @@
 .css1 {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 .css2 {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 .css3 {
-  width: 300px !important;
+  width: 100px !important;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin: 0 !important;
+  font-family: "Ponomar", system-ui;
 }
 .css3 label {
-  color: #6c757d;
+  color: #495057;
   font-weight: 600;
   text-align: center;
   align-items: center;
@@ -25,7 +26,7 @@
 .css4 {
     width: 100% !important;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin-top: 10px !important;
 }
 .css4 input {
@@ -35,4 +36,27 @@
 
 .css4 button i {
     color: #495057;
+}
+.css14{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 200px !important;
+  margin:0px  10px !important;
+}
+.css15{
+  color: #495057;
+  font-family: "Ponomar", system-ui;
+  font-weight: 600;
+}
+
+.css16 {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.css16 button{
+  border: 1px solid #495057;
+  color: #495057;
 }

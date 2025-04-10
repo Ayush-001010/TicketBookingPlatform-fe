@@ -25,19 +25,16 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
   }
   const changeHandlerPrice = (price: number, coachType: string , perCabinSeat : number , totalCabin : number) => {
     const modifyData = setPrice(stops, price, coachType , perCabinSeat , totalCabin);
-    console.log("Modify Data    ", modifyData);
     passingDataToParentFunc({coachType : coachType , perCabinSeat : perCabinSeat , totalCabin : totalCabin} , "Coach")
     setData([...modifyData]);
   };
   const changeHandlerPriceValue = (value : string , backendName : string , index: number) => {
     setData((prevState : any) => {
       prevState[index].price[backendName] = value;
-      console.log(prevState[index].price[backendName] );
       return [...prevState];
     })
   }
   useEffect(() => {
-    console.log("Stops  ", stops);
     setData(stops);
   }, [stops]);
   return (

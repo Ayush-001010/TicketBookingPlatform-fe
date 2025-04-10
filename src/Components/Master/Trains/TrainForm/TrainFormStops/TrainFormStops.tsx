@@ -15,7 +15,7 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
   data : formData
 }) => {
   const [messageAPI, contextHandler] = message.useMessage();
-  const { genratedStopsConfig, modifyConfig } = useAddTrainFunc(messageAPI);
+  const { genratedStopsConfig, modifyConfig , getNoOfDays } = useAddTrainFunc(messageAPI);
   const [data, setData] = useState<Array<ITrainStops>>([]);
 
   const passingValueToParent = () => {
@@ -89,6 +89,7 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
       {contextHandler}
       <StartTime passingValueToParent={gettingInitialTime} />
       {data.map((currValue: ITrainStops, index: number) => {
+        const noOfDays = getNoOfDays(data , index);
         return (
           <>
             <Stops
@@ -99,6 +100,7 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
               index={index}
               deleteStop={deleteStop}
               type="AddStops"
+              noOfDays={noOfDays}
             />
             {index !== data.length - 1 && (
               <div className={styles.css1}>

@@ -38,11 +38,15 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({
     if (type === "Coach") {
       setFormValues((prevState: ITrainDetails | undefined) => {
         if (!prevState) return;
-        if (!prevState.coaches) {
-          prevState.coaches = [];
-        }
-        prevState.coaches = [...prevState.coaches, value];
-        return { ...prevState };
+  
+        // Make a shallow copy of prevState
+        const newState = { ...prevState };
+  
+        // Clone coaches array or create a new one
+        const updatedCoaches = [...(newState.coaches ?? []), value];
+        newState.coaches = updatedCoaches;
+  
+        return newState;
       });
     } else {
       setFormValues((prevState: any) => {
@@ -51,19 +55,30 @@ const TrainForm: React.FunctionComponent<ITrainForm> = ({
       changeFormType(4);
     }
   };
+  
   const gettingStops = (value: Array<ITrainStops>) => {
     setFormValues((prevState: any) => {
-      let price: Record<string, string> = {};
-      for (const curr1 of value) {
-        for (const curr of prevState.TypeOfCoach) {
-          price = { ...price, [curr]: "" };
+      // Clone stops to avoid mutating original objects
+      const updatedStops = value.map((stop) => {
+        const price: Record<string, string> = {};
+        if (prevState?.TypeOfCoach) {
+          for (const coach of prevState.TypeOfCoach) {
+            price[coach] = "";
+          }
         }
-        curr1.price = price;
-      }
-      return { ...prevState, stops: value };
+        return {
+          ...stop,
+          price: { ...price },
+        };
+      });
+  
+      const updatedForm = { ...prevState, stops: updatedStops };
+      dispatch(setAddTrainDataFunc(updatedForm));
+      return updatedForm;
     });
     changeFormType(3);
   };
+  
   const gettingValue = (value: any) => {
     setFormValues(value);
     changeFormType(2);

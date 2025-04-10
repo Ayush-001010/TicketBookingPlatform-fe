@@ -188,20 +188,19 @@ const useAddTrainFunc = (
     perCabinSeat: number,
     totalCabin: number
   ) => {
-    for (const curr of data) {
-      curr.price = {
+    return data.map((curr) => ({
+      ...curr,
+      price: {
         ...curr.price,
-        [coachType]: (Number(curr.distance) * price).toFixed(2).toString(),
-      };
-    }
-    return data;
+        [coachType]: (Number(curr.distance) * price).toFixed(2),
+      },
+    }));
   };
   const totalJourneyTimeFunc = () => {
     if (!data) return;
     let totalMinutes = 0;
     const steps = data.stops.map((ele) => ele.time);
     for (let i = 0; i < steps.length - 1; i++) {
-
       const start = new Date(`1970-01-01T${steps[i]}:00Z`).getTime();
       const end = new Date(`1970-01-01T${steps[i + 1]}:00Z`).getTime();
 
@@ -218,12 +217,28 @@ const useAddTrainFunc = (
     const minutes = Math.floor(totalMinutes % 60);
     setTotalJourneyTimeValue(`${hours}hr:${minutes}mins`);
   };
-  const addNewTrain = async (value : ITrainDetails) => {
+  const addNewTrain = async (value: ITrainDetails) => {
     messageAPI?.destroy();
     messageAPI?.loading(CommonConfig.loadingMessageAPI);
-    const response = await APIService.getData("/train/addNewTrain",value);
+    const response = await APIService.getData("/train/addNewTrain", value);
     // console.log("Response ",response);
-  }
+  };
+  const getNoOfDays = (data: Array<ITrainStops>, index: number) => {
+    let noOfDays = 1;
+    let prevTime: number | null = null;
+    let i: number = 0;
+    for (const curr of data) {
+      const time: string = curr.time.split(":")[0];
+      const timeValue: number = Number(time);
+      if (prevTime && prevTime > timeValue) {
+        noOfDays = noOfDays + 1;
+      }
+      i++;
+      if(i>index) break;
+      prevTime = timeValue;
+    }
+    return noOfDays;
+  };
   useEffect(() => {
     if (data) {
       totalJourneyTimeFunc();
@@ -237,7 +252,8 @@ const useAddTrainFunc = (
     modifyConfig,
     setPrice,
     totalJourneyTimeValue,
-    addNewTrain
+    addNewTrain,
+    getNoOfDays,
   };
 };
 

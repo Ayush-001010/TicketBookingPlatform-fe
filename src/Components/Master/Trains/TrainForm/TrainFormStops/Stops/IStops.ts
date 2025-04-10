@@ -9,4 +9,5 @@ export default interface IStops {
     index:number;
     deleteStop:any;
     type ? : string;
+    noOfDays ?: number;
 }
