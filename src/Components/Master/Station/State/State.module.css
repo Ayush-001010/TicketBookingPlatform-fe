@@ -1,0 +1,21 @@
+.css1 {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+}
+
+.css2 {
+    position: absolute;
+    top:8%;
+    right: 1%;
+    width: 50px;
+    height: 38px;
+    border-radius: 20px;
+    border: none;
+}
+
+.css3{
+    height: 50px;
+    border-radius: 10px;
+    width: 250px;
+}

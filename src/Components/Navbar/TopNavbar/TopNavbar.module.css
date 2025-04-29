@@ -26,7 +26,27 @@
   cursor: pointer;
 }
 
+.active a{
+  padding: 5px;
+  text-decoration: none;
+  text-align: center;
+  height: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: #adb5bd;
+  color: #212529;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
+.active{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: 10px;
+}
 
 .css3 {
   display: flex;

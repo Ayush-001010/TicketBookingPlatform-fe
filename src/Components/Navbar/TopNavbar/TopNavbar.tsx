@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMemo } from "react";
 import ITopNavbar from "./ITopNavbar";
 import styles from "./TopNavbar.module.css";
@@ -8,6 +8,11 @@ import NavbarConfig, { INavItems } from "../../../Service/Config/NavbarConfig";
 import { Dropdown } from "antd";
 
 const TopNavbar: React.FunctionComponent<ITopNavbar> = () => {
+  const [ isNavbarActive , setIsNavbarActive ] =  useState<string>("Home");
+
+  const handleNavbarClick = (item: string) => {
+    setIsNavbarActive(item);
+  };
   const isAdmin: boolean = useAppSelector(
     (state) => state.AuthenticationSlice.IsAdmin
   );
@@ -32,7 +37,7 @@ const TopNavbar: React.FunctionComponent<ITopNavbar> = () => {
             (currItem.role === "Customer" && !isAdmin)
           ) {
             return (
-              <div className={styles.css3}>
+              <div className={`${ isNavbarActive === currItem.displayName ? styles.active: styles.css3}`} onClick={() => handleNavbarClick(currItem.displayName)} key={currItem.displayName}>
                 <Link to={currItem.navLink}>{currItem.displayName}</Link>
               </div>
             );
