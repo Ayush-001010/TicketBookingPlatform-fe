@@ -3,10 +3,9 @@ import Text from "../../UIComponent/Text/Text";
 import { useGetFormContext } from "../Form";
 
 export const FormTitle: React.FunctionComponent<{}> = () => {
-  const value = useGetFormContext();
+  const {title , headerCssClassName} = useGetFormContext();
+  console.log("ClassName", headerCssClassName);
   return (
-    <>
-      <Text className="css1">{value.title}</Text>
-    </>
+      <Text className={  headerCssClassName || "css1"}>{title}</Text>
   );
 };

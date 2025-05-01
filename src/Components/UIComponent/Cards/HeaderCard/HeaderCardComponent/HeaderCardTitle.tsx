@@ -1,10 +1,9 @@
 import React from 'react';
-import { useHeaderCardContextValue } from '../HeaderCard';
+import styles from "./HeaderCardComponent.module.css";
 
-const HeaderCardTitle : React.FunctionComponent<{}> = () => {
-    const { title } = useHeaderCardContextValue();
+const HeaderCardTitle : React.FunctionComponent<{title : string}> = ({title}) => {
     return (
-        <div>
+        <div className={styles.headerCardTitle}>
             <h1>{title}</h1>
         </div>
     )

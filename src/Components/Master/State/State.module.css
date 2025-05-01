@@ -3,7 +3,6 @@
     justify-content: flex-end;
     margin: 10px;
 }
-
 .css2 {
     position: absolute;
     top:8%;
@@ -13,9 +12,13 @@
     border-radius: 20px;
     border: none;
 }
-
 .css3{
     height: 50px;
     border-radius: 10px;
     width: 250px;
+}
+.css4 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 40px;
 }

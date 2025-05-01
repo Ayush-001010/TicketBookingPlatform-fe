@@ -23,3 +23,54 @@
     color: red;
     font-size: 10px;
 }
+
+.halfWidthCss {
+    width: 48% !important;
+    display: inline-block;
+}
+
+
+.halfWidthCss input{
+    color: #33415c !important;
+    font-family: "Ponomar", system-ui;
+    font-weight: 600;
+    font-size: 15px;
+    width: 97%;
+}
+
+.halfWidthCss label {
+    display: block;
+    color: #33415c;
+    font-size: 15px;
+    font-weight: 800;
+    font-family: "Ponomar", system-ui;
+}
+.halfWidthCss div{
+    width: 100% !important;
+}
+
+
+.fullWidthCSS2 {
+    width: 98% !important;
+    display: inline-block;
+}
+
+
+.fullWidthCSS2 input{
+    color: #33415c !important;
+    font-family: "Ponomar", system-ui;
+    font-weight: 600;
+    font-size: 15px;
+    width: 97%;
+}
+
+.fullWidthCSS2 label {
+    display: block;
+    color: #33415c;
+    font-size: 15px;
+    font-weight: 800;
+    font-family: "Ponomar", system-ui;
+}
+.fullWidthCSS2 div{
+    width: 100% !important;
+}

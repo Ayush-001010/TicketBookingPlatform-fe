@@ -10,4 +10,6 @@ export default interface IForm {
   passingeValueToParent?: (value : any) => void;
   information?:any;
   intialValue?:any; 
+  headerCssClassName?:string;
+  formCSSClassName?:string;
 }

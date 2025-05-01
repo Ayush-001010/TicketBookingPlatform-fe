@@ -18,6 +18,7 @@ export interface IFormContext {
   title?: string;
   options?: any;
   information?: any;
+  headerCssClassName?: string;
 }
 
 const FormContext = createContext<IFormContext | undefined>(undefined);
@@ -41,6 +42,8 @@ const Form = ({
   passingeValueToParent,
   information,
   intialValue: val,
+  headerCssClassName,
+  formCSSClassName
 }: IForm & PropsWithChildren) => {
   const { initialValue, validation, formFields } = useFormikHook(formType, val);
   const [iniValue, setIniValue] = useState<Record<string, any> | null>(null);
@@ -49,16 +52,16 @@ const Form = ({
     if (passingeValueToParent) passingeValueToParent(values);
   };
   useEffect(()=>{
-    setIniValue({...initialValue})
+    setIniValue(initialValue)
   },[initialValue])
   return (
     <FormContext.Provider
-      value={{ title: formtitle, options: option, information: information }}
+      value={{ title: formtitle, options: option, information: information , headerCssClassName }}
     >
-      <div className={styles.css1}>
+      <div className={styles[formCSSClassName || "css1"]}>
         {iniValue && (
           <Formik
-            initialValues={iniValue}
+            initialValues={initialValue || {}}
             validationSchema={validation}
             onSubmit={handleSubmit}
           >

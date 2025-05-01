@@ -1,0 +1,21 @@
+.css1 {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+}
+
+.css2{
+    border: 3px solid black;
+    background-color: #495057;
+    color: #adb5bd !important;
+    margin-right: 10px;
+    border-radius: 20px;
+    font-family: "Ponomar", system-ui;
+    font-weight: 600;
+}
+
+.css3 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 40px;
+}

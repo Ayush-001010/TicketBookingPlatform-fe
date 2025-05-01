@@ -1,35 +1,41 @@
-import React, { createContext } from "react";
+import React from "react";
 import HeaderCardTitle from "./HeaderCardComponent/HeaderCardTitle";
 import IHeaderCard from "./IHeaderCard";
 import HeaderCardProgressBar from "./HeaderCardComponent/HeaderCardProgressBar";
+import HeaderCardFooter from "./HeaderCardComponent/HeaderCardFooter";
+import styles from "./HeaderCard.module.css";
+import { Link } from "react-router-dom";
+import HeaderCardSubPoint from "./HeaderCardComponent/HeaderCardSubPoint";
 
-interface IHeaderCardContext {
-    title?:string;
-}
-
-interface IHeaderCardVal extends React.FC<IHeaderCard> {
-    Title: React.FC; 
-}
-
-const HeaderCardContext = createContext<undefined | IHeaderCardContext>(undefined);
-
-export const useHeaderCardContextValue = () => {
-    const context = React.useContext(HeaderCardContext);
-    if (!context) {
-        throw new Error("useHeaderCardContextValue must be used within a HeaderCard");
-    }
-    return context;
-}
-
-const HeaderCard: React.FC<IHeaderCard> & IHeaderCardVal = ({ children , title , progressBarInfo}) => {
+const HeaderCard: React.FC<IHeaderCard> = ({ children, title, progressBarInfo, fotter, subPoints , passingDataToParent , indexNumber}) => {
     return (
-        <HeaderCardContext.Provider value={ { title } }>
-            {children}
-            { progressBarInfo?.map( item  =>  <HeaderCardProgressBar displayName={item.displayName} value={item.value} /> )}
-        </HeaderCardContext.Provider>
+        <div className={styles.css1}>
+            <HeaderCardTitle title={title || ""} />
+            {progressBarInfo &&
+                <div className={styles.css2}>
+                    {progressBarInfo?.map(item => <HeaderCardProgressBar displayName={item.displayName} value={item.value} />)}
+                </div>
+            }
+            {subPoints &&
+                <div className={styles.css2}>
+                    {subPoints.map(item => <HeaderCardSubPoint Title={item.Title} Response={item.Response} />)}
+                </div>
+            }
+            <HeaderCardFooter>
+                {fotter?.map(item => {
+                    switch (item.type) {
+                        case "button": return (
+                            <button className={styles.css3} onClick={() => { if(passingDataToParent) passingDataToParent(indexNumber)} }>
+                                {item.navLink && <Link to={item.navLink[item.navLink.length - 1] === "/" ? `${item.navLink}${title?.replace(/\s/g, "_")}` : item.navLink}> {item.displayName} </Link>}
+                                {!item.navLink && item.displayName}
+                            </button>
+                        )
+                    }
+                })}
+            </HeaderCardFooter>
+        </div>
     );
 };
 
-HeaderCard.Title = HeaderCardTitle;
 
 export default HeaderCard;

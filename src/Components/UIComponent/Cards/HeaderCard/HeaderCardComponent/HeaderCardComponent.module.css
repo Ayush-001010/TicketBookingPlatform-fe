@@ -1,0 +1,47 @@
+.headerCardTitle {
+    font-family: "Ponomar", system-ui;
+    background-color: #343a40;
+    border-radius: 10px 10px 0 0;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+}
+.headerCardTitle h1 {
+    font-weight: 600;
+    font-size: 35px;
+    color: #979dac;
+}
+.headerCardProgressBar{
+    width: 180px;
+    margin: 10px;
+}
+.headerCardProgressBar h1{
+    font-size: 20px;
+    font-family: "Ponomar", system-ui;
+    color: #495057;
+    font-weight: 600;
+    margin: 0;
+}
+.fotter{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px !important;
+}
+.HeaderCardSubPoint{
+    width: 200px;
+    display: inline;
+}
+.HeaderCardSubPoint p :nth-child(1){
+    font-size: 16px;
+    font-family: "Ponomar", system-ui;
+    color: #495057;
+    font-weight: 900;
+    margin: 0;
+}
+.HeaderCardSubPoint p :nth-child(2){
+    font-size: 15px;
+    font-family: "Ponomar", system-ui;
+    color: #adb5bd;
+    margin: 0;
+}

@@ -8,7 +8,7 @@ export default class NavbarConfig {
   static navbarItems: Array<INavItems> = [
     { displayName: "Home", role: "All" , navLink : "/" },
     { displayName: "Add Train", role: "Admin" , navLink : "/AddTrain" },
-    { displayName : "Railway Stations", role: "Admin" , navLink : "/RailwayStations" },
+    { displayName : "Railway Details", role: "Admin" , navLink : "/RailwayDetails" },
   ];
   static userProfileItems: Array<string> = [ "Upcoming Journeys" , "Past Journeys" , "Logout" ];
 }

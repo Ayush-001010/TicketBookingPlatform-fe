@@ -12,7 +12,8 @@ import Home from "./Components/TrainBooking/Home";
 import { socket } from "./socket";
 import { useAppSelector } from "./Redux/Hooks";
 import Authentication from "./Components/Authentication/Authentication";
-import State from "./Components/Master/Station/State/State";
+import State from "./Components/Master/State/State";
+import Stations from "./Components/Master/Stations/Stations";
 
 const AppContent: React.FC = () => {
   const isLogIn = useAppSelector((state) => state.AuthenticationSlice.isLogin);
@@ -34,7 +35,8 @@ const AppContent: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/authentication" element={<Authentication />} />
           <Route path="/AddTrain" element={<AddTrains />} />
-          <Route path="/RailwayStations" element={<State/>} />
+          <Route path="/RailwayDetails" element={<State/>} />
+          <Route path="/RailwayDetails/:State" element={<Stations/>} />
         </Routes>
       </div>
     </QueryClientProvider>

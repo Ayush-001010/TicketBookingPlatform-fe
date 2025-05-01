@@ -21,3 +21,12 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.cornerHeader{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 25px;
+    font-family: "Ponomar", system-ui;
+    color:#495057;
+    font-weight: 600;
+}

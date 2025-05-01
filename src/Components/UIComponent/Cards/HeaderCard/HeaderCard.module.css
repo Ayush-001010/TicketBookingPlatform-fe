@@ -1,0 +1,26 @@
+.css1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 430px;
+    /* height: 320px; */
+    border-radius: 10px;
+    margin: 10px;
+}
+.css2{
+    margin:10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.css3 {
+    border: 3px solid black;
+    background-color: #495057;
+    color: #adb5bd !important;
+    margin-right: 10px;
+    border-radius: 10px;
+    font-family: "Ponomar", system-ui;
+    font-weight: 600;
+}
+.css3 a {
+    color: #adb5bd !important;
+    text-decoration: none;
+    font-weight: 600;
+}

@@ -30,3 +30,30 @@
 .halfWidthCss div{
     width: 100% !important;
 }
+
+
+
+.halfWidthCss2 {
+    width: 48% !important;
+    display: inline-block;
+}
+
+
+.halfWidthCss2 input{
+    color: #33415c !important;
+    font-family: "Ponomar", system-ui;
+    font-weight: 600;
+    font-size: 15px;
+    width: 97%;
+}
+
+.halfWidthCss2 label {
+    display: block;
+    color: #33415c;
+    font-size: 15px;
+    font-weight: 800;
+    font-family: "Ponomar", system-ui;
+}
+.halfWidthCss2 div{
+    width: 100% !important;
+}

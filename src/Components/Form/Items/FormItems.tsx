@@ -12,6 +12,7 @@ const FormItems: React.FunctionComponent<IFormItems> = ({ fields , formik }) => 
   return <div className={style.css1}>
     { fields.map((currItem : IFormFields) => {
         const { displayName , backendName  , fieldType , className , isMultiple , dependableField} = currItem;
+        console.log("Class Name", className);
         if(fieldType.includes("text")) {
             return (
                 <InputUI className={className} displayName={displayName} backendName={backendName}  type={fieldType.split('-')[1]}  formik={formik} />

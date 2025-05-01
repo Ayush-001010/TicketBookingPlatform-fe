@@ -16,12 +16,13 @@ export interface IFormFields {
 export interface IFormTypes {
   SignIn: Array<IFormFields>;
   AddTrain: Array<IFormFields>;
+  AddStation: Array<IFormFields>;
 }
 
 //Validation message
 const requiredErrorMessage: string = "This field is required.";
-const invalidCharacterErrorMessage: string =
-  "Invalid characters, only letters and spaces are allowed.";
+const invalidCharacterErrorMessage: string = "Invalid characters, only letters and spaces are allowed.";
+const invalidCharacterErrorMessage2 : string = "Only numbers are allowed.";
 
 //regex
 const regaxForAtoZCharacterOnlyWhichIncludeSpace = /^[A-Z a-z ( ) , \s]+$/;
@@ -160,6 +161,69 @@ const formConfig: IFormTypes = {
       className: "fullWidthCss",
     },
   ],
+  AddStation : [
+    {
+      displayName: "Station Name",
+      backendName: "PlaceName",
+      validation: Yup.string()
+        .required(requiredErrorMessage)
+        .matches(
+          regaxForAtoZCharacterOnlyWhichIncludeSpace,
+          invalidCharacterErrorMessage
+        ),
+      fieldType: "text",
+      className:"fullWidthCSS2"
+    },
+    {
+      displayName : "Longitude",
+      backendName:"Longitude",
+      validation : Yup.string().required(requiredErrorMessage).matches(regaxForNumberOnly , invalidCharacterErrorMessage2),
+      fieldType : "text",
+      className:"halfWidthCss"
+    },
+    {
+      displayName : "Latitude",
+      backendName:"Latitude",
+      validation : Yup.string().required(requiredErrorMessage).matches(regaxForNumberOnly , invalidCharacterErrorMessage2),
+      fieldType : "text",
+      className:"halfWidthCss"
+    },
+    {
+      displayName : "City",
+      backendName:"City",
+      validation : Yup.string().required(requiredErrorMessage).matches(regaxForAtoZCharacterOnlyWhichIncludeSpace , invalidCharacterErrorMessage),
+      fieldType : "text",
+      className:"halfWidthCss"
+    },
+    {
+      displayName : "State",
+      backendName : "State" ,
+      validation : Yup.string().required(requiredErrorMessage).matches(regaxForAtoZCharacterOnlyWhichIncludeSpace , invalidCharacterErrorMessage),
+      fieldType : "text",
+      className:"halfWidthCss"
+    },
+    {
+      displayName : "Number Of Platforms",
+      backendName : "NumberOfPlatforms",
+      validation : Yup.string().required(requiredErrorMessage).matches(regaxForNumberOnly , invalidCharacterErrorMessage2),
+      fieldType : "text",
+      className:"halfWidthCss"
+    },
+    {
+      displayName : "Type of Station",
+      backendName : "TypeOfStation",
+      validation : Yup.string().required(requiredErrorMessage).matches(regaxForAtoZCharacterOnlyWhichIncludeSpace , invalidCharacterErrorMessage),
+      fieldType : "dropdown",
+      className:"halfWidthCss2"
+    },
+    {
+      displayName : "Capacity",
+      backendName : "Capacity",
+      validation : Yup.string().required(requiredErrorMessage).matches(regaxForNumberOnly , invalidCharacterErrorMessage2),
+      fieldType : "text",
+      className:"halfWidthCss"
+    }
+  ]
 };
 
 export default formConfig;
