@@ -3,7 +3,7 @@ import styles from "./HeaderCardComponent.module.css";
 
 const HeaderCardSubPoint: React.FunctionComponent<{ Title: string, Response: string }> = ({ Title, Response }) => {
     return (
-        <div className={styles.HeaderCardSubPoint}>
+        <div className={Title === "Is Active" ?  Response === "Yes" ? styles.IsActiveHeaderYes :  styles.IsActiveHeaderNo  : styles.HeaderCardSubPoint}>
             <p>
                 <span>{Title}</span>
                 <span> : </span>

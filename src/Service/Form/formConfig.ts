@@ -26,7 +26,7 @@ const invalidCharacterErrorMessage2 : string = "Only numbers are allowed.";
 
 //regex
 const regaxForAtoZCharacterOnlyWhichIncludeSpace = /^[A-Z a-z ( ) , \s]+$/;
-const regaxForNumberOnly = /^[0-9]+$/;
+const regaxForNumberOnly = /^[0-9 .]+$/;
 
 //Configuration for form fields
 const formConfig: IFormTypes = {
@@ -221,6 +221,13 @@ const formConfig: IFormTypes = {
       backendName : "Capacity",
       validation : Yup.string().required(requiredErrorMessage).matches(regaxForNumberOnly , invalidCharacterErrorMessage2),
       fieldType : "text",
+      className:"halfWidthCss"
+    },
+    {
+      displayName:"Is Active",
+      backendName : "IsActive",
+      validation : null,
+      fieldType : "checkbox",
       className:"halfWidthCss"
     }
   ]

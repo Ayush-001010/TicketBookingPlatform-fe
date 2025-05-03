@@ -8,6 +8,11 @@ export default class RailwayDetailsConfig {
             {value : "Terminal" , label : "Terminal"},
             {value : "Junction" , label : "Junction"},
             { value : "Central" , label : "Central"},
+            { value : "Normal Station" , label : "Normal"}
         ]
-    }
+    };
+    static StateDashboardHeader : string = "Indian State Dashboard";
+    static StationDashboardHeader : string = "Indian Railway Station Dashboard";
+    static AddStationFormTitle : string =  "Add Station";
+    static EditStationFormTitle : string =  "Edit Station";
 }

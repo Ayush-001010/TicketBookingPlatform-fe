@@ -53,7 +53,7 @@ const Form = ({
   };
   useEffect(()=>{
     setIniValue(initialValue)
-  },[initialValue])
+  },[{...initialValue}])
   return (
     <FormContext.Provider
       value={{ title: formtitle, options: option, information: information , headerCssClassName }}

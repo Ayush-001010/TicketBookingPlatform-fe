@@ -8,6 +8,7 @@ import HeaderCard from "../../UIComponent/Cards/HeaderCard/HeaderCard";
 import styles from "./Stations.module.css";
 import RailwayDetailsConfig from "../../../Service/Config/RailwayDetailsConfig";
 import ModalForm from "../../UIComponent/ModalForm/ModalForm";
+import PageTitle from "../../UIComponent/PageTitle/PageTitle";
 
 const Stations: React.FunctionComponent<IStations> = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
@@ -60,6 +61,7 @@ const Stations: React.FunctionComponent<IStations> = () => {
     }
     return (
         <div>
+            <PageTitle title={RailwayDetailsConfig.StationDashboardHeader} />
             <div className={styles.css1}>
                 <button type="button" onClick={openFormModal} className={styles.css2}>
                     Add Stations
@@ -72,8 +74,9 @@ const Stations: React.FunctionComponent<IStations> = () => {
                         const subPoints = genratingSubPoints(item);
                         return <HeaderCard indexNumber={index} title={item.PlaceName} subPoints={subPoints} fotter={RailwayDetailsConfig.stationFooterConfig} passingDataToParent={gettingEdittingData} />
                     })}
-                </div>}
-            <ModalForm headerCssClassName="cornerHeader" open={openModal} onCloseFunc={closeFormModal} formType="AddStation" formtitle="Add Station" initialValues={isEdit ? editData : { State: State?.replace("_", " ") }} formOptions={RailwayDetailsConfig.option} gettingValuesFromForm={addStationFunc} />
+                </div>
+            }
+            <ModalForm headerCssClassName="cornerHeader" open={openModal} onCloseFunc={closeFormModal} formType="AddStation" formtitle={isEdit ? RailwayDetailsConfig.EditStationFormTitle : RailwayDetailsConfig.AddStationFormTitle} initialValues={isEdit ? {...editData} : { State: State?.replace("_", " ") }} formOptions={RailwayDetailsConfig.option} gettingValuesFromForm={addStationFunc} />
         </div>
     )
 }

@@ -1,0 +1,20 @@
+.halfWidthCss {
+    width: 48% !important;
+    display: inline-block;
+}
+
+.halfWidthCss label:nth-child(1) {
+    color: #33415c;
+    font-size: 15px;
+    font-weight: 800;
+    font-family: "Ponomar", system-ui;
+    margin-right: 10px;
+}
+
+.halfWidthCss label:nth-child(2){
+    font-size: 17px;
+}
+
+.halfWidthCss div{
+    width: 100% !important;
+}

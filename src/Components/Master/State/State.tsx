@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import useRailwayDetails from "../../../hooks/useRailwayDetails";
 import HeaderCard from "../../UIComponent/Cards/HeaderCard/HeaderCard";
 import RailwayDetailsConfig from "../../../Service/Config/RailwayDetailsConfig";
+import SearchBar from "../../UIComponent/SearchBar/SearchBar";
+import PageTitle from "../../UIComponent/PageTitle/PageTitle";
 
 const State: React.FunctionComponent<IState> = () => {
     const { getStates } = useRailwayDetails();
@@ -22,15 +24,12 @@ const State: React.FunctionComponent<IState> = () => {
         progressBarArray.push({ displayName: "Central Stations", value: item.CentralStations / item.TotalStations * 100 });
         return progressBarArray;
     }
-
     if (isLoading) return <div>Loading...</div>
     return (
         <div>
+            <PageTitle title={RailwayDetailsConfig.StateDashboardHeader}/>
             <div className={styles.css1}>
-                <button className={styles.css2}>
-                    <i className="bi bi-search" />
-                </button>
-                <input className={styles.css3} type="text" placeholder="Ex-Jharkhand" />
+                <SearchBar placeholder="Ex:- Maharashtra" />
             </div>
             <div className={styles.css4}>
                 {stateData?.map((item: any) => {

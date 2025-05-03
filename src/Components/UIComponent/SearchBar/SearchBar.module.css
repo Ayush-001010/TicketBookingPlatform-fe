@@ -1,14 +1,18 @@
 .css2 {
     position: absolute;
-    top:8%;
+    top:16%;
     right: 1%;
     width: 50px;
     height: 38px;
     border-radius: 20px;
     border: none;
+    background-color: #495057;
+    color: #adb5bd;
+    font-weight: 600;
 }
 .css3{
     height: 50px;
-    border-radius: 10px;
-    width: 250px;
+    border-radius: 20px;
+    width: 300px;
+    border: 2px solid black;
 }

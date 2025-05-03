@@ -32,16 +32,60 @@
     width: 200px;
     display: inline;
 }
-.HeaderCardSubPoint p :nth-child(1){
+.HeaderCardSubPoint p:nth-child(1){
     font-size: 16px;
     font-family: "Ponomar", system-ui;
     color: #495057;
     font-weight: 900;
     margin: 0;
 }
-.HeaderCardSubPoint p :nth-child(2){
+.HeaderCardSubPoint p:nth-child(2){
     font-size: 15px;
     font-family: "Ponomar", system-ui;
     color: #adb5bd;
     margin: 0;
+}
+
+.IsActiveHeaderYes{
+    width: 200px;
+    display: inline;
+}
+.IsActiveHeaderYes p :nth-child(1){
+    font-size: 16px;
+    font-family: "Ponomar", system-ui;
+    color: #495057;
+    font-weight: 900;
+    margin: 0;
+}
+.IsActiveHeaderYes p :nth-child(3){
+    font-size: 15px;
+    font-family: "Ponomar", system-ui;
+    color: #52b788;
+    margin: 0;
+    font-weight: 700;
+}
+
+.IsActiveHeaderNo{
+    width: 200px;
+    display: inline;
+}
+.IsActiveHeaderYes p {
+    margin: 0;
+}
+.IsActiveHeaderNo p {
+    margin: 0;
+}
+.IsActiveHeaderNo p :nth-child(1){
+    font-size: 16px;
+    font-family: "Ponomar", system-ui;
+    color: #495057;
+    font-weight: 900;
+    margin: 0;
+}
+.IsActiveHeaderNo p :nth-child(3){
+    font-size: 15px;
+    font-family: "Ponomar", system-ui;
+    color: #d00000;
+    margin: 0;
+    font-weight: 700;
 }

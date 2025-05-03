@@ -24,7 +24,6 @@ const useRailwayDetails = () => {
     } 
     const addStation = async (data : any) => {
         try {
-            data.IsActive = true;
             const response = await APIService.getData('/stations/addStation', {data});
             return response?.data;  
         } catch(error){

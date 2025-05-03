@@ -6,13 +6,13 @@ import style from "./FormItem.module.css";
 import SelectUI from "../../UIComponent/Input/SelectInput/SelectInput";
 import DateUI from "../../UIComponent/Input/DateInput/DateUI";
 import { useGetFormContext } from "../Form";
+import CheckboxInput from "../../UIComponent/Input/CheckboxInput/CheckboxInput";
 
 const FormItems: React.FunctionComponent<IFormItems> = ({ fields , formik }) => {
     const contextValue = useGetFormContext();
   return <div className={style.css1}>
     { fields.map((currItem : IFormFields) => {
         const { displayName , backendName  , fieldType , className , isMultiple , dependableField} = currItem;
-        console.log("Class Name", className);
         if(fieldType.includes("text")) {
             return (
                 <InputUI className={className} displayName={displayName} backendName={backendName}  type={fieldType.split('-')[1]}  formik={formik} />
@@ -24,6 +24,10 @@ const FormItems: React.FunctionComponent<IFormItems> = ({ fields , formik }) => 
         } else if(fieldType.includes("DateTime")){
             return (
                 <DateUI className={className} displayName={displayName} backendName={backendName} formik={formik} placeHolder="Select" />
+            )
+        } else if(fieldType.includes("checkbox")){
+            return (
+                <CheckboxInput displayName={displayName} backendName={backendName} formik={formik} className={className} />
             )
         } else {
             return (
