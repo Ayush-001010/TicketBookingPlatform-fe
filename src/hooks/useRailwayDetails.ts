@@ -40,7 +40,17 @@ const useRailwayDetails = () => {
             return { success: false };
         }
     }
-    return { getStates , getStations , addStation , editStation };
+    const getCardValues = async (stateName : string) => {
+        try {
+            stateName = stateName.replace('_', ' ');
+            const response = await APIService.getData('/stations/getStationCardValues', { StateName : stateName });
+            return response?.data;
+        } catch(error){
+            console.log("Error ", error);
+            return { success: false };
+        }
+    }
+    return { getStates , getStations , addStation , editStation , getCardValues };
 };
 
 export default useRailwayDetails;

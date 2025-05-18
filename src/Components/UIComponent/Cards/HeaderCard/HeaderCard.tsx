@@ -7,7 +7,7 @@ import styles from "./HeaderCard.module.css";
 import { Link } from "react-router-dom";
 import HeaderCardSubPoint from "./HeaderCardComponent/HeaderCardSubPoint";
 
-const HeaderCard: React.FC<IHeaderCard> = ({ children, title, progressBarInfo, fotter, subPoints , passingDataToParent , indexNumber}) => {
+const HeaderCard: React.FC<IHeaderCard> = ({ children, title, progressBarInfo, fotter, subPoints, passingDataToParent, indexNumber }) => {
     return (
         <div className={styles.css1}>
             <HeaderCardTitle title={title || ""} />
@@ -24,12 +24,20 @@ const HeaderCard: React.FC<IHeaderCard> = ({ children, title, progressBarInfo, f
             <HeaderCardFooter>
                 {fotter?.map(item => {
                     switch (item.type) {
-                        case "button": return (
-                            <button className={styles.css3} onClick={() => { if(passingDataToParent) passingDataToParent(indexNumber)} }>
-                                {item.navLink && <Link to={item.navLink[item.navLink.length - 1] === "/" ? `${item.navLink}${title?.replace(/\s/g, "_")}` : item.navLink}> {item.displayName} </Link>}
-                                {!item.navLink && item.displayName}
-                            </button>
-                        )
+                        case "button":
+                            switch (item.buttonType) {
+                                case "delete": return (
+                                    <button className={styles.css3}>
+                                        <i className="bi bi-trash3-fill"/>
+                                    </button>
+                                )
+                                default: return (
+                                    <button className={styles.css3} onClick={() => { if (passingDataToParent) passingDataToParent(indexNumber) }}>
+                                        {item.navLink && <Link to={item.navLink[item.navLink.length - 1] === "/" ? `${item.navLink}${title?.replace(/\s/g, "_")}` : item.navLink}> {item.displayName} </Link>}
+                                        {!item.navLink && item.displayName}
+                                    </button>
+                                )
+                            }
                     }
                 })}
             </HeaderCardFooter>

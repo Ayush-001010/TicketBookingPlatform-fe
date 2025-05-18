@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import IStations from "./IStations";
 import SearchBar from "../../UIComponent/SearchBar/SearchBar";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -9,16 +9,23 @@ import styles from "./Stations.module.css";
 import RailwayDetailsConfig from "../../../Service/Config/RailwayDetailsConfig";
 import ModalForm from "../../UIComponent/ModalForm/ModalForm";
 import PageTitle from "../../UIComponent/PageTitle/PageTitle";
+import Cards from "../../UIComponent/Cards/DashboardCard/Card";
+import { ICardInterface } from "../../../Service/Interface/CardInterface";
 
 const Stations: React.FunctionComponent<IStations> = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [editData, setEditData] = useState<any>(null);
     const [isEdit, setIsEdit] = useState<boolean>(false);
-    const { getStations, addStation, editStation } = useRailwayDetails();
+    const [cardData, setCardData] = useState<any>(null);
+    const { getStations, addStation, editStation , getCardValues } = useRailwayDetails();
     const { State } = useParams();
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryFn: () => getStations(State || ""),
         queryKey: ["stations"],
+    })
+    const { data : cardValues  , isLoading : cardValuesLoading} = useQuery({
+        queryFn:() => getCardValues(State || ""),
+        queryKey: ["cardValues"],
     })
     const { mutateAsync: addStationToDB } = useMutation({
         mutationFn: addStation,
@@ -56,12 +63,29 @@ const Stations: React.FunctionComponent<IStations> = () => {
         ];
         return subPoints;
     }
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
+    useEffect(()=>{
+        if(cardValuesLoading) return;
+        if(cardValues) {
+            // console.log(cardValues);
+            const cardDataVal : Array<ICardInterface> = []; 
+            for(const key in cardValues) {
+                if(key === "Total") continue;
+                const card : ICardInterface = {
+                    displayName: key,
+                    type: "Cirular",
+                    sideIcon: "view",
+                    value: cardValues[key] / cardValues["Total"] * 100,
+                }
+                cardDataVal.push(card);
+            }
+            setCardData(cardDataVal);
+        }
+    },[cardValuesLoading]);
+
     return (
         <div>
             <PageTitle title={RailwayDetailsConfig.StationDashboardHeader} />
+            <Cards cardData={cardData} />
             <div className={styles.css1}>
                 <button type="button" onClick={openFormModal} className={styles.css2}>
                     Add Stations
@@ -76,7 +100,7 @@ const Stations: React.FunctionComponent<IStations> = () => {
                     })}
                 </div>
             }
-            <ModalForm headerCssClassName="cornerHeader" open={openModal} onCloseFunc={closeFormModal} formType="AddStation" formtitle={isEdit ? RailwayDetailsConfig.EditStationFormTitle : RailwayDetailsConfig.AddStationFormTitle} initialValues={isEdit ? {...editData} : { State: State?.replace("_", " ") }} formOptions={RailwayDetailsConfig.option} gettingValuesFromForm={addStationFunc} />
+            <ModalForm headerCssClassName="cornerHeader" open={openModal} onCloseFunc={closeFormModal} formType="AddStation" formtitle={isEdit ? RailwayDetailsConfig.EditStationFormTitle : RailwayDetailsConfig.AddStationFormTitle} initialValues={isEdit ? { ...editData } : { State: State?.replace("_", " ") }} formOptions={RailwayDetailsConfig.option} gettingValuesFromForm={addStationFunc} />
         </div>
     )
 }
