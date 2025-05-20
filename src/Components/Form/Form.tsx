@@ -13,6 +13,7 @@ import FormItems from "./Items/FormItems";
 import { FormTitle } from "./FormTitle/FormTitle";
 import FormButtons from "./FormButtons/FormButtons";
 import FromInformation from "./FromInformation/FromInformation";
+import SubmitPopup from "../UIComponent/Popup/SubmitPopup/SubmitPopup";
 
 export interface IFormContext {
   title?: string;
@@ -43,20 +44,31 @@ const Form = ({
   information,
   intialValue: val,
   headerCssClassName,
-  formCSSClassName
+  formCSSClassName,
+  messageForAddingDataOrEditingInPopUp
 }: IForm & PropsWithChildren) => {
   const { initialValue, validation, formFields } = useFormikHook(formType, val);
   const [iniValue, setIniValue] = useState<Record<string, any> | null>(null);
+  const [openSubmitPopup, setOpenSubmitPopup] = useState(false);
+  const [finalvalue, setFinalvalue] = useState<any>(null);
 
   const handleSubmit = (values: Record<string, any>) => {
-    if (passingeValueToParent) passingeValueToParent(values);
+    setOpenSubmitPopup(true);
+    setFinalvalue(values);
   };
-  useEffect(()=>{
+  const handleDecision = (value?: string) => {
+    if (value === "submit") {
+      if (passingeValueToParent)
+        passingeValueToParent(finalvalue);
+    }
+    setOpenSubmitPopup(false);
+  };
+  useEffect(() => {
     setIniValue(initialValue)
-  },[{...initialValue}])
+  }, [{ ...initialValue }])
   return (
     <FormContext.Provider
-      value={{ title: formtitle, options: option, information: information , headerCssClassName }}
+      value={{ title: formtitle, options: option, information: information, headerCssClassName }}
     >
       <div className={styles[formCSSClassName || "css1"]}>
         {iniValue && (
@@ -81,6 +93,7 @@ const Form = ({
           </Formik>
         )}
       </div>
+      <SubmitPopup message={messageForAddingDataOrEditingInPopUp} open={openSubmitPopup} decisionFunc={handleDecision} />
     </FormContext.Provider>
   );
 };

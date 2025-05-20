@@ -1,9 +1,3 @@
-export interface IDashboardColumn {
-  title: string;
-  dataIndex: string;
-  key: string;
-  render?: any;
-}
 export interface IOptions {
   value: any;
   label: string;

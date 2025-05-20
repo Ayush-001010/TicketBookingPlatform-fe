@@ -24,12 +24,13 @@ const State: React.FunctionComponent<IState> = () => {
         progressBarArray.push({ displayName: "Central Stations", value: item.CentralStations / item.TotalStations * 100 });
         return progressBarArray;
     }
+    const changeHandler = (newValue : string)=> {}
     if (isLoading) return <div>Loading...</div>
     return (
         <div>
             <PageTitle title={RailwayDetailsConfig.StateDashboardHeader}/>
             <div className={styles.css1}>
-                <SearchBar placeholder="Ex:- Maharashtra" />
+                <SearchBar placeholder="Ex:- Maharashtra" changeHandler={changeHandler} />
             </div>
             <div className={styles.css4}>
                 {stateData?.map((item: any) => {

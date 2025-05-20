@@ -12,4 +12,5 @@ export default interface IForm {
   intialValue?:any; 
   headerCssClassName?:string;
   formCSSClassName?:string;
+  messageForAddingDataOrEditingInPopUp?:string;
 }
