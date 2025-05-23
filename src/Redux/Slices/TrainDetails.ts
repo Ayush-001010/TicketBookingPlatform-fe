@@ -7,7 +7,6 @@ export const TrainDetailsSlice = createSlice({
   name: "TrainDetailsSlice",
   reducers: {
     setTrainDetailsData : (state,actions) => {
-      console.log("State  ", state,"    Actions",actions);
       return { data : actions.payload};
     },
   },

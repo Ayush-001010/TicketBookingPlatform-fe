@@ -1,9 +1,10 @@
+import dayjs, { Dayjs } from "dayjs";
 import { IFormFields } from "../Form/formConfig";
 import { IBookingOptions  } from "../Interface/TrainBookingInterface";
 
 export default class TrainBookingConfig {
-  static trainImageText: string =
-    "Explore India effortlessly by Indian Railways";
+  static trainImageText: string = "Explore India effortlessly by Indian Railways";
+  static requiredBackendFields : Array<string> =  [ "departureStation","destinationStation","travelDate","Adults","Kids","seniorCitizen"]
   static OneWayForm: Array<Array<IFormFields>> = [
     [
       {
@@ -11,6 +12,8 @@ export default class TrainBookingConfig {
         backendName: "travelDate",
         validation: null,
         fieldType: "date",
+        isRequired : true,
+        minDate : dayjs().add(1, 'day')
       },
     ],
     [
@@ -19,12 +22,14 @@ export default class TrainBookingConfig {
         backendName: "leavingTime",
         validation: null,
         fieldType: "time",
+        placeholder : "Ex:10:00"
       },
       {
         displayName: "Reach Time",
         backendName: "ReachTime",
         validation: null,
         fieldType: "time",
+        placeholder : "Ex:11:00"
       },
     ],
     [
@@ -33,18 +38,24 @@ export default class TrainBookingConfig {
         backendName: "Adults",
         validation: null,
         fieldType: "dropdown",
+        isRequired : true,
+        placeholder : "Ex:01"
       },
       {
         displayName: "Kids",
         backendName: "Kids",
         validation: null,
         fieldType: "dropdown",
+        isRequired : true,
+        placeholder : "Ex:02"
       },
       {
         displayName: "Senior Citizen",
         backendName: "seniorCitizen",
         validation: null,
         fieldType: "dropdown",
+        isRequired : true,
+        placeholder : "Ex:03"
       },
     ],
   ];

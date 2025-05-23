@@ -15,11 +15,9 @@ const useRailwayDetails = () => {
         try {
             stateName = stateName.replace('_', ' ');
             if (!searchStr) {
-                console.log("State Name ", stateName);
                 const response = await APIService.getData('/stations/getStation', { StateName: stateName, ...filterVal });
                 return response?.data;
             } else {
-                console.log("Search value" , searchStr);
                 const response = await APIService.getData('/stations/search', { State: stateName, searchValue : searchStr });
                 return response?.data;
             }

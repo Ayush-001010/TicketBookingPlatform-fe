@@ -7,7 +7,6 @@ export const AddTrainData = createSlice({
   name: "AddTrainData",
   reducers: {
     setAddTrainDataFunc: (state,actions) => {
-      console.log("State  ", state,"    Actions",actions);
       return {data : actions.payload};
     },
   },

@@ -8,7 +8,6 @@ export const BookTrainTicket = createSlice({
   name: "TrainBookingDetails",
   reducers: {
     setBookTrainTicket: (state, actions) => {
-      console.log("State  ", state, "    Actions", actions);
       return actions.payload;
     },
   },

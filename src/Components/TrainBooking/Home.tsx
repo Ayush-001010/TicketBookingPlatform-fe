@@ -10,7 +10,6 @@ const Home: React.FunctionComponent<IHome> = () => {
   const isStartBooking = useAppSelector(
     (state) => state.BookTrainTicket.isStart
   );
-  console.log("Train Data ", trainData);
   return (
     <div>
       {trainData.length === 0 && !isStartBooking && <TrainBookingCard />}

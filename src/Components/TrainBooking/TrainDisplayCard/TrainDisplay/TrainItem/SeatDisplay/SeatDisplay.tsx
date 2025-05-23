@@ -16,7 +16,6 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
   const bookingDetails = useAppSelector(
     (state) => state.TrainBookingDetailsSlice
   );
-  console.log("Data ",data);
   const [value, setValue] = useState([]);
 
   const startBooking = () => {
@@ -42,7 +41,6 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
   };
   const getPriceHandler = async () => {
     const res = await getPrice(active, data.TrainCode);
-    console.log("Response ", res);
     setPrice(res);
     setIsSubmit(true);
   };
@@ -55,7 +53,6 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
         DestinationStation: bookingDetails.destinationStation,
       });
       socket.on("train-details-data", (trainDetailsValue) => {
-        console.log("trainDetailsValue  ", trainDetailsValue);
         if (trainDetailsValue.trainCode === data.TrainCode) {
           setValue(trainDetailsValue.response);
         }

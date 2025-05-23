@@ -24,7 +24,6 @@ const Authentication: React.FunctionComponent<IAuthentication> = () => {
     } else {
       const response = await signIn(value);
       if (response) {
-        console.log("response", response);
         dispatch(isSignIn({ ...response.data , isLogin : true}));
         window.location.hash = "#/";
       }

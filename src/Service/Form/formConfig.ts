@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import APIService from "../APIServices/APIService";
+import { Dayjs } from "dayjs";
 
 //Interface representing the structure of the form fields
 export interface IFormFields {
@@ -10,6 +11,9 @@ export interface IFormFields {
   className?: string;
   isMultiple?: boolean;
   dependableField?: string;
+  isRequired?: boolean;
+  minDate?:Dayjs;
+  placeholder?:string;
 }
 
 // Interface Represent the types of form.

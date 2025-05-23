@@ -16,7 +16,6 @@ export const TrainBookingDetailsSlice = createSlice({
   name: "TrainBookingDetails",
   reducers: {
     setTrainBookingDetailsValues: (state, actions) => {
-      console.log("State  ", state, "    Actions", actions);
       return {
         departureStation: actions.payload.departureStation,
         destinationStation: actions.payload.destinationStation,

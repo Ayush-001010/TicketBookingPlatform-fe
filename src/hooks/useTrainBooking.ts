@@ -66,23 +66,22 @@ const useTrainBooking = () => {
     return opt;
   }, []);
   const gettingTrainDetails = async (value: any) => {
-    const obj: Record<string, string> = {
+    const obj: Record<string, string | null> = {
       DepartureStation: value["departureStation"],
       DestinationStation: value["destinationStation"],
       JourneyDate: value["travelDate"],
-      DepartureTime: `${value["leavingTimeHr"]}:${value["leavingTimeMinutes"]}`,
-      DestinationTime: `${value["ReachTimeHr"]}:${value["ReachTimeMinutes"]}`,
+      DepartureTime: value["leavingTimeHr"] ? `${value["leavingTimeHr"]}:${value["leavingTimeMinutes"]}` : null,
+      DestinationTime: value["ReachTimeHr"] ? `${value["ReachTimeHr"]}:${value["ReachTimeMinutes"]}` : null,
     };
     const response = await APIService.getData("/train/getTrains", obj);
-    console.log("Response ", response);
     if (response.success) {
       updateValue(setTrainDetailsData(response.data));
     }
+    return response;
   };
   const genrateSideFilters = async () => {
     const type: Array<string> = ["Train Type", "Ticket Price", "Facilites"];
     const response = await APIService.getData("/train/filterOption");
-    console.log("Response ", response);
     const filterArr: Array<ISideFilter> = [];
     if (response.success) {
       const { TypeOfTrainData, TrainFacilites } = response.data;
@@ -115,7 +114,6 @@ const useTrainBooking = () => {
         filterArr.push(obj);
       }
     }
-    console.log("Filter Array ", filterArr);
     return filterArr;
   };
   const bookingData = useAppSelector((state) => state.TrainBookingDetailsSlice);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import ITrainFormPrices from "./ITrainFormPrices";
 import PriceHeaders from "./PriceHeaders/PriceHeaders";
@@ -16,6 +16,7 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
 }) => {
   const { setPrice } = useAddTrainFunc();
   const [data, setData] = useState<Array<ITrainStops>>([]);
+  const isFirst = useRef(true);
 
   const backHandler = () => {
     backHandlerFunc();
@@ -24,7 +25,7 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
     passingDataToParentFunc(data)
   }
   const changeHandlerPrice = (price: number, coachType: string , perCabinSeat : number , totalCabin : number) => {
-    const modifyData = setPrice(stops, price, coachType , perCabinSeat , totalCabin);
+    const modifyData = setPrice(data, price, coachType , perCabinSeat , totalCabin);
     passingDataToParentFunc({coachType : coachType , perCabinSeat : perCabinSeat , totalCabin : totalCabin} , "Coach")
     setData([...modifyData]);
   };
@@ -35,7 +36,10 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
     })
   }
   useEffect(() => {
+    if(isFirst.current) {
     setData(stops);
+    isFirst.current = false;
+    }
   }, [stops]);
   return (
     <div>

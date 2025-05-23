@@ -20,7 +20,6 @@ const AddTrains: React.FunctionComponent<IAddTrains> = () => {
   const {addNewTrain} = useAddTrainFunc();
   const [formType , setFormType] = useState<number>(1);
   const changeFormType = (newValue : number) => {
-    console.log("New Value", newValue);
     setFormType(newValue);
   }
   return (

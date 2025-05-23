@@ -221,7 +221,6 @@ const useAddTrainFunc = (
     messageAPI?.destroy();
     messageAPI?.loading(CommonConfig.loadingMessageAPI);
     const response = await APIService.getData("/train/addNewTrain", value);
-    // console.log("Response ",response);
   };
   const getNoOfDays = (data: Array<ITrainStops>, index: number) => {
     let noOfDays = 1;

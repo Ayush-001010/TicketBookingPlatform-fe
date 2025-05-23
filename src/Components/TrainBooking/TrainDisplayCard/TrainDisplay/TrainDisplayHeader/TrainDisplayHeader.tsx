@@ -20,15 +20,13 @@ const TrainDisplayHeader: React.FunctionComponent<ITrainDisplayHeader> = () => {
     "November",
     "December",
   ];
-  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  console.log("Header Value   ", data);
+  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const dateObj = new Date(data.travelDate);
   return (
     <div className={styles.css1}>
       <p>
-        <span className={styles.css2}>Result Details: </span>
-        <span className={styles.css3}>{`${dateObj.getDate()} ${months[dateObj.getMonth()]}, ${weekdays[dateObj.getDay()]}. ${data.departureStation}-${data.destinationStation}`}</span>
+        <span className={styles.css2}>Train Details: </span>
+        <span className={styles.css3}>{`${dateObj.getDate()} ${months[dateObj.getMonth()]}, ${weekdays[dateObj.getDay()]}. ${data.departureStation} to ${data.destinationStation}`}</span>
       </p>
     </div>
   );

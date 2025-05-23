@@ -106,3 +106,6 @@
   background-color: #212529;
   color: white;
 }
+.css5:hover{
+  cursor: pointer;
+}

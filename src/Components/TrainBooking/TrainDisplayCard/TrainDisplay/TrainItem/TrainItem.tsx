@@ -6,6 +6,7 @@ import SeatDisplay from "./SeatDisplay/SeatDisplay";
 const TrainItem: React.FunctionComponent<ITrainItem> = ({ data }) => {
   const [seatDisplay, setSeatDisplay] = useState<boolean>(false);
 
+  console.log("TrainItem data", data);
   const seatDisplayFunc = () => {
     setSeatDisplay(true);
   };

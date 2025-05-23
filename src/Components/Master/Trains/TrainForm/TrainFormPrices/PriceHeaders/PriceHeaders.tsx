@@ -14,7 +14,6 @@ const PriceHeaders: React.FunctionComponent<IPriceHeaders> = ({
   const [totalCabin, setTotalCabin] = useState<number>();
 
   const changeHandlerRadio = (target: any, backendName: string) => {
-    console.log("Target ", target.checked);
     setRadioValue((prevState: any) => {
       let obj = {};
       for (const curr in prevState) {

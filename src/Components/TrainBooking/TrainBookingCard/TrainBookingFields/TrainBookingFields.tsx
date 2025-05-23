@@ -7,15 +7,49 @@ import BookingFields from "./BookingFields/BookingFields";
 import useTrainBooking from "../../../../hooks/useTrainBooking";
 import { useAppDispatch } from "../../../../Redux/Hooks";
 import { setTrainBookingDetailsValues } from "../../../../Redux/Slices/TrainBookingDetails";
+import { message } from "antd";
+import RequredIndicator from "../../../UIComponent/Text/RequredIndicator/RequredIndicator";
+import TrainNotFoundPopup from "../../../UIComponent/Popup/TrainNotFoundPopup/TrainNotFoundPopup";
 
 const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
   const { bookingOption } = useTrainBooking();
   const [value, setValue] = useState<Record<string, string>>({});
+  const [openNoTrainFoundPopup, setOpenNoTrainFoundPopup] = useState(true);
+  const [messageAPI , contextHandler] = message.useMessage();
   const { gettingTrainDetails } = useTrainBooking();
   const dispatch = useAppDispatch();
 
+  const closeNoTrainFoundPopup = () => setOpenNoTrainFoundPopup(false);
+  const swapHandler = () => {
+    setValue((prevState: Record<string, string>) => {
+      return {
+        ...prevState,
+        departureStation: prevState["destinationStation"],
+        destinationStation: prevState["departureStation"],
+      };
+    });
+  };
   const submitHandler = () => {
-    gettingTrainDetails(value);
+    let isErrorAlreadyShow = false;
+    TrainBookingConfig.requiredBackendFields.forEach((field) => {
+      if(!value[field] && !isErrorAlreadyShow){
+        isErrorAlreadyShow = true;
+        messageAPI.error("Please fill all the required fields");
+        return;
+      }
+    })
+    if(isErrorAlreadyShow) return;
+    if(value["departureStation"] === value["destinationStation"]){
+      messageAPI.error("Please select different stations");
+      return;
+    }
+    gettingTrainDetails(value).then((res) => {
+      if(res.success) {
+        if(res.data.length === 0) {
+          setOpenNoTrainFoundPopup(true);
+        }
+      }
+    });
     dispatch(setTrainBookingDetailsValues(value));
   };
   const changeHandler = (newValue: string, backendName: string) => {
@@ -25,29 +59,34 @@ const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
   };
   return (
     <div className={styles.css1}>
+      {contextHandler}
       <div className={styles.css2}>
         <h1>{TrainBookingConfig.trainImageText}</h1>
       </div>
       <div className={styles.css3}>
         <div className={styles.css4}>
-          <label>Departure Station</label>
+          <label>Departure Station <RequredIndicator/> </label>
           <Select
+            placeholder="Select Departure Station"
             options={bookingOption["departureStation"]}
             onChange={(newValue) => changeHandler(newValue, "departureStation")}
+            value={value["departureStation"]}
           />
         </div>
-        <div className={styles.css5}>
+        <div className={styles.css5} onClick={swapHandler}>
           <p>
             <i className="bi bi-arrow-left-right" />
           </p>
         </div>
         <div className={styles.css4}>
-          <label>Distination Station</label>
+          <label>Distination Station <RequredIndicator/> </label>
           <Select
+            placeholder="Select Distination Station"
             options={bookingOption["destinationStation"]}
             onChange={(newValue) =>
-              changeHandler(newValue, "destinationStation")
-            }
+                changeHandler(newValue, "destinationStation")
+              }
+            value={value["destinationStation"]}
           />
         </div>
       </div>
@@ -83,6 +122,7 @@ const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
       <div className={styles.css9}>
         <Button onClick={submitHandler}>Get times & tickets</Button>
       </div>
+      <TrainNotFoundPopup open={openNoTrainFoundPopup} decisionFunc={closeNoTrainFoundPopup} />
     </div>
   );
 };

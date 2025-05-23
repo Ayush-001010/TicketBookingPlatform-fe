@@ -10,7 +10,6 @@ const CheckboxInput: React.FunctionComponent<ICheckboxInput> = ({
   className
 }) => {
   const changeHandler = (newValue: any) => {
-    console.log(newValue)
     formik.setFieldValue(backendName, newValue);
   };
   const isTouched = () => {
@@ -21,7 +20,7 @@ const CheckboxInput: React.FunctionComponent<ICheckboxInput> = ({
   return (
     <div className={styles[`${className || "css1"}`]} >
       <label>{displayName}</label>
-      <Checkbox onChange={(e)=>changeHandler(e.target.checked)} value={formik.values[backendName]} onBlur={isTouched} />
+      <Checkbox onChange={(e)=>changeHandler(e.target.checked)} checked={formik.values[backendName]} onBlur={isTouched} />
       {(isError && (formik.errors[backendName] as string)?.length > 0) && (
         <p>{formik.errors[backendName] as string}</p>
       )}

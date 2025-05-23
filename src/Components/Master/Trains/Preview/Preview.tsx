@@ -94,7 +94,6 @@ const Preview: React.FunctionComponent<IPreview> = () => {
     return "";
   };
   useEffect(() => {
-    console.log("Data in preview", data);
     const res = genratingPreview();
     if (data === null) {
       res.map((ele: StepProps) => {

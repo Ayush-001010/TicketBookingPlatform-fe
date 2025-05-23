@@ -10,7 +10,6 @@ export const AuthenticationSlice = createSlice({
   name: "Authentication",
   reducers: {
     isSignIn: (state,actions) => {
-      console.log("State  ", state,"    Actions",actions);
       return actions.payload;
     },
   },

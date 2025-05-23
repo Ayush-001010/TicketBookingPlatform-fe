@@ -98,7 +98,7 @@ const Stops: React.FunctionComponent<IStops> = ({
               />
             </div>
           </div>
-          {(type === "Price" || type === "Preview") && (
+          {(type === "Price" || type === "Preview") && data && (
             <>
               {/* <hr></hr> */}
               {/* <h1 className={styles.css8}>Price of Seats : </h1> */}
@@ -108,7 +108,6 @@ const Stops: React.FunctionComponent<IStops> = ({
                     <div className={styles.css5}>
                       <label className={styles.css7}>Price of {currKey}</label>
                       <Input
-                        type="number"
                         value={data.price ? data.price[currKey] : ""}
                         onChange={(event) =>
                           changeHandler(event.target.value, currKey)

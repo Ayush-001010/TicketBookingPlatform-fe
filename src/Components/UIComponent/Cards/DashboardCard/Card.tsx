@@ -6,8 +6,6 @@ import ProgressBarCard from "./CardType/ProgressBarCard";
 import CircularBarCard from "./CardType/CircularBarCard";
 
 const Cards : React.FunctionComponent<ICard> = ({ cardData }) => {
-    console.log(cardData);
-
     const cardType = (item : ICardInterface) => {
         switch(item.type){
             case "Progress" : return <ProgressBarCard item={item} />
@@ -15,9 +13,9 @@ const Cards : React.FunctionComponent<ICard> = ({ cardData }) => {
         }
     }
     return (
-        <div>
+        <div className={styles.css1}>
             {cardData?.map((cardItem : ICardInterface ) => {
-                return cardType(cardItem);
+                return <div className={styles.css2}>{cardType(cardItem)}</div>
             })}
         </div>
     )
