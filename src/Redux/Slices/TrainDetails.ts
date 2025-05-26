@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const TrainDetailsSlice = createSlice({
   initialState: {
-    data:[]
+    data:[] ,
+    allData : []
   },
   name: "TrainDetailsSlice",
   reducers: {
     setTrainDetailsData : (state,actions) => {
-      return { data : actions.payload};
+      return { data : actions.payload.data , allData : actions.payload.allData  };
     },
   },
 });

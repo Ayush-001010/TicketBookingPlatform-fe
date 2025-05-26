@@ -10,7 +10,7 @@ const TrainDisplayCard: React.FunctionComponent<ITrainDisplayCard> = () => {
     <div>
       <UpperCard/>
       <div className={styles.css1}>
-        <SideFilters />
+        <SideFilters/>
         <TrainDisplay/>
       </div>
     </div>

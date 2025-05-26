@@ -11,7 +11,7 @@ import { setTrainDetailsData } from "../Redux/Slices/TrainDetails";
 
 const useTrainBooking = () => {
   const updateValue = useAppDispatch();
-
+  const trainAllData = useAppSelector( (state) => state.TrainDetailsSlice.allData);
   const [bookingOption, setBookingOption] = useState<
     Record<string, Array<IOptions>>
   >({});
@@ -65,6 +65,16 @@ const useTrainBooking = () => {
     }
     return opt;
   }, []);
+  const applyFilter = (filtersValue : Record<string,boolean>) => {
+    console.log("Data to be filtered: ", trainAllData , "Filters: ", filtersValue);
+    const filterData = trainAllData.filter( (item : any) => filtersValue[item.TypeOfTrain] );
+    console.log("Filtered Data: ", filterData);
+    updateValue(setTrainDetailsData({ data : filterData, allData: trainAllData }));
+  }
+  const resetFilter = () => {
+    console.log("Resetting filter");
+    updateValue(setTrainDetailsData({ data : trainAllData, allData: trainAllData }));
+  }
   const gettingTrainDetails = async (value: any) => {
     const obj: Record<string, string | null> = {
       DepartureStation: value["departureStation"],
@@ -75,16 +85,16 @@ const useTrainBooking = () => {
     };
     const response = await APIService.getData("/train/getTrains", obj);
     if (response.success) {
-      updateValue(setTrainDetailsData(response.data));
+      updateValue(setTrainDetailsData({data : response.data , allData : response.data}));
     }
     return response;
   };
   const genrateSideFilters = async () => {
-    const type: Array<string> = ["Train Type", "Ticket Price", "Facilites"];
+    const type: Array<string> = ["Train Type"];
     const response = await APIService.getData("/train/filterOption");
     const filterArr: Array<ISideFilter> = [];
     if (response.success) {
-      const { TypeOfTrainData, TrainFacilites } = response.data;
+      const { TypeOfTrainData  } = response.data;
       for (const item of type) {
         let obj: ISideFilter = { header: "", fields: [] };
         if (item === "Train Type") {
@@ -94,23 +104,7 @@ const useTrainBooking = () => {
               return { labelName: ele.TrainType, fieldType: "checkbox" };
             }),
           };
-        } else if (item === "Facilites") {
-          obj = {
-            header: item,
-            fields: TrainFacilites.map((ele: any) => {
-              return { labelName: ele.FacilitesName, fieldType: "checkbox" };
-            }),
-          };
-        } else {
-          obj = {
-            header: item,
-            fields: [
-              { labelName: "up to 500", fieldType: "radio", radioID: "price" },
-              { labelName: "up to 1000", fieldType: "radio", radioID: "price" },
-              { labelName: "up to 1500", fieldType: "radio", radioID: "price" },
-            ],
-          };
-        }
+        } 
         filterArr.push(obj);
       }
     }
@@ -138,7 +132,7 @@ const useTrainBooking = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return { bookingOption, gettingTrainDetails, genrateSideFilters, getPrice };
+  return { bookingOption, gettingTrainDetails, genrateSideFilters, getPrice  , applyFilter , resetFilter};
 };
 
 export default useTrainBooking;

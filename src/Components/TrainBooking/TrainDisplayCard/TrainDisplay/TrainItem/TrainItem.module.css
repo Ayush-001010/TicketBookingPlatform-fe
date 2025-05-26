@@ -54,7 +54,7 @@
 }
 .css9 {
     font-family: "Ponomar", system-ui;
-    font-size: 15px;
+    font-size: 10px;
     color: #212529;
     margin: 0;
 }
@@ -62,7 +62,7 @@
     margin: 0;
     color: #212529;
     font-family: "Ponomar", system-ui;
-    font-size: 50px;
+    font-size: 35px;
     font-weight: 900;
 }
 .css11{
@@ -77,11 +77,13 @@
 }
 .css13{
     border-top: 2px dashed #6c757d;
-    width: 10px;
     width: 95%;
     margin-top: 65px;
     margin-left: 10px;
     color: #6c757d;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
 }
 .css14{
     margin-top: 54px;
@@ -106,4 +108,11 @@
     font-family: "Ponomar", system-ui;
     font-size: 20px;
     font-weight: 700;
+}
+.css16 {
+    width: 200px;
+}
+
+.css13 span{
+    font-weight: 500;
 }

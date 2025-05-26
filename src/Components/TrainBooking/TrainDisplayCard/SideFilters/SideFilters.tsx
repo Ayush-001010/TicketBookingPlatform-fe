@@ -12,23 +12,36 @@ const SideFilters: React.FunctionComponent<ISideFilters> = () => {
   const { genrateSideFilters } = useTrainBooking();
   const [fields, setFields] = useState<Array<ISideFilter>>([]);
   const [value, setValue] = useState<Record<string, boolean>>({});
+  const { applyFilter , resetFilter } = useTrainBooking();
 
+  const initialValues = (fields : any) => {
+    let obj = {};
+      for (const item of fields) {
+        for (const subItem of item.fields) {
+          obj = { ...obj, [subItem.labelName]: false };
+        }
+      }
+      return obj;
+  }
   const changeHandler = ({ checked }: any, backendName: string) => {
     setValue((prevState: any) => {
       return { ...prevState, [backendName]: checked };
     });
   };
+  const applyFilterHanler = () => {
+    applyFilter(value);
+  }
+  const resetFilterHandler = () => {
+    resetFilter();
+    const initialValue = initialValues(fields);
+    setValue(initialValue);
+  }
 
   useEffect(() => {
     genrateSideFilters().then((response: Array<ISideFilter>) => {
       setFields(response);
-      let obj = {};
-      for (const item of response) {
-        for (const subItem of item.fields) {
-          obj = { ...obj, [subItem.labelName]: false };
-        }
-      }
-      setValue(obj);
+      const initialValue = initialValues(response);
+      setValue(initialValue);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,21 +68,6 @@ const SideFilters: React.FunctionComponent<ISideFilters> = () => {
                     </div>
                   );
                 }
-                case "radio": {
-                  return (
-                    <div className={styles.css3}>
-                      <Radio
-                        name={radioID}
-                        id={radioID}
-                        onChange={(event) =>
-                          changeHandler(event.target, labelName)
-                        }
-                        checked={value[labelName]}
-                      />
-                      <label htmlFor={radioID}>{labelName}</label>
-                    </div>
-                  );
-                }
                 default:
                   return null;
               }
@@ -78,8 +76,8 @@ const SideFilters: React.FunctionComponent<ISideFilters> = () => {
         </div>
       ))}
       <div className={styles.css5}>
-        <button>Apply</button>
-        <button>Reset Filter</button>
+        <button onClick={applyFilterHanler}>Apply</button>
+        <button onClick={resetFilterHandler}>Reset Filter</button>
       </div>
     </div>
   );

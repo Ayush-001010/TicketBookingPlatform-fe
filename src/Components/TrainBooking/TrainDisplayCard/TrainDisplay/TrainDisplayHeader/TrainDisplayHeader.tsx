@@ -25,8 +25,8 @@ const TrainDisplayHeader: React.FunctionComponent<ITrainDisplayHeader> = () => {
   return (
     <div className={styles.css1}>
       <p>
-        <span className={styles.css2}>Train Details: </span>
-        <span className={styles.css3}>{`${dateObj.getDate()} ${months[dateObj.getMonth()]}, ${weekdays[dateObj.getDay()]}. ${data.departureStation} to ${data.destinationStation}`}</span>
+        <span className={styles.css3}>Train Schedule for  {`${months[dateObj.getMonth()]} ${dateObj.getDate()} (${weekdays[dateObj.getDay()]})`}: </span>
+        <span className={styles.css2}>{`Departure from  ${data.departureStation} to ${data.destinationStation}`}</span>
       </p>
     </div>
   );
