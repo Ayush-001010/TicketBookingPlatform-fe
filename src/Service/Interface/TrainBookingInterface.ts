@@ -33,3 +33,20 @@ export interface ISideFilter {
   header: string;
   fields:Array<ISideFilterDetails>
 }
+export interface ITrainTicketBookingInterface {
+  trainCode: string;
+  trainName : string;
+  departureStation: string;
+  destinationStation: string;
+  departureTime: string;
+  destinationTime: string;
+  passengerName: string;
+  passengerAge: string;
+  passengerGender: "Male" | "Female" | "";
+  passengerPhone: string;
+  passengerCoachType: string;
+  passengerCategory: "General" | "Senior Citizen" | "Child" | "Disabled" | "";
+  journeyStartDate: string;
+  journeyEndDate: string;
+  price?: number;
+}

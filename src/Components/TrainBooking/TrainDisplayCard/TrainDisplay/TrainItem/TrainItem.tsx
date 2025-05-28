@@ -58,7 +58,7 @@ const TrainItem: React.FunctionComponent<ITrainItem> = ({ data }) => {
         </div>
       )}
       {seatDisplay && (
-        <div>
+        <div className={styles.css15}>
           <SeatDisplay data={data} />
         </div>
       )}

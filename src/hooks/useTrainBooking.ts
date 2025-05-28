@@ -8,6 +8,7 @@ import { IOptions } from "../Service/Interface/CommonInterface";
 import APIService from "../Service/APIServices/APIService";
 import { useAppDispatch, useAppSelector } from "../Redux/Hooks";
 import { setTrainDetailsData } from "../Redux/Slices/TrainDetails";
+import TicketBookingConfig from "../Service/Config/TicketBookingConfig";
 
 const useTrainBooking = () => {
   const updateValue = useAppDispatch();
@@ -126,13 +127,53 @@ const useTrainBooking = () => {
     }
     return 0;
   };
+  const ticketBookingOptions = async (trainCode : string) => {
+    const response = await APIService.getData("/train/getParticularTrainCoachDetails",{trainCode});
+    console.log("Ticket Booking Options: ", response);
+    const passengerCoachType : Array<IOptions> = [];
+    if (response.success) {
+      for(const item of response.data){
+        passengerCoachType.push({ label: item, value: item });
+      }
+    }
+    const passengerAge : Array<IOptions> = [];
+    for(let i = 0; i <= 100; i++){
+      const str: string = `${i < 10 ? `0${i}` : i.toString()}`;
+      passengerAge.push({ label: str, value: i });
+    }
+    return {
+      passengerAge,
+      passengerCoachType,
+      passengerGender: TicketBookingConfig.options.passengerGender,
+      passengerCategory: TicketBookingConfig.options.passengerCategory,
+    }
+  }
+  const getPriceForEachSeat = async (trainCode : string , departureStation : string, destinationStation : string) => {
+    const response = await APIService.getData("/train/getPriceOfTrainSeat", {
+      trainCode,
+      departureStation,
+      destinationStation
+    });
+    if(response.success){
+      return response.data;
+    }
+    return [];
+  }
+  const calculatePriceAccordingToSeat = (seatPrices: number, category : string) => {
+    switch(category) {
+      case "Child" : return seatPrices * 0.5;
+      case "Adult" : return seatPrices;
+      case "Senior Citizen" : return seatPrices * 0.8;
+      default: return 0;
+    }
+  }
   useEffect(() => {
     genrateBookingOption().then((opt) => {
       setBookingOption(opt);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return { bookingOption, gettingTrainDetails, genrateSideFilters, getPrice  , applyFilter , resetFilter};
+  return { bookingOption, gettingTrainDetails, genrateSideFilters, getPrice  , applyFilter , resetFilter , ticketBookingOptions , getPriceForEachSeat , calculatePriceAccordingToSeat};
 };
 
 export default useTrainBooking;

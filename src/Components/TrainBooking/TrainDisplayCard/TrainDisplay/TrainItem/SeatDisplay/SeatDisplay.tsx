@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../../../../Redux/Hooks";
 import styles from "./SeatDisplay.module.css";
 import useTrainBooking from "../../../../../../hooks/useTrainBooking";
 import { setBookTrainTicket } from "../../../../../../Redux/Slices/BookTrainTicket";
+import { ITrainTicketBookingInterface } from "../../../../../../Service/Interface/TrainBookingInterface";
 
 const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
   const [active, setActive] = useState<string>("");
@@ -19,18 +20,34 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
   const [value, setValue] = useState([]);
 
   const startBooking = () => {
-    const obj = { Name : "" , From  : bookingDetails.departureStation , To : bookingDetails.destinationStation , TrainName : data.TrainName, TrainCode : data.TrainCode ,CoachType : active ,CoachNumber : "-" , Age : "" , Type : "" , PhoneNumber : "" , DestinationTime : data.destinationTime , DepartureTime : data.leavingTime , SeatNo:"-"};
+    const obj : ITrainTicketBookingInterface = {
+      trainName : data.TrainName,
+      departureStation: data.DepartureStation,
+      destinationStation: data.DestinationStation,
+      departureTime: data.DepartureTime,
+      destinationTime: data.DestinationTime,
+      journeyEndDate : data.EndDate,
+      journeyStartDate : data.StartDate,
+      passengerName: "",
+      passengerAge : "",
+      passengerGender : "",
+      passengerPhone: "",
+      passengerCoachType: active,
+      passengerCategory: "",
+      trainCode : data.TrainCode,
+
+    };
     const arr = [];
     for(let i=0;i<Number(bookingDetails.Adults);i++){
-      obj.Type = "Adults";
+      obj.passengerCategory = "General";
       arr.push(obj);
     }
     for(let i=0;i<Number(bookingDetails.Kids);i++){
-      obj.Type = "Kids";
+      obj.passengerCategory = "Child";
       arr.push(obj);
     }
     for(let i=0;i<Number(bookingDetails.seniorCitizen);i++){
-      obj.Type = "Senior Citizen";
+      obj.passengerCategory = "Senior Citizen";
       arr.push(obj);
     }
     dispatch(setBookTrainTicket({isStart : true , data : arr}))

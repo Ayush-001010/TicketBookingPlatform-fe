@@ -1,0 +1,68 @@
+.css1{
+  height: auto;
+  width: 40%;
+  margin: 10px;
+  border-radius: 25px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headerText {
+  font-family: "Ponomar", system-ui;
+  color: #adb5bd;
+}
+.topPart {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #343a40;
+  padding: 10px;
+  border-radius: 25px;
+}
+.sideBySide {
+  display: flex;
+  justify-content: space-between;
+}
+.sideBySide h2{
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+.sideBySide div{
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+.fields1 {
+  color: #6c757d;
+  font-size: 15px;
+  font-family: "Ponomar", system-ui;
+}
+.fields1 span {
+  color: #ced4da;
+}
+.downPart{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 25px;
+  padding: 10px;
+}
+.inputFieldCss {
+  display: flex;
+  flex-direction: column;
+  margin: 3px;
+}
+.inputFieldCss label {
+  color: #212529;
+  font-family: "Ponomar", system-ui;
+  font-weight: 900;
+}
+.selectFieldCss {
+  display: flex;
+  flex-direction: column;
+  margin: 3px;
+}
+.selectFieldCss label {
+  font-family: "Ponomar", system-ui;
+  color: #212529;
+  font-weight: 900;
+}
