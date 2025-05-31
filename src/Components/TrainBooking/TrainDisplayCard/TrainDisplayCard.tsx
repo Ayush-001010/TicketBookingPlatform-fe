@@ -1,7 +1,7 @@
 import React from "react";
 import ITrainDisplayCard from "./ITrainDisplayCard";
 import SideFilters from "./SideFilters/SideFilters";
-import UpperCard from "./UpperCard/UpperCard";
+import UpperCard from "../UpperCard/UpperCard";
 import TrainDisplay from "./TrainDisplay/TrainDisplay";
 import styles from "./TrainDisplayCard.module.css";
 

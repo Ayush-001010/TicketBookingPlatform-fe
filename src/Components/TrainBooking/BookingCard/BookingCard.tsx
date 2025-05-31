@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import IBookingCard from "./IBookingCard";
-import UpperCard from "../TrainDisplayCard/UpperCard/UpperCard";
-import { useAppSelector } from "../../../Redux/Hooks";
+import UpperCard from "../UpperCard/UpperCard";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import BookingDetails from "./BookingDetails/BookingDetails";
 import { ITrainTicketBookingInterface } from "../../../Service/Interface/TrainBookingInterface";
 import useTrainBooking from "../../../hooks/useTrainBooking";
 import { IOptions } from "../../../Service/Interface/CommonInterface";
+import {  setBookTrainTicket } from "../../../Redux/Slices/BookTrainTicket";
 
 const BookingCard: React.FunctionComponent<IBookingCard> = () => {
   const details:any= useAppSelector((state) => state.BookTrainTicket.data);
@@ -13,7 +14,12 @@ const BookingCard: React.FunctionComponent<IBookingCard> = () => {
   const [options , setOptions] = useState<Record<string,Array<IOptions>> | null>(null);
   const { ticketBookingOptions , getPriceForEachSeat } = useTrainBooking();
   const [seatPrice , setSeatPrice] = useState<Record<string,number> | null>(null);
+  const dispatch = useAppDispatch();
   console.log("BookingCard data:", data);
+  
+  const nextPage = () => {
+    dispatch(setBookTrainTicket({isStart : true , data , isStartReview : true}))
+  }
   const addNewPassengerHandler = () => {
     setData((prevState : Array<ITrainTicketBookingInterface>) => {
       const newPassenger : ITrainTicketBookingInterface = {
@@ -55,7 +61,7 @@ const BookingCard: React.FunctionComponent<IBookingCard> = () => {
       <UpperCard currentItem={1} />
       <button onClick={addNewPassengerHandler}>Add New Passenger</button>
       {data.map((item : ITrainTicketBookingInterface) => <BookingDetails data={item} options={options} seatPrices={seatPrice} />)}
-      <button>Next</button>
+      <button onClick={nextPage}>Next</button>
     </div>
   );
 };

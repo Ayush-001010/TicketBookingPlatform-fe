@@ -1,0 +1,23 @@
+.css1 {
+    padding: 10px;
+    background-color: #ced4da;
+    display: flex;
+    justify-content: flex-start;
+}
+.css2 {
+    background-color: #6c757d;
+    border-radius: 10px;
+    padding: 5px;
+    font-family: "Ponomar", system-ui;
+}
+.css2 p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+}
+
+.deative {
+    color: #f8f9fa;
+}

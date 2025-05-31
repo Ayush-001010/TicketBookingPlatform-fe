@@ -4,6 +4,7 @@ export const BookTrainTicket = createSlice({
   initialState: {
     isStart: false,
     data: [],
+    isStartReview : false
   },
   name: "TrainBookingDetails",
   reducers: {

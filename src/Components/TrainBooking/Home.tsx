@@ -7,14 +7,15 @@ import BookingCard from "./BookingCard/BookingCard";
 
 const Home: React.FunctionComponent<IHome> = () => {
   const trainData = useAppSelector((state) => state.TrainDetailsSlice.data);
-  const isStartBooking = useAppSelector(
-    (state) => state.BookTrainTicket.isStart
+  const {isStart : isStartBooking , isStartReview } = useAppSelector(
+    (state) => state.BookTrainTicket
   );
   return (
     <div>
       {trainData.length === 0 && !isStartBooking && <TrainBookingCard />}
       {trainData.length > 0 && !isStartBooking && <TrainDisplayCard />}
-      {isStartBooking && <BookingCard />}
+      {isStartBooking && !isStartReview && <BookingCard />}
+      {isStartReview && <></>}
     </div>
   );
 };
