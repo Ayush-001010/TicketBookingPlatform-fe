@@ -4,3 +4,61 @@
     justify-content: center;
     align-items: center;
 }
+.addPassengerButton{
+    margin: 10px;
+    border: none;
+    background-color: #343a40;
+    border-radius: 10px;
+    height: 40px;
+    color: #adb5bd;
+    font-family: "Ponomar", system-ui;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.addPassengerButton:hover{
+    background-color: #343a40 !important;
+    color: #adb5bd !important;
+    font-family: "Ponomar", system-ui;
+    font-weight: 900 !important;
+}
+.placeContentToEnd{
+    display: flex;
+    justify-content: flex-end;
+}
+.passengerDetailsCards {
+    display: flex;
+    flex-wrap: wrap;
+}
+.bottomButtons{
+    margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.completedButtonCSS{
+    margin: 10px;
+    background-color: #1b4332;
+    color: #74c69d;
+    font-family: "Ponomar", system-ui;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+}
+.completedButtonCSS:hover{
+    background-color: #1b4332 !important;
+    color: #74c69d !important;
+    font-family: "Ponomar", system-ui;
+    font-weight: 900 !important;
+    border:none !important;
+}
+.goBackButtonCSS{
+    margin: 10px;
+    background-color: #a4161a;
+    color: #d3d3d3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: "Ponomar", system-ui;
+    border:none !important;
+}
+.goBackButtonCSS:hover{
+    font-weight: 900 !important;
+    background-color: #a4161a !important;
+    color: #d3d3d3 !important;
+    border:none !important;
+}

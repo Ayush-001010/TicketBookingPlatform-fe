@@ -9,7 +9,6 @@ const TrainItem: React.FunctionComponent<ITrainItem> = ({ data }) => {
   const [startDate , setStartDate] = useState<string>("");
   const [endDate , setEndDate] = useState<string>("");
 
-  console.log("TrainItem data", data);
   const seatDisplayFunc = () => {
     setSeatDisplay(true);
   };

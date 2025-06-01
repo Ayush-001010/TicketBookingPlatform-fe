@@ -8,7 +8,7 @@ import styles from "./TrainDisplayCard.module.css";
 const TrainDisplayCard: React.FunctionComponent<ITrainDisplayCard> = () => {
   return (
     <div>
-      <UpperCard/>
+      <UpperCard currentItem={0}/>
       <div className={styles.css1}>
         <SideFilters/>
         <TrainDisplay/>

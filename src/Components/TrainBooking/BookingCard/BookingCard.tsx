@@ -6,62 +6,76 @@ import BookingDetails from "./BookingDetails/BookingDetails";
 import { ITrainTicketBookingInterface } from "../../../Service/Interface/TrainBookingInterface";
 import useTrainBooking from "../../../hooks/useTrainBooking";
 import { IOptions } from "../../../Service/Interface/CommonInterface";
-import {  setBookTrainTicket } from "../../../Redux/Slices/BookTrainTicket";
+import { setBookTrainTicket } from "../../../Redux/Slices/BookTrainTicket";
+import BookingHeader from "./BookingHeader/BookingHeader";
+import styles from "./BookingCard.module.css";
+import { Button } from "antd";
 
 const BookingCard: React.FunctionComponent<IBookingCard> = () => {
-  const details:any= useAppSelector((state) => state.BookTrainTicket.data);
-  const [data , setData] = useState<Array<ITrainTicketBookingInterface>>([]);
-  const [options , setOptions] = useState<Record<string,Array<IOptions>> | null>(null);
-  const { ticketBookingOptions , getPriceForEachSeat } = useTrainBooking();
-  const [seatPrice , setSeatPrice] = useState<Record<string,number> | null>(null);
+  const details: any = useAppSelector((state) => state.BookTrainTicket.data);
+  const [data, setData] = useState<Array<ITrainTicketBookingInterface>>([]);
+  const [finalValue, setFinalValue] = useState<Array<ITrainTicketBookingInterface>>([]);
+  const [options, setOptions] = useState<Record<string, Array<IOptions>> | null>(null);
+  const { ticketBookingOptions, getPriceForEachSeat, addNewPassenger } = useTrainBooking();
+  const [seatPrice, setSeatPrice] = useState<Record<string, number> | null>(null);
   const dispatch = useAppDispatch();
-  console.log("BookingCard data:", data);
-  
-  const nextPage = () => {
-    dispatch(setBookTrainTicket({isStart : true , data , isStartReview : true}))
+  const [startTakingData, setStartTakingData] = useState<boolean>(false);
+
+  const completedHandler = () => {
+    setStartTakingData(true);
+  }
+  const takingDataFromChild = (isError: boolean, value?: ITrainTicketBookingInterface | null) => {
+    if (isError) {
+      setStartTakingData(false);
+    }
+    setFinalValue((prevState: any) => {
+      return [...prevState, value]
+    })
   }
   const addNewPassengerHandler = () => {
-    setData((prevState : Array<ITrainTicketBookingInterface>) => {
-      const newPassenger : ITrainTicketBookingInterface = {
-        departureStation : prevState[0].departureStation,
-        destinationStation : prevState[0].destinationStation,
-        trainCode : prevState[0].trainCode,
-        passengerName : "",
-        passengerAge : "",
-        passengerGender : "",
-        passengerCategory : data[0].passengerCategory,
-        passengerCoachType: data[0].passengerCoachType,
-        passengerPhone : "",
-        journeyEndDate : prevState[0].journeyEndDate,
-        journeyStartDate : prevState[0].journeyStartDate,
-        departureTime : prevState[0].departureTime,
-        destinationTime : prevState[0].destinationTime,
-        trainName : prevState[0].trainName,
-      }
+    setData((prevState: Array<ITrainTicketBookingInterface>) => {
+      const newPassenger: ITrainTicketBookingInterface = addNewPassenger(prevState[0]);
       return [...prevState, newPassenger];
     });
   }
   useEffect(() => {
-    ticketBookingOptions(details[0].trainCode).then((response)=>{
+    ticketBookingOptions(details[0].trainCode).then((response) => {
       setOptions(response);
     });
-    getPriceForEachSeat(details[0].trainCode , details[0].departureStation, details[0].destinationStation).then((response) => {
-      console.log("Price for each seat: ", response);
+    getPriceForEachSeat(details[0].trainCode, details[0].departureStation, details[0].destinationStation).then((response) => {
       setSeatPrice(response);
     });
-  },[]);
+  }, []);
   useEffect(() => {
     if (details && details.length > 0) {
       setData(details);
     }
-  }
-  , [details]);
+  }, [details]);
+  useEffect(() => {
+    const timeObj = setTimeout(() => {
+      if (startTakingData) {
+        console.log(finalValue);
+        dispatch(setBookTrainTicket({ isStart: true, data: finalValue, isStartReview: true }));
+      }
+    }, 3000);
+    return () => {
+      clearTimeout(timeObj);
+    }
+  }, [finalValue])
   return (
     <div>
       <UpperCard currentItem={1} />
-      <button onClick={addNewPassengerHandler}>Add New Passenger</button>
-      {data.map((item : ITrainTicketBookingInterface) => <BookingDetails data={item} options={options} seatPrices={seatPrice} />)}
-      <button onClick={nextPage}>Next</button>
+      <BookingHeader trainName={data[0]?.trainName || ""} departureStation={data[0]?.departureStation || ""} departureTime={data[0]?.departureTime || ""} destinationStation={data[0]?.destinationStation || ""} destinationTime={data[0]?.destinationTime || ""} />
+      <div className={styles.placeContentToEnd}>
+        <Button className={styles.addPassengerButton} onClick={addNewPassengerHandler}>Add New Passenger</Button>
+      </div>
+      <div className={styles.passengerDetailsCards}>
+        {data.map((item: ITrainTicketBookingInterface, index: number) => <BookingDetails passingDataToParentFunc={takingDataFromChild} startCompletingProcess={startTakingData} passengerNumber={index + 1} data={item} options={options} seatPrices={seatPrice} />)}
+      </div>
+      <div className={styles.bottomButtons}>
+        <Button className={styles.goBackButtonCSS}>Go Back</Button>
+        <Button className={styles.completedButtonCSS} onClick={completedHandler}>Completed</Button>
+      </div>
     </div>
   );
 };

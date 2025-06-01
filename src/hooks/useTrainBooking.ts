@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   IBookingOptions,
   ISideFilter,
+  ITrainTicketBookingInterface,
 } from "../Service/Interface/TrainBookingInterface";
 import TrainBookingConfig from "../Service/Config/TrainBookingConfig";
 import { IOptions } from "../Service/Interface/CommonInterface";
@@ -12,7 +13,7 @@ import TicketBookingConfig from "../Service/Config/TicketBookingConfig";
 
 const useTrainBooking = () => {
   const updateValue = useAppDispatch();
-  const trainAllData = useAppSelector( (state) => state.TrainDetailsSlice.allData);
+  const trainAllData = useAppSelector((state) => state.TrainDetailsSlice.allData);
   const [bookingOption, setBookingOption] = useState<
     Record<string, Array<IOptions>>
   >({});
@@ -66,15 +67,12 @@ const useTrainBooking = () => {
     }
     return opt;
   }, []);
-  const applyFilter = (filtersValue : Record<string,boolean>) => {
-    console.log("Data to be filtered: ", trainAllData , "Filters: ", filtersValue);
-    const filterData = trainAllData.filter( (item : any) => filtersValue[item.TypeOfTrain] );
-    console.log("Filtered Data: ", filterData);
-    updateValue(setTrainDetailsData({ data : filterData, allData: trainAllData }));
+  const applyFilter = (filtersValue: Record<string, boolean>) => {
+    const filterData = trainAllData.filter((item: any) => filtersValue[item.TypeOfTrain]);
+    updateValue(setTrainDetailsData({ data: filterData, allData: trainAllData }));
   }
   const resetFilter = () => {
-    console.log("Resetting filter");
-    updateValue(setTrainDetailsData({ data : trainAllData, allData: trainAllData }));
+    updateValue(setTrainDetailsData({ data: trainAllData, allData: trainAllData }));
   }
   const gettingTrainDetails = async (value: any) => {
     const obj: Record<string, string | null> = {
@@ -86,7 +84,7 @@ const useTrainBooking = () => {
     };
     const response = await APIService.getData("/train/getTrains", obj);
     if (response.success) {
-      updateValue(setTrainDetailsData({data : response.data , allData : response.data}));
+      updateValue(setTrainDetailsData({ data: response.data, allData: response.data }));
     }
     return response;
   };
@@ -95,7 +93,7 @@ const useTrainBooking = () => {
     const response = await APIService.getData("/train/filterOption");
     const filterArr: Array<ISideFilter> = [];
     if (response.success) {
-      const { TypeOfTrainData  } = response.data;
+      const { TypeOfTrainData } = response.data;
       for (const item of type) {
         let obj: ISideFilter = { header: "", fields: [] };
         if (item === "Train Type") {
@@ -105,7 +103,7 @@ const useTrainBooking = () => {
               return { labelName: ele.TrainType, fieldType: "checkbox" };
             }),
           };
-        } 
+        }
         filterArr.push(obj);
       }
     }
@@ -120,24 +118,23 @@ const useTrainBooking = () => {
       Kids: bookingData.Kids,
       seniorCitizen: bookingData.seniorCitizen,
       trainCode,
-      coachType 
+      coachType
     });
-    if(response.success){
+    if (response.success) {
       return response.data;
     }
     return 0;
   };
-  const ticketBookingOptions = async (trainCode : string) => {
-    const response = await APIService.getData("/train/getParticularTrainCoachDetails",{trainCode});
-    console.log("Ticket Booking Options: ", response);
-    const passengerCoachType : Array<IOptions> = [];
+  const ticketBookingOptions = async (trainCode: string) => {
+    const response = await APIService.getData("/train/getParticularTrainCoachDetails", { trainCode });
+    const passengerCoachType: Array<IOptions> = [];
     if (response.success) {
-      for(const item of response.data){
+      for (const item of response.data) {
         passengerCoachType.push({ label: item, value: item });
       }
     }
-    const passengerAge : Array<IOptions> = [];
-    for(let i = 0; i <= 100; i++){
+    const passengerAge: Array<IOptions> = [];
+    for (let i = 0; i <= 100; i++) {
       const str: string = `${i < 10 ? `0${i}` : i.toString()}`;
       passengerAge.push({ label: str, value: i });
     }
@@ -148,24 +145,43 @@ const useTrainBooking = () => {
       passengerCategory: TicketBookingConfig.options.passengerCategory,
     }
   }
-  const getPriceForEachSeat = async (trainCode : string , departureStation : string, destinationStation : string) => {
+  const getPriceForEachSeat = async (trainCode: string, departureStation: string, destinationStation: string) => {
     const response = await APIService.getData("/train/getPriceOfTrainSeat", {
       trainCode,
       departureStation,
       destinationStation
     });
-    if(response.success){
+    if (response.success) {
       return response.data;
     }
     return [];
   }
-  const calculatePriceAccordingToSeat = (seatPrices: number, category : string) => {
-    switch(category) {
-      case "Child" : return seatPrices * 0.5;
-      case "Adult" : return seatPrices;
-      case "Senior Citizen" : return seatPrices * 0.8;
+  const calculatePriceAccordingToSeat = (seatPrices: number, category: string) => {
+    switch (category) {
+      case "Child": return seatPrices * 0.5;
+      case "Adult": return seatPrices;
+      case "Senior Citizen": return seatPrices * 0.8;
       default: return 0;
     }
+  }
+  const addNewPassenger = (prevValue: ITrainTicketBookingInterface) => {
+    const newPassenger: ITrainTicketBookingInterface = {
+      departureStation: prevValue.departureStation,
+      destinationStation: prevValue.destinationStation,
+      trainCode: prevValue.trainCode,
+      passengerName: "",
+      passengerAge: "",
+      passengerGender: "",
+      passengerCategory: prevValue.passengerCategory,
+      passengerCoachType: prevValue.passengerCoachType,
+      passengerPhone: "",
+      journeyEndDate: prevValue.journeyEndDate,
+      journeyStartDate: prevValue.journeyStartDate,
+      departureTime: prevValue.departureTime,
+      destinationTime: prevValue.destinationTime,
+      trainName: prevValue.trainName,
+    }
+    return newPassenger;
   }
   useEffect(() => {
     genrateBookingOption().then((opt) => {
@@ -173,7 +189,7 @@ const useTrainBooking = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return { bookingOption, gettingTrainDetails, genrateSideFilters, getPrice  , applyFilter , resetFilter , ticketBookingOptions , getPriceForEachSeat , calculatePriceAccordingToSeat};
+  return {  addNewPassenger , bookingOption, gettingTrainDetails, genrateSideFilters, getPrice, applyFilter, resetFilter, ticketBookingOptions, getPriceForEachSeat, calculatePriceAccordingToSeat };
 };
 
 export default useTrainBooking;

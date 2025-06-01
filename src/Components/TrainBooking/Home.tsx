@@ -4,6 +4,7 @@ import TrainBookingCard from "./TrainBookingCard/TrainBookingCard";
 import { useAppSelector } from "../../Redux/Hooks";
 import TrainDisplayCard from "./TrainDisplayCard/TrainDisplayCard";
 import BookingCard from "./BookingCard/BookingCard";
+import ReviewPage from "./ReviewPage/ReviewPage";
 
 const Home: React.FunctionComponent<IHome> = () => {
   const trainData = useAppSelector((state) => state.TrainDetailsSlice.data);
@@ -15,7 +16,7 @@ const Home: React.FunctionComponent<IHome> = () => {
       {trainData.length === 0 && !isStartBooking && <TrainBookingCard />}
       {trainData.length > 0 && !isStartBooking && <TrainDisplayCard />}
       {isStartBooking && !isStartReview && <BookingCard />}
-      {isStartReview && <></>}
+      {isStartReview && <ReviewPage/>}
     </div>
   );
 };

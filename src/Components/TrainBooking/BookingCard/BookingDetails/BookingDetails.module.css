@@ -1,7 +1,7 @@
 .css1{
   height: auto;
-  width: 40%;
-  margin: 10px;
+  width: 45%;
+  margin: 20px 0px 0px 50px;
   border-radius: 25px;
 }
 .center {
@@ -12,12 +12,6 @@
 .headerText {
   font-family: "Ponomar", system-ui;
   color: #adb5bd;
-}
-.topPart {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #343a40;
-  padding: 10px;
-  border-radius: 25px;
 }
 .sideBySide {
   display: flex;
@@ -65,4 +59,37 @@
   font-family: "Ponomar", system-ui;
   color: #212529;
   font-weight: 900;
+}
+.selectFieldCss div{
+  width: 100%;
+  border-radius: 7px;
+}
+
+.passengerNumber{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Ponomar", system-ui;
+  background-color: #495057;
+  width: 150px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.passengerNumber p {
+  color: #ced4da;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+}
+.passengerNumber p span:nth-child(2){
+  font-weight: 900;
+  margin-left: 5px;
+}
+.error {
+  border : 1px solid #c9184a;
 }

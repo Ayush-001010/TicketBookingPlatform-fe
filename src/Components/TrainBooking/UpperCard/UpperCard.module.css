@@ -4,12 +4,14 @@
     display: flex;
     justify-content: flex-start;
 }
+
 .css2 {
     background-color: #6c757d;
     border-radius: 10px;
     padding: 5px;
     font-family: "Ponomar", system-ui;
 }
+
 .css2 p {
     display: flex;
     justify-content: center;
@@ -17,7 +19,23 @@
     margin: 0;
     height: 100%;
 }
+.css2 p i {
+    margin-right: 5px;
+}
 
-.deative {
-    color: #f8f9fa;
+.css3 {
+    width: 500px;
+    margin: 7px 5px 0px 5px;
+    border-top: 2px dashed #6c757d;
+}
+
+.css4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.active {
+    background-color: #495057;
+    color: #ced4da;
 }

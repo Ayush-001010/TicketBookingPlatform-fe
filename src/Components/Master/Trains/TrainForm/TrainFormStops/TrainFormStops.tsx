@@ -56,7 +56,6 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
     backendName: string,
     index: string
   ) => {
-    console.log("Value  ", newValue);
     setData((prevState: any) => {
       prevState[index][backendName] = newValue;
       return [...prevState];

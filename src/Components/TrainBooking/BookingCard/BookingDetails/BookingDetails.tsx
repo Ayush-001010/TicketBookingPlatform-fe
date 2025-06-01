@@ -5,9 +5,10 @@ import { Input, Select } from "antd";
 import useTrainBooking from "../../../../hooks/useTrainBooking";
 import styles from "./BookingDetails.module.css";
 
-const BookingDetails: React.FunctionComponent<IBookingDetails> = ({ data, options, seatPrices }) => {
+const BookingDetails: React.FunctionComponent<IBookingDetails> = ({ data, options, seatPrices , passengerNumber , startCompletingProcess , passingDataToParentFunc}) => {
     const { calculatePriceAccordingToSeat } = useTrainBooking();
     const [value, setValue] = useState<ITrainTicketBookingInterface | null>(null);
+    const [errorFields , setErrorFields] = useState<Array<string>>([]);
 
     const changeSelectHandler = (newValue: any, backendName: string) => {
         if (backendName === "passengerAge" && seatPrices) {
@@ -46,58 +47,62 @@ const BookingDetails: React.FunctionComponent<IBookingDetails> = ({ data, option
             })
         }
     }, [seatPrices, value?.passengerCategory, value?.passengerCoachType]);
+    useEffect(()=>{
+        if(startCompletingProcess && value){
+            const keys = Object.keys(value);
+            let isError : boolean = false;
+            const val : any = value;
+            const errFields : Array<string> = [];
+            for(const key of keys){
+                if(!val[key] || val[key].toString().trim().length === 0){
+                    isError = true;
+                    errFields.push(key);
+                }
+            }
+            setErrorFields(errFields);
+            passingDataToParentFunc(isError , value);
+        }
+    },[startCompletingProcess])
     return (
         <div className={styles.css1}>
-            <div className={styles.topPart}>
-                <div className={styles.center}>
-                    <h1 className={styles.headerText}>{data.trainName}</h1>
-                </div>
-                <div>
-                    <div className={styles.sideBySide}>
-                        <h2 className={styles.fields1}>Departure Station: <span>{data.departureStation}</span></h2>
-                        <h2 className={styles.fields1}>Destination Station: <span>{data.destinationStation}</span></h2>
-                    </div>
-                    <div className={styles.sideBySide}>
-                        <h2 className={styles.fields1}>Departure Time: <span>{data.departureTime}</span></h2>
-                        <h2 className={styles.fields1}>Destination Time: <span>{data.destinationTime}</span></h2>
-                    </div>
-                </div>
-            </div>
             <div className={styles.downPart}>
+                <div className={styles.passengerNumber}>
+                    <p><span>Passenger No</span> <span>{passengerNumber}</span></p>
+                </div>
                 <div className={styles.sideBySide}>
                     <div className={styles.inputFieldCss}>
                         <label>Passenger Name  </label>
-                        <Input type="text" value={value?.passengerName} onChange={(e) => changeInputHandler(e, "passengerName")} />
+                        <Input className={errorFields.includes("passengerName") ? styles.error : ""}  value={value?.passengerName} onChange={(e) => changeInputHandler(e, "passengerName")} />
                     </div>
                     <div className={styles.selectFieldCss}>
                         <label>Passenger Age  </label>
-                        <Select options={options ? options.passengerAge : []} onChange={(newValue) => changeSelectHandler(newValue, "passengerAge")} />
+                        <Select className={errorFields.includes("passengerAge") ? styles.error : ""} options={options ? options.passengerAge : []} onChange={(newValue) => changeSelectHandler(newValue, "passengerAge")} />
                     </div>
                 </div>
                 <div className={styles.sideBySide}>
                     <div className={styles.inputFieldCss}>
                         <label>Passenger Phone Number  </label>
-                        <Input type="text" value={value?.passengerPhone} onChange={(e) => changeInputHandler(e, "passengerPhone")} />
+                        <Input className={errorFields.includes("passengerPhone") ? styles.error : ""} value={value?.passengerPhone} onChange={(e) => changeInputHandler(e, "passengerPhone")} />
                     </div>
                     <div className={styles.selectFieldCss}>
                         <label>Passenger Gender  </label>
-                        <Select options={options ? options.passengerGender : []} onChange={(newValue) => changeSelectHandler(newValue, "passengerGender")} />
+                        <Select className={errorFields.includes("passengerGender") ? styles.error : ""} options={options ? options.passengerGender : []} onChange={(newValue) => changeSelectHandler(newValue, "passengerGender")} />
                     </div>
                 </div>
                 <div className={styles.sideBySide}>
                     <div className={styles.selectFieldCss}>
                         <label>Passenger Category  </label>
-                        <Select disabled options={options ? options.passengerCategory : []} value={value?.passengerCategory} onChange={(newValue) => changeSelectHandler(newValue, "passengerCategory")} />
+                        <Select className={errorFields.includes("passengerCategory") ? styles.error : ""} disabled options={options ? options.passengerCategory : []} value={value?.passengerCategory} onChange={(newValue) => changeSelectHandler(newValue, "passengerCategory")} />
                     </div>
                     <div className={styles.selectFieldCss}>
                         <label>Coach Type  </label>
-                        <Select options={options ? options.passengerCoachType : []} value={value?.passengerCoachType} onChange={(newValue) => changeSelectHandler(newValue, "passengerCoachType")} />
+                        <Select className={errorFields.includes("passengerCoachType") ? styles.error : ""} options={options ? options.passengerCoachType : []} value={value?.passengerCoachType} onChange={(newValue) => changeSelectHandler(newValue, "passengerCoachType")} />
                     </div>
                 </div>
                 <div className={styles.sideBySide}>
                     <div className={styles.inputFieldCss}>
                         <label>Price  </label>
-                        <Input disabled type="text" value={value?.price} />
+                        <Input className={errorFields.includes("price") ? styles.error : ""} disabled value={value?.price} />
                     </div>
                 </div>
             </div>
