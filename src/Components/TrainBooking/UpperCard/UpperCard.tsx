@@ -4,7 +4,6 @@ import { Steps } from "antd";
 import styles from "./UpperCard.module.css"
 
 const UpperCard: React.FunctionComponent<IUpperCard> = ({ currentItem }) => {
-  console.log("Current Item ",currentItem);
   return (
     <div className={styles.css1}>
       <div className={`${styles.css2} ${styles[`${currentItem === 0 ? "active" : ""}`]}`}>

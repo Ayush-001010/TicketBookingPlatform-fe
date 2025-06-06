@@ -1,0 +1,60 @@
+.cardItemDivCSS{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #adb5bd;
+    width: 45%;
+    margin: 10px;
+    border-radius: 20px;
+    /* padding: 10px; */
+}
+.cardHeaderCss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Ponomar", system-ui;
+    /* font-size: 25px; */
+    background-color: #495057;
+    border-radius: 20px 20px 0px 0px;
+}
+.cardHeaderCss h1 {
+    color: #adb5bd;
+    font-weight: 600;
+    font-size: 40px;
+}
+.cardHeaderCss span{
+    font-size: 15px;
+    color: #adb5bd;
+    font-weight: 500;
+    margin-left: 2px;
+}
+.cardJourneyDetailsCss{
+    display: flex;
+}
+.journeyDetailsCss{
+    font-family: "Ponomar", system-ui;
+    margin: 5px 5px 0px 5px;
+}
+.journeyDetailsCss h1 {
+    font-size: 25px;
+}
+.journeyDetailsCss h2 {
+    font-size: 20px;
+}
+.line {
+    width: 70px;
+    border-top: 1px dashed #495057;
+    margin-top: 20px;
+}
+.logoDivCss {
+    display: flex;
+    margin: 10px;
+}
+.logoCss {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #495057;
+    margin: 5px;
+    border-radius: 10px;
+}

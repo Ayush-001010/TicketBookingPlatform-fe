@@ -14,6 +14,8 @@ import { useAppSelector } from "./Redux/Hooks";
 import Authentication from "./Components/Authentication/Authentication";
 import State from "./Components/Master/State/State";
 import Stations from "./Components/Master/Stations/Stations";
+import Successfull from "./Components/TrainBooking/Successfull/Successfull";
+import UpcomingJournery from "./Components/Journery/UpcomingJourney/UpcomingJourney";
 
 const AppContent: React.FC = () => {
   const isLogIn = useAppSelector((state) => state.AuthenticationSlice.isLogin);
@@ -37,6 +39,8 @@ const AppContent: React.FC = () => {
           <Route path="/AddTrain" element={<AddTrains />} />
           <Route path="/RailwayDetails" element={<State/>} />
           <Route path="/RailwayDetails/:State" element={<Stations/>} />
+          <Route path="/success" element={<Successfull/>} />
+          <Route path="/UpcomingJourneys" element={<UpcomingJournery/>}/>
         </Routes>
       </div>
     </QueryClientProvider>

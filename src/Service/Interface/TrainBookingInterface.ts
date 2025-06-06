@@ -49,4 +49,4 @@ export interface ITrainTicketBookingInterface {
   journeyStartDate: string;
   journeyEndDate: string;
   price?: number;
-}
+}1

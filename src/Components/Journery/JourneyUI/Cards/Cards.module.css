@@ -1,0 +1,126 @@
+.cardDivCss {
+    background-color: #6c757d;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    padding: 10px;
+}
+.upperCardContentCss {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Ponomar", system-ui;
+}
+
+.upperCardContentCss p:nth-child(1) {
+    width: 45%;
+}
+.upperCardContentCss p:nth-child(2) {
+    width: 55%;
+}
+.upperCardContentCss p{
+    display: flex;
+    justify-content: flex-start;
+    color: #343a40;
+    font-weight: 900;
+}
+.cardDetailsCss{
+    color: #212529;
+    font-weight: 700;
+    font-family: "Ponomar", system-ui;
+}
+.cardvalueCss {
+    color: #f5f3f4;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1px;
+}
+.cardJourneyDetailsCss {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #adb5bd;
+    border-radius: 10px;
+    padding: 5px;
+}
+.cardJourneyDetailsCss div{
+    margin: 0;
+    padding: 0;
+    width: 150px;
+}
+.cardJourneyHeaderCss{
+    font-family: "Ponomar", system-ui;
+    margin: 0;
+}
+.cardJourneyHeaderCss h1 {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+.cardJourneyHeaderCss h2 {
+    font-size: 17px;
+    margin: 0;
+    padding: 0;
+}
+.line{
+    width: 70px;
+    border-top: 1px dashed black;
+    margin-top: 30px;
+}
+.logoDivCss {
+    display: flex;
+    margin: 5px;
+}
+.logo {
+    margin: 15px 5px 1px 5px;
+    color: #f8f9fa;
+    background-color: #343a40;
+    border-radius: 10px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardJourneyBelowDetailsCSS{
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Ponomar", system-ui;
+    color: #343a40;
+    font-weight: 900;
+}
+.cardJourneyBelowDetailsValueCSS{
+    color: #adb5bd;
+}
+.confirmCss{
+    color: #2d6a4f;
+    border: 1px solid #2d6a4f;
+    padding: 2px;
+    border-radius: 5px;
+}
+.viewButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+.viewButton button{
+    background-color: #adb5bd;
+    font-family: "Ponomar", system-ui;
+    border: none;
+    width: 100px;
+    color: #212529;
+    font-size: 18px;
+}
+.viewButton button:hover{
+    background-color: #adb5bd !important;
+    font-family: "Ponomar", system-ui;
+    border: none !important;
+    width: 100px !important;
+    color: #212529 !important;
+    font-size: 20px;
+}

@@ -1,0 +1,36 @@
+.calenderDivCss {
+    width: 70%;
+    height: 500px;
+    overflow: auto;
+}
+.calenderDateTextCss {
+    list-style-type: none;
+    background-color: #ced4da;
+    padding: 3px;
+    margin: 1px;
+    border-radius: 10px;
+}
+.calenderDateTextCss p:nth-child(1) {
+    font-family: "Ponomar", system-ui;
+    margin: 0;
+    padding: 0;
+    color: #343a40;
+    font-weight: 900;
+}
+.calenderDateTextCss p:nth-child(2) {
+    font-family: "Ponomar", system-ui;
+    text-align: center;
+    color: #6c757d;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+.calenderDateTextCss p:nth-child(3) {
+    text-align: center;
+}
+.calenderDateTextCss p:nth-child(3) i {
+    padding: 5px;
+    background-color: #adb5bd;
+    border-radius: 10px;
+    font-size: 15px;
+}
