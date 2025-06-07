@@ -5,7 +5,7 @@ import {
   ISideFilter,
   ISideFilterDetails,
 } from "../../../../Service/Interface/TrainBookingInterface";
-import { Checkbox, Radio } from "antd";
+import { Checkbox } from "antd";
 import styles from "./SideFilters.module.css";
 
 const SideFilters: React.FunctionComponent<ISideFilters> = () => {

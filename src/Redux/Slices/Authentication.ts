@@ -5,7 +5,7 @@ export const AuthenticationSlice = createSlice({
     userName: "Test User 1",
     userEmail: "testingUser1@gmail.com",
     IsAdmin: false,
-    isLogin : false
+    isLogin : true
   },
   name: "Authentication",
   reducers: {

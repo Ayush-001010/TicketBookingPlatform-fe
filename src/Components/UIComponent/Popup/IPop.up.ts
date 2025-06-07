@@ -3,4 +3,5 @@ export default interface IPopup {
     open : boolean;
     message?:string;
     popupType? : "Success" | "Error";
+    isLogIn?:boolean
 }

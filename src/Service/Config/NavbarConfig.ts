@@ -9,6 +9,7 @@ export default class NavbarConfig {
     { displayName: "Home", role: "All" , navLink : "/" },
     { displayName: "Add Train", role: "Admin" , navLink : "/AddTrain" },
     { displayName : "Railway Details", role: "Admin" , navLink : "/RailwayDetails" },
+    {displayName : "Upcoming Journeys" , role : "All" , navLink : "/UpcomingJourneys"}
   ];
-  static userProfileItems: Array<string> = [ "Upcoming Journeys" , "Past Journeys" , "Logout" ];
+  static userProfileItems: Array<string> = [ "Logout" ];
 }

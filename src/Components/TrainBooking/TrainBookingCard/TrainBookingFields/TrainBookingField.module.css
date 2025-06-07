@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Ponomar&display=swap");
+
 .css1 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5%;
@@ -12,6 +13,7 @@
   padding: 1%;
   font-family: "Ponomar", system-ui;
 }
+
 .css2 h1 {
   font-size: 25px;
   font-weight: 600;
@@ -23,21 +25,25 @@
   justify-content: space-between;
   margin-bottom: 10px;
 }
+
 .css4 {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.css4 label{
-    color: #4a4e69;
-    font-weight: 700;
+
+.css4 label {
+  color: #4a4e69;
+  font-weight: 700;
 }
+
 .css5 {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: 10px;
 }
+
 .css5 p {
   text-align: center;
   margin: 0;
@@ -51,24 +57,29 @@
   padding: 14%;
   font-size: 20px;
 }
+
 .css5 p i {
-    color: white;
-    font-weight: 800;
+  color: white;
+  font-weight: 800;
 }
+
 .css6 {
   background-color: #ced4da;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
   padding: 5%;
 }
+
 .css7 {
   color: #343a40;
   font-weight: 700;
 }
 
 .css8 .ant-tabs-nav .ant-tabs-tab {
-  background-color: #adb5bd !important  ; /* Light gray background */
-  color: #333; /* Default text color */
+  background-color: #adb5bd !important;
+  /* Light gray background */
+  color: #333;
+  /* Default text color */
   font-weight: bold;
   border-radius: 5px 5px 0 0;
   padding: 10px 15px;
@@ -76,15 +87,18 @@
 }
 
 /* Active tab */
-.css8  .ant-tabs-tab  .ant-tabs-tab-active {
-  background-color: #6c757d !important; /* Darker gray when active */
-  color: white !important; /* White text for better contrast */
+.css8 .ant-tabs-tab .ant-tabs-tab-active {
+  background-color: #6c757d !important;
+  /* Darker gray when active */
+  color: white !important;
+  /* White text for better contrast */
   font-weight: bold;
 }
 
 /* Hover effect */
 .css8 .ant-tabs-tab:hover {
-  background-color: #868e96; /* Medium gray on hover */
+  background-color: #868e96;
+  /* Medium gray on hover */
   color: white;
 }
 
@@ -101,11 +115,20 @@
   display: flex;
   justify-content: center;
 }
-.css9 button{
+
+.css9 button {
   width: 100%;
   background-color: #212529;
   color: white;
 }
-.css5:hover{
+
+.css9 button:hover {
+  width: 100%;
+  background-color: #212529 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.css5:hover {
   cursor: pointer;
 }

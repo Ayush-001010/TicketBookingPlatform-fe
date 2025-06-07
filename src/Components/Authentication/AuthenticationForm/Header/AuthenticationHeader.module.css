@@ -1,0 +1,30 @@
+.NavCss{
+    margin: 10px;
+}
+.NavCss p {
+    color: #212529;
+    font-family: "Ponomar", system-ui;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
+}
+.NavCss p i{
+    margin-right: 5px;
+}
+.HeaderCss{
+    margin-top: 15%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Ponomar", system-ui;
+}
+.HeaderCss div h1{
+    font-size: 25px;
+    font-weight: 600;
+    color: #212529;
+}
+.HeaderCss div p {
+    font-size: 20px;
+    color: #495057;
+    font-weight: 400;
+}

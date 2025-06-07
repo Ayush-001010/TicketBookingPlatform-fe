@@ -15,7 +15,7 @@
   justify-content: center;
   color: #adb5bd;
   height: 88%;
-  margin-top: 4px;
+  margin: 4px;
 }
 
 .css2:hover {
@@ -34,11 +34,11 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  background-color: #adb5bd;
-  color: #212529;
+  color: #f8f9fa;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
+  font-family: "Ponomar", system-ui;
 }
 
 .active{
@@ -53,6 +53,8 @@
   align-items: center;
   height: 100%;
   margin-left: 10px;
+  font-family: "Ponomar", system-ui;
+  font-weight: 600;
 }
 .css3 a {
   padding: 5px;
@@ -66,10 +68,7 @@
 }
 
 .css3 a:hover {
-  background-color: #adb5bd;
-  color: #212529;
-  border-radius: 20px;
-  font-weight: 600;
+  color: #ced4da;
 }
 
 .css4 {
@@ -84,4 +83,17 @@
 
 .css6 {
   text-decoration: none;
+}
+
+.navLogoCss {
+  background-color: #adb5bd;
+  font-size: 25px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 40px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-shadow: 1px 1px 2px #6c757d;
 }

@@ -14,7 +14,7 @@ import TrainNotFoundPopup from "../../../UIComponent/Popup/TrainNotFoundPopup/Tr
 const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
   const { bookingOption } = useTrainBooking();
   const [value, setValue] = useState<Record<string, string>>({});
-  const [openNoTrainFoundPopup, setOpenNoTrainFoundPopup] = useState(true);
+  const [openNoTrainFoundPopup, setOpenNoTrainFoundPopup] = useState(false);
   const [messageAPI , contextHandler] = message.useMessage();
   const { gettingTrainDetails } = useTrainBooking();
   const dispatch = useAppDispatch();

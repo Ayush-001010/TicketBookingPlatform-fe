@@ -1,0 +1,99 @@
+.AuthenticationContentDivCss{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.GoogleAuthenticationButtonCss {
+    width: 420px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.GoogleAuthenticationButtonCss p{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: "Ponomar", system-ui;
+}
+.GoogleAuthenticationButtonCss p:nth-child(2){
+    color: #343a40;
+    font-weight: 600;
+}
+.GoogleAuthenticationButtonCss p:nth-child(1) img{
+    width: 20px !important;
+}
+.OrTextDivCss {
+    margin-top: 10px;
+    display: flex;
+}
+.OrTextDivCss p:nth-child(1) {
+    border-top: 1px solid #adb5bd;
+    width: 100px;
+    margin: 15px 20px 0px 0px;
+    width: 180px;
+}
+.OrTextDivCss p:nth-child(3) {
+    border-top: 1px solid #adb5bd;
+    margin: 15px 0px 0px 20px;
+    width: 180px;
+}
+.OrTextDivCss p{
+    font-family: "Ponomar", system-ui;
+}
+.emailFieldCss {
+    width: 420px;
+    margin-top: 5px;
+    font-family: "Ponomar", system-ui;
+}
+.emailFieldCss label{
+    color: #212529;
+    font-weight: 700;
+}
+.emailFieldCss input{
+    height: 40px;
+}
+.checkboxCss{
+    margin-top: 10px;
+    font-family: "Ponomar", system-ui;
+}
+.checkboxCss label {
+    margin-left: 5px;
+    color: #212529;
+    font-weight: 600;
+}
+.buttonDivCss{
+    margin-top: 10px;
+}
+.buttonDivCss button{
+    width: 100%;
+    height: 40px;
+    font-family: "Ponomar", system-ui;
+    background-color: #000000;
+    color: white;
+    font-weight: 500;
+}
+.buttonDivCss button:hover{
+    width: 100%;
+    height: 40px;
+    font-family: "Ponomar", system-ui;
+    background-color: #000000 !important;
+    color: white !important;
+    font-weight: 900 !important;
+    border:none !important;
+}
+.textCss {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-family: "Ponomar", system-ui;
+    font-size: 15px;
+    color: #5c677d;
+}
+.textCss:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

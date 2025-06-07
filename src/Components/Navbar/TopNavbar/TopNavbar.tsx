@@ -30,6 +30,9 @@ const TopNavbar: React.FunctionComponent<ITopNavbar> = () => {
   return (
     <div className={styles.css1}>
       <div className={styles.css4}>
+        <div>
+          <p className={styles.navLogoCss}><i className="bi bi-train-front"/></p>
+        </div>
         {NavbarConfig.navbarItems.map((currItem: INavItems) => {
           if (
             currItem.role === "All" ||

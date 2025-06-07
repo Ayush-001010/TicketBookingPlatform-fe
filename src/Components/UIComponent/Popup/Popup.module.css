@@ -13,13 +13,11 @@
     border-radius: 10px;
     opacity: 0.7;
 }
-
 .css2 i {
     font-size: 40px;
     color: #641220;
     font-weight: 900;
 }
-
 .css4{
     font-family: "Ponomar", system-ui;
     font-size: 30px;
@@ -27,18 +25,42 @@
     text-decoration: underline;
     color: #495057;
 }
-
 .css5{
     font-family: "Ponomar", system-ui;
     font-size: 15px;
     color: #495057;
     font-weight: 600;
 }
-
 .css6 {
     width: 100%;
     background-color: #2d6a4f;
     color: #d8f3dc;
     border: none;
     border-radius: 11px;
+}
+.SignUpPopUpHeaderCss{
+    font-family: "Ponomar", system-ui;
+    color: #2d6a4f;
+    text-shadow: 1px 1px 2px #52b788;
+    font-size: 30px;
+}
+.SignUpPopUpTextCss{
+    color: #6c757d;
+    font-family: "Ponomar", system-ui;
+    font-weight: 900;
+}
+.SignUpPopUpButtonCss{
+    width: 100%;
+    font-family: "Ponomar", system-ui;
+    background-color: #343a40;
+    color: #ced4da;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.SignUpPopUpButtonCss:hover{
+    background-color: #343a40 !important;
+    color: #ced4da !important;
+    font-weight: 900;
+    border: none !important;
 }

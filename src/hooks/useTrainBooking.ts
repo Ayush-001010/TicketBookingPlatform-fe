@@ -107,6 +107,7 @@ const useTrainBooking = () => {
         filterArr.push(obj);
       }
     }
+    filterArr.push({ header: "Train Timing", fields: [{ labelName: "Morning Trains (4AM-11AM)", fieldType: "checkbox" },{ labelName: "Afternoon Trains (11AM-4PM)", fieldType: "checkbox" },{ labelName: "Evening Trains (4PM-7PM)", fieldType: "checkbox" },{ labelName: "Night Trains (7PM-4AM)", fieldType: "checkbox" }] })
     return filterArr;
   };
   const bookingData = useAppSelector((state) => state.TrainBookingDetailsSlice);
@@ -189,7 +190,7 @@ const useTrainBooking = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return {  addNewPassenger , bookingOption, gettingTrainDetails, genrateSideFilters, getPrice, applyFilter, resetFilter, ticketBookingOptions, getPriceForEachSeat, calculatePriceAccordingToSeat };
+  return { addNewPassenger, bookingOption, gettingTrainDetails, genrateSideFilters, getPrice, applyFilter, resetFilter, ticketBookingOptions, getPriceForEachSeat, calculatePriceAccordingToSeat };
 };
 
 export default useTrainBooking;
