@@ -10,6 +10,7 @@ import { setBookTrainTicket } from "../../../Redux/Slices/BookTrainTicket";
 import BookingHeader from "./BookingHeader/BookingHeader";
 import styles from "./BookingCard.module.css";
 import { Button } from "antd";
+import { setTrainDetailsData } from "../../../Redux/Slices/TrainDetails";
 
 const BookingCard: React.FunctionComponent<IBookingCard> = () => {
   const details: any = useAppSelector((state) => state.BookTrainTicket.data);
@@ -21,6 +22,9 @@ const BookingCard: React.FunctionComponent<IBookingCard> = () => {
   const dispatch = useAppDispatch();
   const [startTakingData, setStartTakingData] = useState<boolean>(false);
 
+  const goBackHandler = () => {
+    dispatch(setTrainDetailsData({isStart : false }));
+  }
   const completedHandler = () => {
     setStartTakingData(true);
   }
@@ -73,7 +77,7 @@ const BookingCard: React.FunctionComponent<IBookingCard> = () => {
         {data.map((item: ITrainTicketBookingInterface, index: number) => <BookingDetails passingDataToParentFunc={takingDataFromChild} startCompletingProcess={startTakingData} passengerNumber={index + 1} data={item} options={options} seatPrices={seatPrice} />)}
       </div>
       <div className={styles.bottomButtons}>
-        <Button className={styles.goBackButtonCSS}>Go Back</Button>
+        <Button className={styles.goBackButtonCSS} onClick={goBackHandler}>Go Back</Button>
         <Button className={styles.completedButtonCSS} onClick={completedHandler}>Completed</Button>
       </div>
     </div>

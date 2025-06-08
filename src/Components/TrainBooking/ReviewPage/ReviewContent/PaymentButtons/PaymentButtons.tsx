@@ -31,7 +31,7 @@ const PaymentButtons : React.FunctionComponent<{}> = () => {
     },[])
     return (
         <div className={styles.paymentButtonsCss}>
-            <Button onClick={paymentHandler}>Pay {totalAmount} </Button>
+            <Button onClick={paymentHandler}>Pay {totalAmount.toFixed(2)} </Button>
         </div>
     )
 };

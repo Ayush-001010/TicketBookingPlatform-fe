@@ -39,16 +39,16 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
     };
     const arr = [];
     for(let i=0;i<Number(bookingDetails.Adults);i++){
-      obj.passengerCategory = "General";
-      arr.push(obj);
+      obj.passengerCategory = "Adult";
+      arr.push({...obj});
     }
     for(let i=0;i<Number(bookingDetails.Kids);i++){
       obj.passengerCategory = "Child";
-      arr.push(obj);
+      arr.push({...obj});
     }
     for(let i=0;i<Number(bookingDetails.seniorCitizen);i++){
       obj.passengerCategory = "Senior Citizen";
-      arr.push(obj);
+      arr.push({...obj});
     }
     dispatch(setBookTrainTicket({isStart : true , data : arr}))
   }
@@ -71,6 +71,7 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
       });
       socket.on("train-details-data", (trainDetailsValue) => {
         if (trainDetailsValue.trainCode === data.TrainCode) {
+          console.log("Train Details Value  ",trainDetailsValue);
           setValue(trainDetailsValue.response);
         }
       });
@@ -84,12 +85,12 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
         {value.map((curr: any) => (
           <div
             className={`${
-              active === curr.CoachType ? styles.css5 : styles.css2
+              active === curr.CoachName ? styles.css5 : styles.css2
             }`}
-            onClick={() => selectHandler(curr.CoachType)}
+            onClick={() => selectHandler(curr.CoachName)}
           >
-            <p className={styles.css3}>{curr.CoachType}</p>
-            <p className={styles.css4}>{curr.Seats}</p>
+            <p className={styles.css3}>{curr.CoachName}</p>
+            <p className={styles.css4}>{curr.TotalAvalibleSeats}</p>
           </div>
         ))}
       </div>
@@ -103,7 +104,7 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
           <div>
             <p className={styles.css8}>
               Price:{" "} 
-              <span className={styles.css9}>{price}</span> {" "}
+              <span className={styles.css9}>{price.toFixed(2)}</span> {" "}
               <span className={styles.css10}>
                 ( Adults: {bookingDetails.Adults} , Kids: {bookingDetails.Kids}{" "}
                 , Senior Citezen: {bookingDetails.seniorCitizen} )

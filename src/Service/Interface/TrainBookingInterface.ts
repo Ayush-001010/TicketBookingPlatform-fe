@@ -45,7 +45,7 @@ export interface ITrainTicketBookingInterface {
   passengerGender: "Male" | "Female" | "";
   passengerPhone: string;
   passengerCoachType: string;
-  passengerCategory: "General" | "Senior Citizen" | "Child" | "Disabled" | "";
+  passengerCategory: "Adult" | "Senior Citizen" | "Child" | "Disabled" | "";
   journeyStartDate: string;
   journeyEndDate: string;
   price?: number;

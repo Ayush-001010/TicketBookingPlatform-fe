@@ -67,9 +67,22 @@ const useTrainBooking = () => {
     }
     return opt;
   }, []);
-  const applyFilter = (filtersValue: Record<string, boolean>) => {
-    const filterData = trainAllData.filter((item: any) => filtersValue[item.TypeOfTrain]);
+  const applyFilter = (trainTypeFilter: Array<string>, TrainTimingFilter: Array<string>) => {
+    let filterData = trainAllData.filter((item: any) => trainTypeFilter.includes(item.TypeOfTrain) || trainTypeFilter.length === 0);
+    filterData = filterData.filter((item: any) => {
+      if (TrainTimingFilter.length === 0) return true;
+      const hours = Number(item.DepartureTime.split(":")[0]);
+      return TrainTimingFilter.filter((item1: string) => {
+        const value = TicketBookingConfig.TrainTimingConfig[item1];
+        if (hours >= value.from && hours < value.to) {
+          return true;
+        }
+        return false;
+      }).length > 0
+    })
+    if(filterData.length === 0) return false;
     updateValue(setTrainDetailsData({ data: filterData, allData: trainAllData }));
+    return true;
   }
   const resetFilter = () => {
     updateValue(setTrainDetailsData({ data: trainAllData, allData: trainAllData }));
@@ -107,7 +120,7 @@ const useTrainBooking = () => {
         filterArr.push(obj);
       }
     }
-    filterArr.push({ header: "Train Timing", fields: [{ labelName: "Morning Trains (4AM-11AM)", fieldType: "checkbox" },{ labelName: "Afternoon Trains (11AM-4PM)", fieldType: "checkbox" },{ labelName: "Evening Trains (4PM-7PM)", fieldType: "checkbox" },{ labelName: "Night Trains (7PM-4AM)", fieldType: "checkbox" }] })
+    filterArr.push({ header: "Train Timing", fields: [{ labelName: "Morning Trains (4AM-11AM)", fieldType: "checkbox" }, { labelName: "Afternoon Trains (11AM-4PM)", fieldType: "checkbox" }, { labelName: "Evening Trains (4PM-7PM)", fieldType: "checkbox" }, { labelName: "Night Trains (7PM-4AM)", fieldType: "checkbox" }] })
     return filterArr;
   };
   const bookingData = useAppSelector((state) => state.TrainBookingDetailsSlice);
@@ -115,14 +128,25 @@ const useTrainBooking = () => {
     const response = await APIService.getData("/train/getPrice", {
       DepartureStation: bookingData.departureStation,
       DestinationStation: bookingData.destinationStation,
-      Adults: bookingData.Adults,
-      Kids: bookingData.Kids,
-      seniorCitizen: bookingData.seniorCitizen,
+      // Adults: bookingData.Adults,
+      // Kids: bookingData.Kids,
+      // seniorCitizen: bookingData.seniorCitizen,
       trainCode,
       coachType
     });
+    console.log("Response ",response);
+    let totalPrice : number = 0;
+    for(let i=0;i<Number(bookingData.Kids);i++){
+      totalPrice += calculatePriceAccordingToSeat(response.data , "Child");
+    }
+    for(let i=0;i<Number(bookingData.Adults);i++){
+      totalPrice += calculatePriceAccordingToSeat(response.data , "Adult");
+    }
+    for(let i=0;i<Number(bookingData.seniorCitizen);i++){
+      totalPrice += calculatePriceAccordingToSeat(response.data , "Senior Citizen");
+    }
     if (response.success) {
-      return response.data;
+      return totalPrice;
     }
     return 0;
   };
@@ -157,7 +181,7 @@ const useTrainBooking = () => {
     }
     return [];
   }
-  const calculatePriceAccordingToSeat = (seatPrices: number, category: string) => {
+  const calculatePriceAccordingToSeat = (seatPrices: number, category: string) : number => {
     switch (category) {
       case "Child": return seatPrices * 0.5;
       case "Adult": return seatPrices;
