@@ -22,7 +22,6 @@ const JourneyCalendar: React.FunctionComponent<ICalendar> = ({ data }) => {
                         <li className={styles.calenderDateTextCss} key={1}>
                             <p>{journeyItems[0].TrainName}</p>
                             <p>{journeyItems[0].TrainCode}</p>
-                            <p><i className="bi bi-eye"/></p>
                         </li>
                     </ul>
                 );
@@ -32,8 +31,10 @@ const JourneyCalendar: React.FunctionComponent<ICalendar> = ({ data }) => {
     };
 
     return (
-        <div className={styles.calenderDivCss}>
-            <Calendar cellRender={cellRenderHandler} />
+        <div className={styles.mainDivCss}>
+            <div className={styles.calenderDivCss}>
+                <Calendar cellRender={cellRenderHandler} />
+            </div>
         </div>
     );
 };

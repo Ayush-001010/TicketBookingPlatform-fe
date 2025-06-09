@@ -1,0 +1,24 @@
+.searchBarDivCss {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+}
+.searchBarDivCss input {
+    width: 350px;
+    height: 50px;
+    border-radius: 20px;
+}
+.searchBarDivCss button {
+    position: absolute;
+    right: 15px;
+    top: 600px;
+    background-color: #212529;
+    color: #ced4da;
+    font-family: "Ponomar", system-ui;
+    border-radius: 20px;
+}
+.searchBarDivCss button:hover {
+    color: #ced4da !important;
+    background-color: #212529 !important;
+    border: none !important;
+}

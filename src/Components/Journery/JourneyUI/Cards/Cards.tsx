@@ -19,7 +19,7 @@ const Cards: React.FunctionComponent<ICards> = ({ data }) => {
                 </div>
             </div>
             <div className={styles.cardDivCss}>
-                <p className={styles.cardDetailsCss}>Next Journey:</p>
+                <p className={styles.cardDetailsCss}>Next Journey</p>
                 <div className={styles.cardJourneyDetailsCss}>
                     <div className={styles.cardJourneyHeaderCss}>
                         <h1>{DepartureStation}</h1>
@@ -27,7 +27,7 @@ const Cards: React.FunctionComponent<ICards> = ({ data }) => {
                     </div>
                     <div className={styles.logoDivCss}>
                         <p className={styles.line}></p>
-                        <p className={styles.logo}><i className="bi bi-train-front" /></p>
+                        <p className={styles.logo}>To</p>
                         <p className={styles.line}></p>
                     </div>
                     <div className={styles.cardJourneyHeaderCss}>
@@ -46,7 +46,9 @@ const Cards: React.FunctionComponent<ICards> = ({ data }) => {
                     </div>
                 </div>
                 <div className={styles.viewButton}>
-                    <Button><i className="bi bi-eye" /></Button>
+                    <Button>
+                        Details
+                    </Button>
                 </div>
             </div>
         </div>

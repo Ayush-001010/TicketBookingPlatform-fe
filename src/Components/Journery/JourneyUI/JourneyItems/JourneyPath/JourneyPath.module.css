@@ -1,0 +1,37 @@
+.journeyPathHeader {
+    font-family: "Ponomar", system-ui;
+    font-size: 30px;
+    font-weight: 900;
+    color: #212529;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.JourneyPathContent {
+    background-color: #979dac;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+.JourneyPathContent div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Ponomar", system-ui;
+    color: #001233;
+    font-weight: 900;
+}
+.journeyPathDeatilsDivCss{
+    font-family: "Ponomar", system-ui;
+    display: flex;
+    justify-content: space-between;
+    color: #495057;
+    font-weight: 900;
+}
+.journeyPathLine {
+    border-right: 2px solid #adb5bd;
+    height: 100px;
+    width: 100px;
+    margin-left: 120px;
+}

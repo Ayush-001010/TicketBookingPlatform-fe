@@ -17,8 +17,11 @@ const useJourneyHook = () => {
         const response = await APIService.getData("/passengerDetails/ticket" , { trainCode , JourneyDate});
         return response.data;
     }
+    const searchHandeler = (data : Array<Record<string,string>> , searchValue : string) => {
+        return data.filter(item => item.TrainName.includes(searchValue))
+    }
 
-    return {getCardData , getDayByDayJourneyDetails , getTrainJourney , getTicket};
+    return {getCardData , getDayByDayJourneyDetails , getTrainJourney , getTicket , searchHandeler};
 }
 
 export default useJourneyHook;

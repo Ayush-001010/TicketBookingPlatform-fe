@@ -1,14 +1,13 @@
 .cardDivCss {
-    background-color: #6c757d;
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
-    padding: 10px;
 }
 .upperCardContentCss {
     display: flex;
     justify-content: space-between;
     font-family: "Ponomar", system-ui;
+    margin: 10px;
 }
 
 .upperCardContentCss p:nth-child(1) {
@@ -24,27 +23,33 @@
     font-weight: 900;
 }
 .cardDetailsCss{
-    color: #212529;
+    background-color: #212529;
+    color: #f8f9fa;
     font-weight: 700;
     font-family: "Ponomar", system-ui;
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px;
+    font-size: 20px;
 }
 .cardvalueCss {
-    color: #f5f3f4;
+    color: #adb5bd;
     font-weight: 600;
     font-size: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 1px;
+    margin-left: 4px;
+    margin-top: 1px;
 }
 .cardJourneyDetailsCss {
     display: flex;
-    width: 100%;
+    width: 98%;
     justify-content: flex-start;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #adb5bd;
     border-radius: 10px;
     padding: 5px;
+    margin: 0px 5px 0px 5px;
 }
 .cardJourneyDetailsCss div{
     margin: 0;
@@ -67,24 +72,25 @@
 }
 .line{
     width: 70px;
-    border-top: 1px dashed black;
-    margin-top: 30px;
+    border-top: 1px solid black;
+    margin: 30px 4px 0px 4px;
 }
 .logoDivCss {
     display: flex;
     margin: 5px;
 }
 .logo {
+    font-family: "Ponomar", system-ui;
     margin: 15px 5px 1px 5px;
-    color: #f8f9fa;
-    background-color: #343a40;
+    color: #000814;
     border-radius: 10px;
     padding: 5px;
-    width: 30px;
+    width: 10px;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 900;
 }
 .cardJourneyBelowDetailsCSS{
     margin: 10px;
@@ -98,23 +104,26 @@
     color: #adb5bd;
 }
 .confirmCss{
-    color: #2d6a4f;
-    border: 1px solid #2d6a4f;
+    background-color: #2d6a4f;
     padding: 2px;
     border-radius: 5px;
+    color: #ffffff;
+    font-family: "Ponomar", system-ui;
 }
 .viewButton {
     display: flex;
     justify-content: flex-end;
-    margin-right: 10px;
+    margin: 0px 10px 0px 0px;
 }
 .viewButton button{
-    background-color: #adb5bd;
+    background-color: #212529;
     font-family: "Ponomar", system-ui;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: none;
     width: 100px;
-    color: #212529;
+    color: #e9ecef;
     font-size: 18px;
+    margin-bottom: 10px;
 }
 .viewButton button:hover{
     background-color: #adb5bd !important;

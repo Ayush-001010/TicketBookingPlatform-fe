@@ -3,6 +3,7 @@ import IJourneyPath from "./IJourneyPath";
 import { Modal } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import useJourneyHook from "../../../../../hooks/useJourneyHook";
+import styles from "./JourneyPath.module.css";
 
 const JourneyPath: React.FunctionComponent<IJourneyPath> = ({ open, closeFunc, TrainCode, DepartureStation, DestinationStation }) => {
     const { getTrainJourney } = useJourneyHook();
@@ -23,22 +24,26 @@ const JourneyPath: React.FunctionComponent<IJourneyPath> = ({ open, closeFunc, T
     console.log("Data   ", data);
     return (
         <Modal open={open} onCancel={closeFunc} footer={null}>
-            <h1>Journey Path</h1>
-            {data.map((item: any, index: number) => {
+            <div className={styles.journeyPathHeader}>
+                <h1>Journey Path</h1>
+            </div>
+            {data && data.map((item: any, index: number) => {
                 return (
                     <>
-                        <div>
-                            <h1>{item.PlaceName}</h1>
+                        <div className={styles.JourneyPathContent}>
                             <div>
+                                <h1>{item.PlaceName}</h1>
+                            </div>
+                            <div className={styles.journeyPathDeatilsDivCss}>
                                 <p>Arrival Time : <span>{item.Time}</span></p>
                                 <p>Departure Time :<span>{calculatingDepartureTime(item.Time, Number(item.TrainStoppageTime))}</span></p>
                             </div>
-                            <div>
+                            <div className={styles.journeyPathDeatilsDivCss}>
                                 <p>Distance : <span>{(Number(item.Distance)) - (Number(data[0].Distance))}</span></p>
                                 <p>Stoppage Time : <span>{item.TrainStoppageTime}</span></p>
                             </div>
                         </div>
-                        {index !== data.length-1  && <div></div>}
+                        {index !== data.length - 1 && <div className={styles.journeyPathLine}></div>}
                     </>
                 )
             })}
