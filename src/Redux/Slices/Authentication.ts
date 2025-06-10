@@ -4,7 +4,7 @@ export const AuthenticationSlice = createSlice({
   initialState: {
     userName: "Test User 1",
     userEmail: "testingUser1@gmail.com",
-    IsAdmin: false,
+    IsAdmin: true,
     isLogin : true
   },
   name: "Authentication",

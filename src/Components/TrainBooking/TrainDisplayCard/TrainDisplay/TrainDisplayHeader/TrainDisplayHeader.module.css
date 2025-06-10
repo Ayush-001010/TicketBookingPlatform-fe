@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Ponomar&display=swap");
 .css1 {
     margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 .css2 {
     font-family: "Ponomar", system-ui;
@@ -10,4 +12,22 @@
 .css3 {
     color: #212529;
     font-weight: 700;
+}
+.tatkalButtonDivCss {
+    margin-right: 10px;
+}
+.tatkalButtonDivCss button {
+    font-family: "Ponomar", system-ui;
+    border: 1px solid #212529;
+    color: #212529;
+}
+.tatkalButtonDivCss button:hover {
+    border: none !important;
+    font-family: "Ponomar", system-ui;
+    background-color: #212529 !important;
+    color: #dee2e6 !important;
+    font-weight: 900;
+}
+.tatkalPointsCss {
+    font-family: "Ponomar", system-ui;
 }

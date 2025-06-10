@@ -21,6 +21,9 @@ const Notes: React.FunctionComponent<{}> = () => {
                 <li>
                     If booking online, use a stable internet connection to prevent payment failures.
                 </li>
+                <li>
+                    For a tatkal ticket, you must pay 20% extra.
+                </li>
             </ul>
         </div>
     )
