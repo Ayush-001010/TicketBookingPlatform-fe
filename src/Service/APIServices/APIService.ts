@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export default class APIService {
-  static baseURL: string = "http://localhost:8000";
+  // static baseURL: string = "http://localhost:8000";
+  static baseURL:string = "https://ticketbookingplatform-be.onrender.com"
   static getData = async (url: string, data?: Record<string, any>) => {
     try {
       const res = await axios.post(this.baseURL + url, data);

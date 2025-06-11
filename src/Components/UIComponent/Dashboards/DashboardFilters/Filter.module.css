@@ -1,0 +1,30 @@
+.filterDivCss {
+    display: flex;
+    width: 100%;
+}
+.dropDownDivCss {
+    width: 100%;
+}
+.dropDownDivCss div {
+    width: 90%;
+}
+.dropDownDivCss p {
+    font-family: "Ponomar", system-ui;
+    font-weight: 700;
+}
+.filterButtonDivCss {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filterButtonDivCss button {
+    margin: 0px 10px 0px 10px;
+    height: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none !important;
+    border-radius: 10px;
+    background-color: #212529;
+    color: #ced4da;
+    font-family: "Ponomar", system-ui;
+    font-weight: 700;
+}

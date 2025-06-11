@@ -67,7 +67,12 @@ const useRailwayDetails = () => {
         ];
         return subPoints;
     }
-    return { getStates, getStations, addStation, editStation, getCardValues, genratingSubPointsFunc };
+    const getTrainDetailOnParticularStation = async (Station : string) => {
+        if(!Station || Station.length === 0) return;
+        const response = await APIService.getData("/stations/getTrainsOnPerticularStation" , { Station });
+        return response;
+    }
+    return { getStates, getStations, addStation, editStation, getCardValues, genratingSubPointsFunc , getTrainDetailOnParticularStation };
 };
 
 export default useRailwayDetails;

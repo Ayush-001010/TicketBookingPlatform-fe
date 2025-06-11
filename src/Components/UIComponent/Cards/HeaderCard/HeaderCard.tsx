@@ -32,7 +32,7 @@ const HeaderCard: React.FC<IHeaderCard> = ({ children, title, progressBarInfo, f
                                     </button>
                                 )
                                 default: return (
-                                    <button className={styles.css3} onClick={() => { if (passingDataToParent) passingDataToParent(indexNumber) }}>
+                                    <button className={styles.css3} onClick={() => { if (passingDataToParent) passingDataToParent(indexNumber , item.displayName) }}>
                                         {item.navLink && <Link to={item.navLink[item.navLink.length - 1] === "/" ? `${item.navLink}${title?.replace(/\s/g, "_")}` : item.navLink}> {item.displayName} </Link>}
                                         {!item.navLink && item.displayName}
                                     </button>

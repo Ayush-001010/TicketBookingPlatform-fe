@@ -14,8 +14,11 @@ import { ICardInterface } from "../../../Service/Interface/CardInterface";
 import AfterSubmitPopup from "../../UIComponent/Popup/AfterSubmitPopup/AfterSubmitPopup";
 import Filter from "../../UIComponent/Dashboards/DashboardFilters/Filters";
 import RailwayStationConfig from "../../../Service/Config/RailwayStationConfig";
+import TrainDisplayModule from "./TrainDisplayModule/TrainDisplayModule";
 
 const Stations: React.FunctionComponent<IStations> = () => {
+    const [openTrainDisplayModal , setOpenTrainDisplayModal] = useState<boolean>(false);
+    const [stationName , setStationName] = useState<string>("");
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [editData, setEditData] = useState<any>(null);
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -28,7 +31,7 @@ const Stations: React.FunctionComponent<IStations> = () => {
     const [openActionPopupResult, setOpenActionPopupResult] = useState<boolean>(false);
     const [actionPopupType, setActionPopupType] = useState<string>("Success");
 
-
+    const closeTrainDisplayModalFunc = () => setOpenTrainDisplayModal(false);
     const { data } = useQuery({
         queryFn: () => getStations(State || "" , filterVal , searchValue ),
         queryKey: ["stations" , filterVal , searchValue],
@@ -62,8 +65,16 @@ const Stations: React.FunctionComponent<IStations> = () => {
         setIsEdit(false);
     };
     const closeFormModal = () => setOpenModal(false);
-    const gettingEdittingData = (id: any) => {
+    const gettingEdittingData = (id: any , buttonType? : string) => {
+        console.log("Button Type    ",buttonType);
+        if(buttonType && buttonType === "View Trains"){
+            // PlaceName
+            setOpenTrainDisplayModal(true);
+            setStationName(data[id].PlaceName);
+            return;
+        }
         setEditData(data[id]);
+        console.log(data[id]);
         setIsEdit(true);
         setOpenModal(true);
     }
@@ -103,9 +114,6 @@ const Stations: React.FunctionComponent<IStations> = () => {
             <Cards cardData={cardData} />
             <div className={styles.css1}>
                 <Filter filterArray={RailwayStationConfig.filterFields} filterApplied={applyFilter} clearFilter={clearFilter} />
-                <button type="button" className={styles.css2}>
-                    Filter
-                </button>
                 <button type="button" onClick={openFormModal} className={styles.css2}>
                     Add Stations
                 </button>
@@ -121,6 +129,7 @@ const Stations: React.FunctionComponent<IStations> = () => {
             }
             <ModalForm headerCssClassName="cornerHeader" open={openModal} onCloseFunc={closeFormModal} formType="AddStation" formtitle={isEdit ? RailwayDetailsConfig.EditStationFormTitle : RailwayDetailsConfig.AddStationFormTitle} initialValues={isEdit ? { ...editData } : { State: State?.replace("_", " ") }} formOptions={RailwayDetailsConfig.option} gettingValuesFromForm={addStationFunc} />
             <AfterSubmitPopup open={openActionPopupResult} decisionFunc={closePopup} popupType={actionPopupType as "Success" | "Error"} />
+            <TrainDisplayModule open={openTrainDisplayModal} closeFunc={closeTrainDisplayModalFunc} StationName={stationName} />
         </div>
     )
 }

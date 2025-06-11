@@ -13,7 +13,7 @@ const Cards : React.FunctionComponent<ICard> = ({ cardData }) => {
         }
     }
     return (
-        <div className={styles.css1}>
+        <div className={styles.cardDivCss}>
             {cardData?.map((cardItem : ICardInterface ) => {
                 return <div className={styles.css2}>{cardType(cardItem)}</div>
             })}

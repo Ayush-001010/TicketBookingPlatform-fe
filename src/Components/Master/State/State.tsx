@@ -29,9 +29,6 @@ const State: React.FunctionComponent<IState> = () => {
     return (
         <div>
             <PageTitle title={RailwayDetailsConfig.StateDashboardHeader}/>
-            <div className={styles.css1}>
-                <SearchBar placeholder="Ex:- Maharashtra" changeHandler={changeHandler} />
-            </div>
             <div className={styles.css4}>
                 {stateData?.map((item: any) => {
                     const progressBarArray = genratingProgressBar(item);

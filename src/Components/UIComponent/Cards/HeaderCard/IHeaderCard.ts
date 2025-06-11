@@ -6,6 +6,6 @@ export default interface IHeaderCard{
     progressBarInfo?: Array<{ displayName : string , value : number }>;
     fotter? : Array<{displayName : string , type : "button"  , buttonType ? : "delete", navLink?: string}>;
     subPoints? : Array<{Title : string , Response : string}>;
-    passingDataToParent? : (value : any) => void;
+    passingDataToParent? : (value : any , type?:string) => void;
     indexNumber? : number;
 }
