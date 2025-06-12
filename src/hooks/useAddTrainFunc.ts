@@ -194,6 +194,10 @@ const useAddTrainFunc = (
         ...curr.price,
         [coachType]: (Number(curr.distance) * price).toFixed(2),
       },
+      perKmPrice : {
+        ...curr.perKmPrice,
+        [coachType] : price
+      }
     }));
   };
   const totalJourneyTimeFunc = () => {

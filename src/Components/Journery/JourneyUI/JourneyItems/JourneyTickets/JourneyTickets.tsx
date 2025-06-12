@@ -4,13 +4,15 @@ import { Modal } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import useJourneyHook from "../../../../../hooks/useJourneyHook";
 import styles from "./JourneyTickets.module.css";
+import { useAppSelector } from "../../../../../Redux/Hooks";
 
 const JourneyTickets: React.FunctionComponent<IJourneyTickets> = ({ open, closeFunc, trainCode, JourneyDate }) => {
     const { getTicket } = useJourneyHook();
+    const userEmail = useAppSelector(state => state.AuthenticationSlice.userEmail)
 
     const { data } = useQuery({
-        queryFn: () => getTicket(trainCode, JourneyDate),
-        queryKey: [trainCode, JourneyDate]
+        queryFn: () => getTicket(trainCode, JourneyDate,userEmail),
+        queryKey: [trainCode, JourneyDate,userEmail]
     });
 
     console.log("Data   ", data);

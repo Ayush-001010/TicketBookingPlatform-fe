@@ -9,19 +9,21 @@ import { IJourneyDetails } from "../../../Service/Interface/JourneyInterface";
 import styles from "./UpcomingJourney.module.css";
 import SearchBar from "../JourneyUI/SearchBar/SearchBar";
 import { message } from "antd";
+import { useAppSelector } from "../../../Redux/Hooks";
 
 const UpcomingJournery: React.FunctionComponent<IUpcomingJournery> = () => {
     const { getCardData, getDayByDayJourneyDetails, searchHandeler } = useJourneyHook();
     const [messageAPI , contextHandler ] = message.useMessage();
     const [searchValue, setSearchValue] = useState<string>("");
     const [data , setData] = useState<Array<any>>([]);
+    const userEmail = useAppSelector(state => state.AuthenticationSlice.userEmail);
     const { data: cardData } = useQuery({
-        queryFn: getCardData,
-        queryKey: ["card"]
+        queryFn: () => getCardData({userEmail}),
+        queryKey: ["card" , userEmail]
     });
     const { data: dayByDayJourneyDetails } = useQuery({
-        queryFn: getDayByDayJourneyDetails,
-        queryKey: ["Calender"]
+        queryFn:  () => getDayByDayJourneyDetails({userEmail}),
+        queryKey: ["Calender",userEmail]
     });
 
     const changeHandler = (value: string) => setSearchValue(value);
@@ -29,7 +31,7 @@ const UpcomingJournery: React.FunctionComponent<IUpcomingJournery> = () => {
     useEffect(() => {
         const timeOutObj = setTimeout(() => {
             const searchData = searchHandeler(dayByDayJourneyDetails, searchValue);
-            if(searchData.length > 0){
+            if( searchData && searchData.length > 0){
                 setData(searchData);
             } else {
                 messageAPI.error({content : "No Train Found!!"});

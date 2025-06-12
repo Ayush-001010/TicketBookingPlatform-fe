@@ -32,6 +32,7 @@ const BookingCard: React.FunctionComponent<IBookingCard> = () => {
     console.log("isError  ",isError);
     if (isError) {
       setStartTakingData(false);
+      return;
     }
     setFinalValue((prevState: any) => {
       return [...prevState, value]

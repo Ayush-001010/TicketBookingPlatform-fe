@@ -39,8 +39,10 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
     passingDataToParentFunc(data)
   }
   const changeHandlerPrice = (price: number, coachType: string , perCabinSeat : number , totalCabin : number) => {
+    console.log("Price  ",price);
     const modifyData = setPrice(data, price, coachType , perCabinSeat , totalCabin);
-    passingDataToParentFunc({coachType : coachType , perCabinSeat : perCabinSeat , totalCabin : totalCabin} , "Coach")
+    passingDataToParentFunc({coachType : coachType , perCabinSeat : perCabinSeat , totalCabin : totalCabin} , "Coach");
+    console.log("Modify Data  ",modifyData);
     setData([...modifyData]);
   };
   const changeHandlerPriceValue = (value : string , backendName : string , index: number) => {

@@ -11,15 +11,17 @@ const PaymentButtons: React.FunctionComponent<{}> = () => {
     const [isTatkalBooking, setIsTatkalBooking] = useState<boolean>(false);
     const [tatkalAmountVal, setTatkalAmountVal] = useState<number>(0);
     const data: any = useAppSelector(state => state.BookTrainTicket.data);
+    const userEmail = useAppSelector( state => state.AuthenticationSlice.userEmail);
     console.log("Data   ", data);
 
     const paymentHandler = async () => {
         // tatkalBooking
         let response: any;
         if (!isTatkalBooking) {
-            response = await APIService.getData("/train/bookTrainSeat", { data: data });
+            console.log(userEmail);
+            response = await APIService.getData("/train/bookTrainSeat", { data: data  , userEmail } );
         } else {
-            response = await APIService.getData("/train/tatkalBooking", { data });
+            response = await APIService.getData("/train/tatkalBooking", { data , userEmail });
         }
         console.log("Response   ", response);
         if (response.success) {
@@ -35,7 +37,7 @@ const PaymentButtons: React.FunctionComponent<{}> = () => {
         const dateObj = new Date(data[0]?.journeyStartDate || "");
         const currentDate = new Date();
         const nextDate = new Date(currentDate);
-        nextDate.setDate(currentDate.getDate() + 2);
+        nextDate.setDate(currentDate.getDate() + 1);
 
         const tatkalAmount = (nextDate.getDate() === dateObj.getDate() && nextDate.getMonth() === dateObj.getMonth() && nextDate.getFullYear() === dateObj.getFullYear()) ? (totalAmount * 20 / 100) : 0;
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { data, HashRouter, Route, Routes } from "react-router-dom";
 import TopNavbar from "./Components/Navbar/TopNavbar/TopNavbar";
 import { Provider } from "react-redux";
 import { store } from "./Redux/Store/Store";
@@ -25,6 +25,7 @@ const AppContent: React.FC = () => {
   const { checkUserAlreadySignInOrNot } = useAuthentication();
   const dispatch = useAppDispatch();
   const [isLogInVal , setIsLogInVal] = useState<boolean>(false);
+  const val = useAppSelector(state => state.AuthenticationSlice);
 
   useEffect(() => {
     setIsLogInVal(isLogIn);
@@ -33,7 +34,9 @@ const AppContent: React.FC = () => {
         checkUserAlreadySignInOrNot().then((res) => {
           if (res.success) {
             setIsLogInVal(true);
-            dispatch(isSignIn({ ...res.data , isLogIn : true }))
+            dispatch(isSignIn({ userEmail : res.data.UserEmail , IsAdmin : res.data.IsAdmin, isLogIn : true }))
+          } else {
+            window.location.hash = "#/authentication"; // Fallback navigation method
           }
         });
         return;
@@ -43,6 +46,7 @@ const AppContent: React.FC = () => {
   }, [isLogIn]);
 
   socket.on("connect", () => console.log("Hey, I am connected to backend!!"));
+  console.log(val);
 
   return (
     <QueryClientProvider client={queryClient}>
