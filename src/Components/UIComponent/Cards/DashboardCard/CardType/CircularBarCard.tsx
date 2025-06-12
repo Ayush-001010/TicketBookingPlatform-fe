@@ -8,7 +8,7 @@ const CircularBarCard: React.FunctionComponent<ICardType> = ({ item }) => {
     return (
         <div className={styles.cardContainer}>
             <h1 className={styles.cardHeader}>{item.displayName}</h1>
-            <Progress type="circle" percent={item.value} className={styles.progressCircle} />
+            <Progress type="circle" percent={Number(item.value.toFixed(2))} className={styles.progressCircle} />
         </div>
     )
 };

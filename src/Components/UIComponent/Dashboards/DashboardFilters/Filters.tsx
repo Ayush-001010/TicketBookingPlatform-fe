@@ -27,6 +27,8 @@ const Filter : React.FunctionComponent<IDashboard> = ({filterArray , filterAppli
         }
     }
     const clearFilterHandler = () => {
+        const initialValues = genrateInitialValues(filterArray || []);
+        setValues(initialValues);
         if(clearFilter){
             clearFilter();
         }

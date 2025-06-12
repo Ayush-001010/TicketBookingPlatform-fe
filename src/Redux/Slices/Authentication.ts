@@ -2,10 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const AuthenticationSlice = createSlice({
   initialState: {
-    userName: "Test User 1",
-    userEmail: "testingUser1@gmail.com",
-    IsAdmin: true,
-    isLogin : true
+    userEmail: "",
+    IsAdmin: false,
+    isLogin : false
   },
   name: "Authentication",
   reducers: {

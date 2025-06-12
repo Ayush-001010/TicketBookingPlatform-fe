@@ -6,7 +6,7 @@ import { ITrainStops } from "../../../../../Service/Interface/AddTrainInterface"
 import Stops from "../TrainFormStops/Stops/Stops";
 import useAddTrainFunc from "../../../../../hooks/useAddTrainFunc";
 import styles from "./TrainFormPrices.module.css";
-import { Button } from "antd";
+import { Button, message } from "antd";
 
 const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
   coachTypes,
@@ -14,6 +14,7 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
   passingDataToParentFunc,
   backHandlerFunc
 }) => {
+  const [messageAPI , contextHandler] = message.useMessage();
   const { setPrice } = useAddTrainFunc();
   const [data, setData] = useState<Array<ITrainStops>>([]);
   const isFirst = useRef(true);
@@ -22,6 +23,19 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
     backHandlerFunc();
   }
   const passingDataToParent = () => {
+    console.log("Data ",data);
+    let isFlag = false;
+    data.forEach( item => {
+      for(const key in item.price){
+        if(item.price[key].length === 0){
+          isFlag = true;
+        }
+      }
+    } )
+    if(isFlag){
+      messageAPI.error({content : "All fields are required. Please complete them."});
+      return;
+    }
     passingDataToParentFunc(data)
   }
   const changeHandlerPrice = (price: number, coachType: string , perCabinSeat : number , totalCabin : number) => {
@@ -43,6 +57,7 @@ const TrainFormPrices: React.FunctionComponent<ITrainFormPrices> = ({
   }, [stops]);
   return (
     <div>
+      {contextHandler}
       <div>
         <PriceHeaders
           coachTypes={coachTypes}

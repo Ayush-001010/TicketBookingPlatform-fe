@@ -16,7 +16,11 @@ const useAuthentication = () => {
     })
     return response;
   }
-  return { signUpHandler , signInHandler };
+  const checkUserAlreadySignInOrNot = async () => {
+    const response = await APIService.getData("/authentication/checkUserIsAlreadyLogInOrNot");
+    return response;
+  }
+  return { signUpHandler , signInHandler , checkUserAlreadySignInOrNot };
 };
 
 export default useAuthentication;

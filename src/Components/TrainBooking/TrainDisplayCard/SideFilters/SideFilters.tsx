@@ -40,12 +40,20 @@ const SideFilters: React.FunctionComponent<ISideFilters> = () => {
         trainTimingFieldApplied.push(key);
       }
     }
+    messageAPI.destroy();
+    if(trainTimingFieldApplied.length === 0 && trainTypeFieldApplied.length === 0){
+      messageAPI.error("Please choose at least one filter.")
+      return;
+    }
     if(!applyFilter(trainTypeFieldApplied , trainTimingFieldApplied)){
       messageAPI.error({content : "No Train Found!!"});
+    } else {
+      messageAPI.success("Filters successfully applied.")
     }
   }
   const resetFilterHandler = () => {
     resetFilter();
+    messageAPI.success("All filters have been cleared.")
     const initialValue = initialValues(fields);
     setValue(initialValue);
   }

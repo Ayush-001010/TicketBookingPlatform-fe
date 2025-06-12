@@ -13,7 +13,7 @@ import AfterSuccessfullyAuthenticated from "../../UIComponent/Popup/AfterSuccess
 
 const AuthenticationForm: React.FunctionComponent<IAuthenticationForm> = () => {
     const [messageAPI, contextHandler] = message.useMessage();
-    const [isUserSuccessfullyLoggedIn , setIsUserSuccessfullyLoggedIn] = useState({ isLogin : false , IsAdmin : false});
+    const [isUserSuccessfullyLoggedIn , setIsUserSuccessfullyLoggedIn] = useState({ isLogin : false , IsAdmin : false , userEmail : ""});
     const [isLogIn, setIsLogIn] = useState<boolean>(true);
     const { signUpHandler, signInHandler } = useAuthentication();
     const [isOpenPopUp, setIsOpenPopUp] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const AuthenticationForm: React.FunctionComponent<IAuthenticationForm> = () => {
         } else {
             response = await signInHandler(value);
             if(response.success){
-                setIsUserSuccessfullyLoggedIn({isLogin : true , IsAdmin : response.data?.IsAdmin});
+                setIsUserSuccessfullyLoggedIn({isLogin : true , IsAdmin : response.data?.IsAdmin , userEmail : response.data.UserEmail});
             }
         }
         messageAPI.destroy();

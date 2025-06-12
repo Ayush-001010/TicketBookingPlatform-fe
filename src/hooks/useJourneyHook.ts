@@ -18,7 +18,8 @@ const useJourneyHook = () => {
         return response.data;
     }
     const searchHandeler = (data : Array<Record<string,string>> , searchValue : string) => {
-        return data.filter(item => item.TrainName.includes(searchValue))
+        if(searchValue.trim().length === 0) return data;
+        return data?.filter(item => item.TrainName.includes(searchValue))
     }
 
     return {getCardData , getDayByDayJourneyDetails , getTrainJourney , getTicket , searchHandeler};

@@ -35,7 +35,7 @@ const AuthenticationContent: React.FunctionComponent<IAuthenticationContent> = (
     return (
         <div className={styles.AuthenticationContentDivCss}>
             {contextHandler}
-            <div className={styles.GoogleAuthenticationDivCss}>
+            {/* <div className={styles.GoogleAuthenticationDivCss}>
                 <Button className={styles.GoogleAuthenticationButtonCss}>
                     <p>
                         <img src={Image} />
@@ -47,7 +47,7 @@ const AuthenticationContent: React.FunctionComponent<IAuthenticationContent> = (
                 <p></p>
                 <p>or</p>
                 <p></p>
-            </div>
+            </div> */}
             <div>
                 <div className={styles.emailFieldCss}>
                     <label>Email</label>

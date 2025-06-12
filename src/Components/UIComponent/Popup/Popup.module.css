@@ -64,3 +64,82 @@
     font-weight: 900;
     border: none !important;
 }
+.logoDivCss {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.logo1 {
+    font-size: 50px;
+    color: #dbb42c;
+}
+
+.contentDivCss {
+    display: flex;
+    justify-content: center; 
+    flex-direction: column;
+    align-items: center;
+}
+.areYouSureTextCss {
+    font-family: "Ponomar", system-ui; 
+    color: #660708;
+    font-weight: 900;
+}
+.areYouSureTextMessageCss {
+    font-family: "Ponomar", system-ui;
+    font-weight: 900; 
+}
+.buttonCssOfSumbitPopUp{
+    display: flex;
+    justify-content: flex-end;
+}
+.buttonCssOfSumbitPopUp button {
+    font-family: "Ponomar", system-ui;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+}
+.buttonCssOfSumbitPopUp button:hover {
+    cursor: pointer;
+    font-weight: 900;
+}
+.buttonCssOfSumbitPopUp button:nth-child(1) {
+    margin-right: 10px;
+    background-color: #333d29;
+    color: #c7f9cc;
+}
+.buttonCssOfSumbitPopUp button:nth-child(1) {
+    background-color: #333d29;
+    color: #c7f9cc;
+}
+.buttonCssOfSumbitPopUp button:nth-child(2) {
+    background-color: #660708;
+    color: #d3d3d3;
+}
+.successIconCss{
+    font-size: 40px;
+    color: #588157;
+}
+.successfullyTextCss {
+    font-family: "Ponomar", system-ui;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+    color: #40916c;
+}
+.buttonAfterSubmitPopupCss{
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    background-color: #000000;
+    color: #ffffff;
+}
+.buttonAfterSubmitPopupCss:hover {
+    cursor: pointer;
+    font-weight: 900;
+}

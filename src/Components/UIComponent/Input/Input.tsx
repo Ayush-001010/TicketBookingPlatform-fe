@@ -30,7 +30,7 @@ const InputUI: React.FunctionComponent<IInput> = ({
         onBlur={isTouched}
       />
       {(isError && (formik.errors[backendName] as string)?.length > 0) && (
-        <p>{formik.errors[backendName] as string}</p>
+        <p className={styles.error}>{formik.errors[backendName] as string}</p>
       )}
     </div>
   );

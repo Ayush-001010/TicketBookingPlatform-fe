@@ -7,7 +7,7 @@ const ProgressBarCard : React.FunctionComponent<ICardType> = ({ item }) => {
     return (
         <div>
             <h1 className={styles.css3}>{item.displayName}</h1>
-            <Progress percent={item.value }/>
+            <Progress percent={Number(item.value.toFixed(2)) }/>
         </div>
     )
 };

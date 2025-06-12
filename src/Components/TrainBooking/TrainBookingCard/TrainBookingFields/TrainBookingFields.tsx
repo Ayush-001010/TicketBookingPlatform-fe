@@ -38,11 +38,16 @@ const TrainBookingFields: React.FunctionComponent<ITrainBookingFields> = () => {
         return;
       }
     })
+    console.log("Value  ",value);
     if(isErrorAlreadyShow) return;
     if(value["departureStation"] === value["destinationStation"]){
       messageAPI.error("Please select different stations");
       return;
     }
+    if(Number(value["Kids"]) === 0 && Number(value["Adults"]) === 0 && Number(value["seniorCitizen"]) === 0){
+      messageAPI.error({content : "Please choose at least one passenger from one of the categories."})
+      return;
+    } 
     gettingTrainDetails(value).then((res) => {
       if(res.success) {
         if(res.data.length === 0) {

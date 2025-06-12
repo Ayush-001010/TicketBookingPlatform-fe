@@ -6,11 +6,13 @@ import styles from "./SeatDisplay.module.css";
 import useTrainBooking from "../../../../../../hooks/useTrainBooking";
 import { setBookTrainTicket } from "../../../../../../Redux/Slices/BookTrainTicket";
 import { ITrainTicketBookingInterface } from "../../../../../../Service/Interface/TrainBookingInterface";
+import { message } from "antd";
 
 const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
   const [active, setActive] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [messageAPI , contextHandler] = message.useMessage();
   const dispatch = useAppDispatch();
 
   const { getPrice } = useTrainBooking();
@@ -57,6 +59,12 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
     setIsSubmit(false);
   };
   const getPriceHandler = async () => {
+    console.log("Active   ",active);
+    if(active.length === 0){
+      messageAPI.destroy();
+      messageAPI.error("Please select a Coach Type.");
+      return;
+    }
     const res = await getPrice(active, data.TrainCode);
     setPrice(res);
     setIsSubmit(true);
@@ -81,6 +89,7 @@ const SeatDisplay: React.FunctionComponent<ISeatDisplay> = ({ data }) => {
 
   return (
     <div>
+      {contextHandler}
       <div className={styles.css1}>
         {value.map((curr: any) => (
           <div

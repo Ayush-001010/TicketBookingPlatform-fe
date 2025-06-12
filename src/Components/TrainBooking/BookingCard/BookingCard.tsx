@@ -29,6 +29,7 @@ const BookingCard: React.FunctionComponent<IBookingCard> = () => {
     setStartTakingData(true);
   }
   const takingDataFromChild = (isError: boolean, value?: ITrainTicketBookingInterface | null) => {
+    console.log("isError  ",isError);
     if (isError) {
       setStartTakingData(false);
     }

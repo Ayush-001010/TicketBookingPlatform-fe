@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import IBookingDetails from "./IBookingDetails";
 import { ITrainTicketBookingInterface } from "../../../../Service/Interface/TrainBookingInterface";
-import { Input, Select } from "antd";
+import { Input, message, Select } from "antd";
 import useTrainBooking from "../../../../hooks/useTrainBooking";
 import styles from "./BookingDetails.module.css";
 
@@ -9,6 +9,7 @@ const BookingDetails: React.FunctionComponent<IBookingDetails> = ({ data, option
     const { calculatePriceAccordingToSeat } = useTrainBooking();
     const [value, setValue] = useState<ITrainTicketBookingInterface | null>(null);
     const [errorFields , setErrorFields] = useState<Array<string>>([]);
+    const [messageAPI , contextHandler] = message.useMessage();
 
     const changeSelectHandler = (newValue: any, backendName: string) => {
         if (backendName === "passengerAge" && seatPrices) {
@@ -59,12 +60,19 @@ const BookingDetails: React.FunctionComponent<IBookingDetails> = ({ data, option
                     errFields.push(key);
                 }
             }
+            console.log("Value  ",val);
+            if( val.passengerPhone.length > 0 && !/^[6-9]\d{9}$/.test(val.passengerPhone)){
+                messageAPI.error("The phone number entered is invalid.");
+                errFields.push("passengerPhone");
+                isError=true;
+            }
             setErrorFields(errFields);
             passingDataToParentFunc(isError , value);
         }
     },[startCompletingProcess])
     return (
         <div className={styles.css1}>
+            {contextHandler}
             <div className={styles.downPart}>
                 <div className={styles.passengerNumber}>
                     <p><span>Passenger No</span> <span>{passengerNumber}</span></p>

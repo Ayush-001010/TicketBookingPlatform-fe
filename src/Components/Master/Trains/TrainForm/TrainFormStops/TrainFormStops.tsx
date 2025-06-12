@@ -19,6 +19,17 @@ const TrainFormStops: React.FunctionComponent<ITrainFormStops> = ({
   const [data, setData] = useState<Array<ITrainStops>>([]);
 
   const passingValueToParent = () => {
+    console.log("Data ",data);
+    let isFlag : boolean = false;
+    data.forEach(item => {
+      if(item.distance.length === 0 || item.time.length === 0){
+        isFlag=true;
+      }
+    });
+    if(isFlag){
+      messageAPI.error({content : "All fields are required. Please complete them."});
+      return;
+    }
     passingValueToParentFunc(data);
   }
   const backHandlerFunc = () => {

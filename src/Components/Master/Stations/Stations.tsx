@@ -17,42 +17,57 @@ import RailwayStationConfig from "../../../Service/Config/RailwayStationConfig";
 import TrainDisplayModule from "./TrainDisplayModule/TrainDisplayModule";
 
 const Stations: React.FunctionComponent<IStations> = () => {
-    const [openTrainDisplayModal , setOpenTrainDisplayModal] = useState<boolean>(false);
-    const [stationName , setStationName] = useState<string>("");
+    const [openTrainDisplayModal, setOpenTrainDisplayModal] = useState<boolean>(false);
+    const [stationName, setStationName] = useState<string>("");
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [editData, setEditData] = useState<any>(null);
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const [cardData, setCardData] = useState<any>(null);
-    const [filterVal , setFilterVal] = useState<Record<string,any>>();
-    const [searchValue , setSearchValue] = useState<string | null >(null);
-    const [tempStore , setTempStore] = useState<string | null >(null); 
-    const { getStations, addStation, editStation, getCardValues , genratingSubPointsFunc } = useRailwayDetails();
+    const [filterVal, setFilterVal] = useState<Record<string, any>>();
+    const [searchValue, setSearchValue] = useState<string | null>(null);
+    const [tempStore, setTempStore] = useState<string | null>(null);
+    const { getStations, addStation, editStation, getCardValues, genratingSubPointsFunc } = useRailwayDetails();
     const { State } = useParams();
     const [openActionPopupResult, setOpenActionPopupResult] = useState<boolean>(false);
     const [actionPopupType, setActionPopupType] = useState<string>("Success");
 
     const closeTrainDisplayModalFunc = () => setOpenTrainDisplayModal(false);
     const { data } = useQuery({
-        queryFn: () => getStations(State || "" , filterVal , searchValue ),
-        queryKey: ["stations" , filterVal , searchValue],
+        queryFn: () => getStations(State || "", filterVal, searchValue),
+        queryKey: ["stations", filterVal, searchValue, openActionPopupResult],
     })
     const { data: cardValues, isLoading: cardValuesLoading } = useQuery({
         queryFn: () => getCardValues(State || ""),
-        queryKey: ["cardValues"],
+        queryKey: ["cardValues", openActionPopupResult],
     });
     const closePopup = () => { setOpenActionPopupResult(false); }
     const addStationResult = (result?: boolean) => {
+        setOpenModal(false);
         setOpenActionPopupResult(true);
         setActionPopupType(result ? "Success" : "Error");
     }
+    const editStationResult = () => {
+        setOpenModal(false);
+        setOpenActionPopupResult(true);
+        setActionPopupType("Success");
+    }
     const { mutateAsync: addStationToDB, } = useMutation({
         mutationFn: addStation,
-        onSuccess: addStationResult
+        onSuccess: addStationResult,
     })
     const { mutateAsync: editStationToDB } = useMutation({
-        mutationFn: editStation
+        mutationFn: editStation,
+        onSuccess : editStationResult
     })
-    const applyFilter = (value : Record<string,any>) => setFilterVal(value);
+    const applyFilter = (value: Record<string, any>) => {
+        console.log("Value  ",value);
+        const arr = ["NoOfPlatform" , "Capacity"]
+        for(const item of arr){
+            value = { ...value, [item]: value[item] ? JSON.parse(value[item].replace(/(\w+)\s*:/g, '"$1":')) : undefined };
+        }
+        console.log("Value  ",value);
+        setFilterVal(value);
+    }
     const clearFilter = () => setFilterVal(undefined);
     const addStationFunc = async (value: any) => {
         if (!isEdit)
@@ -65,9 +80,9 @@ const Stations: React.FunctionComponent<IStations> = () => {
         setIsEdit(false);
     };
     const closeFormModal = () => setOpenModal(false);
-    const gettingEdittingData = (id: any , buttonType? : string) => {
-        console.log("Button Type    ",buttonType);
-        if(buttonType && buttonType === "View Trains"){
+    const gettingEdittingData = (id: any, buttonType?: string) => {
+        console.log("Button Type    ", buttonType);
+        if (buttonType && buttonType === "View Trains") {
             // PlaceName
             setOpenTrainDisplayModal(true);
             setStationName(data[id].PlaceName);
@@ -78,8 +93,8 @@ const Stations: React.FunctionComponent<IStations> = () => {
         setIsEdit(true);
         setOpenModal(true);
     }
-    const changeHandler = (newvalue : string) => {
-        if(newvalue.trim().length === 0) setTempStore(null);
+    const changeHandler = (newvalue: string) => {
+        if (newvalue.trim().length === 0) setTempStore(null);
         else setTempStore(newvalue.trim());
     }
     useEffect(() => {
@@ -100,13 +115,13 @@ const Stations: React.FunctionComponent<IStations> = () => {
         }
     }, [cardValuesLoading]);
     useEffect(() => {
-        const timeOutObj = setTimeout(()=>{
+        const timeOutObj = setTimeout(() => {
             setSearchValue(tempStore);
-        } , 3000);
-        return () => { 
+        }, 3000);
+        return () => {
             clearTimeout(timeOutObj);
         }
-    },[tempStore])
+    }, [tempStore])
 
     return (
         <div>
@@ -127,7 +142,9 @@ const Stations: React.FunctionComponent<IStations> = () => {
                     })}
                 </div>
             }
-            <ModalForm headerCssClassName="cornerHeader" open={openModal} onCloseFunc={closeFormModal} formType="AddStation" formtitle={isEdit ? RailwayDetailsConfig.EditStationFormTitle : RailwayDetailsConfig.AddStationFormTitle} initialValues={isEdit ? { ...editData } : { State: State?.replace("_", " ") }} formOptions={RailwayDetailsConfig.option} gettingValuesFromForm={addStationFunc} />
+            {openModal &&
+                <ModalForm headerCssClassName="cornerHeader" open={openModal} onCloseFunc={closeFormModal} formType="AddStation" formtitle={isEdit ? RailwayDetailsConfig.EditStationFormTitle : RailwayDetailsConfig.AddStationFormTitle} initialValues={isEdit ? { ...editData } : { State: State?.replace("_", " ") }} formOptions={RailwayDetailsConfig.option} gettingValuesFromForm={addStationFunc} />
+            }
             <AfterSubmitPopup open={openActionPopupResult} decisionFunc={closePopup} popupType={actionPopupType as "Success" | "Error"} />
             <TrainDisplayModule open={openTrainDisplayModal} closeFunc={closeTrainDisplayModalFunc} StationName={stationName} />
         </div>
